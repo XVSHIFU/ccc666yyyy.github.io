@@ -1,0 +1,65 @@
+---
+import { ArrowUpRight, ArrowDown, Search, Radio, Rss } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate, categoryUrl, readingTime } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts = await getPosts();
+const categories = [...new Set(posts.map(post => post.data.category))];
+const signals = [{x:64,y:23},{x:25,y:43},{x:68,y:70},{x:46,y:82}];
+---
+<div class="radar-home">
+  <section class="radar-intro" aria-labelledby="radar-title">
+    <div class="radar-intro-copy">
+      <h1 id="radar-title"><span lang="en">QINGHE<br/>LABORATORY</span><small>清和的观测手记</small></h1>
+      <p>记录学习的足迹，也收藏生活的片刻。<br/>把一闪而过的念头，变成可以再次发现的信号。</p>
+      <div class="radar-topics">{categories.map(category => <a href={categoryUrl(category)}><Radio size={14}/>{category}<ArrowUpRight size={13}/></a>)}</div>
+      <a class="radar-start" href="#writings">开始阅读<ArrowDown size={17}/></a>
+    </div>
+    <radar-scope class="radar-scope" aria-label="在雷达上选择一篇文章">
+      <svg viewBox="0 0 440 440" fill="none"><g class="radar-grid"><circle cx="220" cy="220" r="190"/><circle cx="220" cy="220" r="140"/><circle cx="220" cy="220" r="90"/><circle cx="220" cy="220" r="40"/><path d="M20 220H420M220 20V420" stroke-dasharray="3 7"/><path d="M79 79L361 361M79 361L361 79" stroke-dasharray="2 9"/></g><g class="radar-sweep"><path d="M220 220L220 31"/><path d="M220 220L240 32L220 31Z" fill="currentColor" opacity=".16"/></g><g class="radar-signals"><circle cx="282" cy="99" r="5"/><circle cx="111" cy="186" r="4"/><circle cx="292" cy="303" r="4"/><circle cx="200" cy="362" r="3"/><circle cx="220" cy="220" r="7"/></g><g class="radar-ticks"><path d="M216 16h8M216 424h8M16 216v8M424 216v8"/></g></svg>
+      <span class="radar-axis radar-north" aria-hidden="true">N</span><span class="radar-axis radar-east" aria-hidden="true">E</span>
+      {posts.map((post,index) => <button type="button" class="radar-signal" data-radar-signal={post.id} data-category={post.data.category} aria-pressed={index===0} aria-label={`选择文章：${post.data.title}`} style={`left:${signals[index%signals.length].x}%;top:${signals[index%signals.length].y}%`}><span></span></button>)}
+      <div class="radar-scope-selection" aria-live="polite">{posts.map((post,index)=><div data-radar-detail={post.id} hidden={index!==0}><span>{post.data.category} · {formatDate(post.data.published,true)}</span><a href={getPostUrl(post)}>{post.data.title}<ArrowUpRight size={16}/></a></div>)}</div>
+      <span class="radar-scope-caption">点亮信号，发现一篇记录</span>
+    </radar-scope>
+  </section>
+  <main id="main-content" class="feed radar-feed">
+    <div class="radar-feed-title" id="writings"><h2>信号档案</h2><span>{posts.length} 篇记录</span><button type="button" data-open-search><Search size={15}/>搜索档案</button></div>
+    <div class="radar-console">
+      <aside class="radar-directory" aria-label="文章分类"><h3>浏览频道</h3><button type="button" data-category-filter="all" aria-pressed="true">全部记录<span>{posts.length}</span></button>{categories.map(category => <button type="button" data-category-filter={category} aria-pressed="false">{category}<span>{posts.filter(post=>post.data.category===category).length}</span></button>)}<div class="radar-console-note"><Radio size={20}/><p>保持好奇，<br/>继续接收新的信号。</p><a href={url('rss.xml')}><Rss size={14}/>订阅更新</a></div></aside>
+      <div class="radar-posts" data-post-list>{posts.map(post => <article class="post-card radar-post" data-category={post.data.category} data-post-key={post.id}><div class="radar-post-date"><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published,true)}</time><span>{readingTime(post.body)}</span></div><div class="radar-post-copy"><div class="radar-post-category"><a href={categoryUrl(post.data.category)}>{post.data.category}</a>{post.data.example && <span class="example-badge">示例</span>}</div><h3><a href={getPostUrl(post)}>{post.data.title}</a></h3><p>{post.data.description}</p><a class="radar-read" href={getPostUrl(post)}>打开记录<ArrowUpRight size={15}/></a></div></article>)}</div>
+    </div>
+    <p id="filter-status" class="sr-only" role="status" aria-live="polite"></p>
+    <div class="radar-bottom"><span>END OF CURRENT TRANSMISSION</span><a href={url('about/')}>认识 {site.name}<ArrowUpRight size={14}/></a></div>
+  </main>
+</div>
+<script>
+  class RadarScope extends HTMLElement {
+    observer?: IntersectionObserver; controller?: AbortController;
+    connectedCallback() {
+      this.controller?.abort(); this.controller = new AbortController();
+      const signal = this.controller.signal;
+      const choices = [...this.querySelectorAll<HTMLButtonElement>('[data-radar-signal]')];
+      const choose = (id: string) => {
+        choices.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.radarSignal === id)));
+        this.querySelectorAll<HTMLElement>('[data-radar-detail]').forEach(detail => { detail.hidden = detail.dataset.radarDetail !== id; });
+        this.dataset.selected = id;
+      };
+      this.addEventListener('click', event => { const button = (event.target as Element).closest<HTMLButtonElement>('[data-radar-signal]'); if (button) choose(button.dataset.radarSignal!); }, { signal });
+      this.addEventListener('keydown', event => {
+        if (!['ArrowRight','ArrowLeft','ArrowUp','ArrowDown'].includes(event.key)) return;
+        const available=choices.filter(button=>!button.hidden); const current=available.indexOf(document.activeElement as HTMLButtonElement);
+        if(current<0)return; event.preventDefault(); const next=available[(current+(['ArrowRight','ArrowDown'].includes(event.key)?1:-1)+available.length)%available.length];
+        next.focus(); choose(next.dataset.radarSignal!);
+      }, { signal });
+      this.closest('.radar-home')?.addEventListener('click', event => {
+        const filter=(event.target as Element).closest<HTMLElement>('[data-category-filter]'); if(!filter)return;
+        choices.forEach(button=>{button.hidden=filter.dataset.categoryFilter!=='all'&&button.dataset.category!==filter.dataset.categoryFilter;});
+        const first=choices.find(button=>!button.hidden); if(first)choose(first.dataset.radarSignal!);
+      }, { signal });
+      this.observer=new IntersectionObserver(entries=>{this.dataset.paused=String(!entries[0].isIntersecting || document.hidden);});this.observer.observe(this);
+      document.addEventListener('visibilitychange',()=>{this.dataset.paused=String(document.hidden || this.getBoundingClientRect().bottom<0);},{signal});
+    }
+    disconnectedCallback(){this.observer?.disconnect();this.controller?.abort();}
+  }
+  if(!customElements.get('radar-scope'))customElements.define('radar-scope',RadarScope);
+</script>

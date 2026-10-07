@@ -1,0 +1,41 @@
+---
+import { CodeXml as Github, Mail, Rss } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts = await getPosts();
+// The original first post is the one deliberately pinned starting point.
+const startingPost = posts.find(post => post.data.permalink === '/2025/12/18/hello-world/');
+const notes = posts.filter(post => post.data.category === '随笔');
+---
+<main id="main-content" class="feed cactus-home">
+  <section class="cactus-intro" aria-labelledby="home-title">
+    <h1 id="home-title">Hello World!</h1>
+    <p>你好，我是 <a href={url('about/')}>{site.name}</a>。欢迎来到我的小站。</p>
+    <p>{site.description}这里有技术，也有日常，以及一些写在纸页之间的想法。</p>
+    <div class="cactus-social"><span>Find me on</span><a href={site.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github size={22}/></a><a href={`mailto:${site.email}`} aria-label="电子邮件"><Mail size={22}/></a><a href={url('rss.xml')} aria-label="RSS 订阅"><Rss size={21}/></a></div>
+  </section>
+  {startingPost && <section class="cactus-section" aria-labelledby="cactus-pinned-title">
+    <h2 id="cactus-pinned-title">Pinned Posts</h2>
+    <article class="post-card cactus-row" data-category={startingPost.data.category} data-post-key={startingPost.id}>
+      <time datetime={startingPost.data.published.toISOString()}>{formatDate(startingPost.data.published, true)}</time>
+      <h3><a href={getPostUrl(startingPost)}>{startingPost.data.title}</a></h3>
+    </article>
+  </section>}
+  <section class="cactus-section" aria-labelledby="cactus-posts-title">
+    <h2 id="cactus-posts-title"><a href={url('archives/')}>Posts</a></h2>
+    <div class="cactus-posts" data-post-list>
+      {posts.map(post => <article class="post-card cactus-row" data-category={post.data.category} data-post-key={post.id}>
+        <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published, true)}</time>
+        <h3><a href={getPostUrl(post)}>{post.data.title}</a>{post.data.example && <span class="example-badge">示例</span>}</h3>
+      </article>)}
+    </div>
+  </section>
+  {notes.length > 0 && <section class="cactus-section cactus-notes" aria-labelledby="cactus-notes-title">
+    <h2 id="cactus-notes-title"><a href={url(`categories/${encodeURIComponent('随笔')}/`)}>Notes <span>· 随笔</span></a></h2>
+    {notes.map(post => <article class="cactus-note" data-category={post.data.category} data-post-key={post.id}>
+      <h3><a href={getPostUrl(post)}>{post.data.title}</a>{post.data.example && <span class="example-badge">示例</span>}</h3>
+      <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
+      <p>{post.data.description}</p>
+    </article>)}
+  </section>}
+</main>

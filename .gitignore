@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+test-results/
+playwright-report/
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/runtime/
+.impeccable/hook.cache.json
+.references/
+*.log

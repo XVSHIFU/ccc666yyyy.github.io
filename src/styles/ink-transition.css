@@ -1,0 +1,131 @@
+/* Neutral paper and pigment remain consistent across all appearance worlds.
+   The procedural wet edge is painted in the canvas, never as a tinted backdrop.
+   Keep it independent
+   of the incoming theme's dialog rules and inherited color tokens. */
+dialog#theme-transition {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  min-width: 0;
+  min-height: 0;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  overflow: hidden;
+  background: transparent;
+  color: var(--ink-transition-text, #383633);
+  box-shadow: none;
+  transform: none;
+  animation: none;
+  transition: none;
+  isolation: isolate;
+  z-index: 2147483647;
+  color-scheme: light;
+  cursor: progress;
+  font-family: 'Noto Sans SC Variable', 'Microsoft YaHei', sans-serif;
+}
+
+dialog#theme-transition::backdrop {
+  background: transparent;
+  backdrop-filter: none;
+  animation: none;
+  transition: none;
+}
+
+#theme-transition .ink-transition-canvas,
+#theme-transition .ink-transition-fallback {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  pointer-events: none;
+}
+
+#theme-transition .ink-transition-fallback {
+  opacity: 0;
+  background: var(--ink-transition-ink, #f0efec);
+}
+
+#theme-transition .ink-transition-feedback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 120ms ease-out;
+  pointer-events: none;
+}
+
+#theme-transition[data-phase='covered'] .ink-transition-feedback {
+  opacity: 1;
+}
+
+#theme-transition #theme-transition-status {
+  margin: 0;
+  color: var(--ink-transition-text, #383633);
+  font-size: 14px;
+  font-weight: 450;
+  letter-spacing: .08em;
+  line-height: 1.8;
+  text-align: center;
+  text-wrap: balance;
+}
+
+#theme-transition .ink-transition-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 18px;
+  border: 1px solid var(--ink-transition-border, #96918a);
+  border-radius: 8px;
+  color: var(--ink-transition-text, #383633);
+  background: var(--ink-transition-button, #e5e2dc);
+  box-shadow: none;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 120ms ease-out;
+}
+
+#theme-transition .ink-transition-cancel:hover {
+  color: var(--ink-transition-text, #383633);
+  background: var(--ink-transition-hover, #d9d5cf);
+}
+
+#theme-transition .ink-transition-cancel:focus-visible {
+  outline: 2px solid var(--ink-transition-text, #383633);
+  outline-offset: 4px;
+}
+
+#theme-transition .ink-transition-cancel:disabled {
+  cursor: progress;
+  opacity: .65;
+}
+
+#theme-transition ::selection {
+  color: var(--ink-transition-ink, #f0efec);
+  background: var(--ink-transition-text, #383633);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #theme-transition .ink-transition-feedback,
+  #theme-transition .ink-transition-cancel {
+    transition: none;
+  }
+}

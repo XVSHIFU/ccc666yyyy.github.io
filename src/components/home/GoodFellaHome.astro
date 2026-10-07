@@ -1,0 +1,65 @@
+---
+import { ArrowUpRight, Plus, ArrowDown, Menu, X } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate, categoryUrl } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts = await getPosts();
+---
+<goodfella-world class="goodfella-home">
+  <button class="goodfella-menu-trigger" type="button" aria-haspopup="dialog" aria-controls="goodfella-navigation">菜单<Menu size={18}/></button>
+  <dialog id="goodfella-navigation" class="goodfella-navigation" aria-label="清和的小站导航"><div class="goodfella-menu-top"><span>QINGHE</span><button type="button" data-goodfella-close>关闭<X size={19}/></button></div><div class="goodfella-menu-body"><nav aria-label="Good Fella 主题导航"><a href={url('/')}>首页<span>Home</span></a><a href={url('archives/')}>文章<span>Writing</span></a><a href={url('categories/')}>分类<span>Categories</span></a><a href={url('about/')}>关于<span>About</span></a></nav><div class="goodfella-menu-contact"><p>保持联系</p><a href={`mailto:${site.email}`}>{site.email}</a><a href={site.github} target="_blank" rel="noreferrer">GitHub<ArrowUpRight size={16}/></a><a href={url('rss.xml')}>RSS 订阅<ArrowUpRight size={16}/></a><span>{site.description}</span></div></div></dialog>
+  <section class="goodfella-hero" aria-labelledby="goodfella-title">
+    <div class="goodfella-hero-copy"><h1 id="goodfella-title">灵感有迹可循。<br/><span lang="en">Make room<br/>for the curious.</span></h1><p>{site.description}<br/>这里是 {site.name} 的个人空间。</p><div class="goodfella-hero-links"><a class="goodfella-cta" href="#writings"><span>看看我写的</span><Plus size={19}/></a><a class="goodfella-about" href={url('about/')}>认识清和<ArrowUpRight size={16}/></a></div></div>
+    <goodfella-ascii class="goodfella-sculpture" data-portrait={url('media/avatar.webp')} aria-hidden="true"><canvas></canvas><span class="goodfella-sculpture-fallback"><img src={url('media/avatar.webp')} alt="" width="240" height="240"/></span></goodfella-ascii>
+    <div class="goodfella-hero-bottom"><span>LEARN. MAKE. LIVE.</span><a href="#writings">向下探索<ArrowDown size={17}/></a></div>
+  </section>
+  <main id="main-content" class="feed goodfella-feed">
+    <div class="goodfella-section-title" id="writings"><h2>最近的想法。<span lang="en">Selected writing.</span></h2><a href={url('archives/')}>全部文章 <ArrowUpRight size={20}/></a></div>
+    <div class="goodfella-posts" data-post-list>{posts.map(post => <article class="post-card goodfella-post" data-category={post.data.category} data-post-key={post.id}>
+      <div class="goodfella-post-copy"><div class="goodfella-post-meta"><span class="goodfella-marker" aria-hidden="true"></span><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published,true)}</time><a href={categoryUrl(post.data.category)}>{post.data.category}</a>{post.data.example && <span class="example-badge">示例</span>}</div><h3><a href={getPostUrl(post)}>{post.data.title}</a></h3><p>{post.data.description}</p><a class="goodfella-read" href={getPostUrl(post)}>继续阅读<Plus size={19}/></a></div>
+      <a class="goodfella-cover" href={getPostUrl(post)} tabindex="-1" aria-hidden="true"><img src={url(post.data.cover || 'media/portrait.webp')} width="900" height="600" alt="" loading="lazy"/><span class="goodfella-cover-arrow"><ArrowUpRight size={26}/></span></a>
+    </article>)}</div>
+    <section class="goodfella-contact"><h2>想到什么，<br/>就写下来。</h2><a class="goodfella-cta" href={url('rss.xml')}><span>订阅下一篇</span><Plus size={20}/></a></section>
+  </main>
+</goodfella-world>
+<script>
+  class GoodFellaWorld extends HTMLElement {
+    controller?:AbortController;
+    connectedCallback(){
+      this.controller?.abort();this.controller=new AbortController();const signal=this.controller.signal;
+      const dialog=this.querySelector<HTMLDialogElement>('dialog')!;const trigger=this.querySelector<HTMLButtonElement>('.goodfella-menu-trigger')!;
+      const close=()=>{dialog.close();this.dataset.menu='false';document.documentElement.style.overflow='';trigger.focus({preventScroll:true});};
+      trigger.addEventListener('click',()=>{dialog.showModal();this.dataset.menu='true';document.documentElement.style.overflow='hidden';},{signal});
+      dialog.querySelector('[data-goodfella-close]')?.addEventListener('click',close,{signal});
+      dialog.addEventListener('cancel',event=>{event.preventDefault();close();},{signal});
+      dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientY>r.bottom||event.clientX<r.left||event.clientX>r.right)close();}},{signal});
+    }
+    disconnectedCallback(){if(this.querySelector('dialog[open]'))document.documentElement.style.overflow='';this.controller?.abort();}
+  }
+  if(!customElements.get('goodfella-world'))customElements.define('goodfella-world',GoodFellaWorld);
+  class GoodFellaAscii extends HTMLElement {
+    frame = 0; observer?: IntersectionObserver; resize?: ResizeObserver; cleanup?: () => void;
+    connectedCallback() {
+      const canvas = this.querySelector('canvas'); if (!canvas) return;
+      const ctx = canvas.getContext('2d'); if (!ctx) return;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+      let width=1, height=1, visible=false, last=0, angle=0, turn=0, tilt=0, targetTurn=0, targetTilt=0;
+      const points: {x:number;y:number;z:number;light:number;char:string}[]=[];
+      const chars=' .,:;+*Q@';
+      // The user's own portrait becomes a curved ASCII relief, not an
+      // unauthorized copy of Good Fella's animated 3D head model.
+      const portrait=new Image();
+      portrait.onload=()=>{if(!this.isConnected)return;const sampler=document.createElement('canvas');sampler.width=76;sampler.height=90;const pixels=sampler.getContext('2d')!;pixels.drawImage(portrait,0,0,76,90);const data=pixels.getImageData(0,0,76,90).data;for(let y=0;y<90;y++)for(let x=0;x<76;x++){const nx=(x/75-.5)*1.7,ny=(y/89-.5)*2;const r=nx*nx/1.05+ny*ny/1.35;if(r>1)continue;const at=(y*76+x)*4;const luminance=(data[at]*.2126+data[at+1]*.7152+data[at+2]*.0722)/255;if(data[at+3]<40||luminance>.94)continue;const light=1-luminance*.8;points.push({x:nx,y:ny,z:Math.sqrt(1-r)*.52+luminance*.15,light,char:chars[Math.min(chars.length-1,Math.floor(light*(chars.length-1)))]});}this.classList.add('is-ready');draw();};
+      const draw=()=>{ctx.clearRect(0,0,width,height);const scale=Math.min(width/2.5,height/2.6);ctx.font=`${Math.max(5,Math.min(10,width/75))}px monospace`;ctx.textAlign='center';const a=turn+Math.sin(angle)*.10;const rotated=points.map(p=>{const x=p.x*Math.cos(a)+p.z*Math.sin(a);const z=-p.x*Math.sin(a)+p.z*Math.cos(a);const y=p.y*Math.cos(tilt)-z*Math.sin(tilt);return{...p,x,y,z}}).sort((a,b)=>a.z-b.z);for(const p of rotated){const perspective=3.7/(3.7-p.z);ctx.fillStyle=`rgba(255,${Math.round(70+p.light*42)},${Math.round(24+p.light*23)},${.28+p.light*.72})`;ctx.fillText(p.char,width/2+p.x*scale*perspective,height/2+p.y*scale*perspective)}};
+      const tick=(time:number)=>{this.frame=0;if(!visible||reduce.matches||document.hidden||!this.isConnected)return;if(time-last>40){angle+=.018;turn+=(targetTurn-turn)*.12;tilt+=(targetTilt-tilt)*.12;draw();last=time}this.frame=requestAnimationFrame(tick)};
+      const start=()=>{if(visible&&!reduce.matches&&!this.frame)this.frame=requestAnimationFrame(tick);else draw()};
+      const size=()=>{const box=this.getBoundingClientRect();width=Math.max(1,box.width);height=Math.max(1,box.height);const dpr=Math.min(devicePixelRatio,1.5);canvas.width=width*dpr;canvas.height=height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);draw()};
+      this.resize=new ResizeObserver(size);this.resize.observe(this);
+      this.observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(!visible){cancelAnimationFrame(this.frame);this.frame=0}else start()});this.observer.observe(this);
+      const hero=this.closest('.goodfella-hero')!;const pointer=(event:Event)=>{const e=event as PointerEvent;const b=hero.getBoundingClientRect();targetTurn=((e.clientX-b.left)/b.width-.5)*.9;targetTilt=-((e.clientY-b.top)/b.height-.5)*.36;};const leave=()=>{targetTurn=0;targetTilt=0;};
+      const preference=()=>{cancelAnimationFrame(this.frame);this.frame=0;start()};reduce.addEventListener('change',preference);hero.addEventListener('pointermove',pointer);hero.addEventListener('pointerleave',leave);document.addEventListener('visibilitychange',preference);
+      this.cleanup=()=>{portrait.onload=null;reduce.removeEventListener('change',preference);hero.removeEventListener('pointermove',pointer);hero.removeEventListener('pointerleave',leave);document.removeEventListener('visibilitychange',preference);};size();portrait.src=this.dataset.portrait!;
+    }
+    disconnectedCallback(){cancelAnimationFrame(this.frame);this.observer?.disconnect();this.resize?.disconnect();this.cleanup?.();this.frame=0}
+  }
+  if(!customElements.get('goodfella-ascii'))customElements.define('goodfella-ascii',GoodFellaAscii);
+</script>

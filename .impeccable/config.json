@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "bebas neue",
+        "createdAt": "2026-10-07T11:28:16.430Z",
+        "reason": "Agent design decision: user requested Radar Laboratory reference adaptation; official current source uses Bebas Neue for its display typography. New theme expands the old six-theme design contract."
+      },
+      {
+        "rule": "design-system-font",
+        "value": "space grotesk variable",
+        "createdAt": "2026-10-07T11:31:26.034Z",
+        "reason": "Agent design decision: new user-requested Good Fella and AVA reference adaptations use a locally licensed geometric display face instead of proprietary upstream fonts. Parent installed and registered the face."
+      },
+      {
+        "rule": "design-system-font",
+        "value": "ibm plex mono",
+        "createdAt": "2026-10-07T11:31:26.117Z",
+        "reason": "Agent design decision: source-backed AVA technical microtype uses IBM Plex Mono; new reference themes expand the existing six-theme typography contract."
+      }
+    ]
+  }
+}

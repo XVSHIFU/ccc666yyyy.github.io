@@ -1,0 +1,55 @@
+---
+import { render } from 'astro:content';
+import { ArrowLeft, ArrowRight, Link2, Mail } from '@lucide/astro';
+import Base from '../layouts/Base.astro';
+import { categoryUrl, formatDate, getPosts, getPostUrl, readingTime, tagUrl, type Post } from '../lib/content';
+import { site, url } from '../lib/site';
+
+interface Props { post: Post }
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const chapters = headings.filter(heading => heading.depth === 2 || heading.depth === 3);
+const posts = await getPosts();
+const current = posts.findIndex(item => item.id === post.id);
+const previous = current >= 0 ? posts[current + 1] : undefined;
+const next = current > 0 ? posts[current - 1] : undefined;
+---
+<Base title={post.data.title} description={post.data.description} pageType="article" image={post.data.cover}>
+  <div class="content-surface article-surface">
+    <header class="article-header">
+      <a class="back-link" href={url('/archives/')}><ArrowLeft size={16} aria-hidden="true" />所有文章</a>
+      <h1 class="post-title">{post.data.title}</h1>
+      <p class="article-description">{post.data.description}</p>
+      <div class="post-meta article-meta">
+        <a class="post-category" href={categoryUrl(post.data.category)}>{post.data.category}</a>
+        <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
+        <span>{readingTime(post.body)}</span>
+        {post.data.example && <span class="example-badge">示例</span>}
+      </div>
+    </header>
+    <article class="prose" id="article-body">
+      {post.data.archived && !post.body?.trim() ? <p class="empty-article">这篇文章还没有正文。</p> : <Content />}
+    </article>
+    <footer class="article-footer">
+      <div class="article-tags">{post.data.tags.map(tag => <a class="tag-link" href={tagUrl(tag)}>#{tag}</a>)}</div>
+      <button class="text-button copy-link" type="button" data-copy-link><Link2 size={16} aria-hidden="true" /><span>复制文章链接</span></button>
+    </footer>
+    <div class="article-conversation">
+      <div><h2>关于这篇文章</h2><p>有想法想交流，欢迎写一封邮件。</p></div>
+      <a class="contact-link" href={`mailto:${site.email}?subject=${encodeURIComponent(`关于文章：${post.data.title}`)}`}><Mail size={17} aria-hidden="true" />联系我</a>
+    </div>
+    {(previous || next) && <nav class="post-navigation" aria-label="相邻文章">
+      {previous ? <a href={getPostUrl(previous)}><span><ArrowLeft size={15} aria-hidden="true" />上一篇</span><strong>{previous.data.title}</strong></a> : <span />}
+      {next && <a class="post-navigation-next" href={getPostUrl(next)}><span>下一篇<ArrowRight size={15} aria-hidden="true" /></span><strong>{next.data.title}</strong></a>}
+    </nav>}
+  </div>
+  <div slot="sidebar" class="article-sidebar-content">
+    {chapters.length > 0 && <nav class="article-toc" data-toc aria-label="文章目录">
+      <details class="article-toc-details" open>
+        <summary class="toc-title">文章目录</summary>
+        <ol>{chapters.map(heading => <li class:list={{ 'toc-nested': heading.depth === 3 }}><a href={`#${heading.slug}`} data-heading={heading.slug}>{heading.text}</a></li>)}</ol>
+        <a class="toc-back" href="#article-body">回到正文开头</a>
+      </details>
+    </nav>}
+  </div>
+</Base>

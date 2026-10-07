@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPosts, tagUrl } from '../../lib/content';
+import { url } from '../../lib/site';
+const posts = await getPosts();
+const tags = [...new Set(posts.flatMap(post => post.data.tags))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+---
+<Base title="文章标签" pageType="page" description="循着一个词，找到下一篇想读的文字。">
+  <section class="content-surface">
+    <header class="page-heading"><h1>循着一个词</h1><p class="page-intro">一些反复出现的兴趣，一些偶然相遇的念头。</p></header>
+    <nav class="index-navigation" aria-label="文章浏览方式"><a href={url('/archives/')}>按时间</a><a href={url('/categories/')}>按分类</a><a aria-current="page" href={url('/tags/')}>按标签</a></nav>
+    <ul class="tag-cloud">{tags.map(tag => <li><a href={tagUrl(tag)}><span>#{tag}</span><small>{posts.filter(post => post.data.tags.includes(tag)).length}</small></a></li>)}</ul>
+  </section>
+</Base>

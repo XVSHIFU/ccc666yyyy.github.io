@@ -1,0 +1,26 @@
+---
+import { Check, X, Sun, Moon, Monitor, RotateCcw } from '@lucide/astro';
+import { themes, url } from '../lib/site';
+const choices = [...themes.slice(6), ...themes.slice(0, 6)];
+---
+<dialog id="appearance-dialog" class="appearance-dialog" aria-labelledby="appearance-title">
+  <div class="dialog-heading"><div><h2 id="appearance-title">挑一个喜欢的世界</h2><p>换一种心情，继续阅读。</p></div><button type="button" class="icon-button" data-close-dialog aria-label="关闭外观设置"><X size={20}/></button></div>
+  <div class="theme-filters" role="group" aria-label="筛选外观">
+    <button type="button" data-theme-filter="all" aria-pressed="true">全部 <span>16</span></button>
+    <button type="button" data-theme-filter="journal" aria-pressed="false">博客手记 <span>6</span></button>
+    <button type="button" data-theme-filter="gallery" aria-pressed="false">设计漫游 <span>10</span></button>
+  </div>
+  <div class="theme-options" role="group" aria-label="博客外观">
+    {choices.map(theme => <button type="button" class="theme-option" data-theme-option={theme.id} data-theme-group={themes.findIndex(item => item.id === theme.id) < 6 ? 'journal' : 'gallery'} aria-pressed={theme.id === 'firefly'}>
+      <span class="theme-preview" aria-hidden="true"><img src={url(`previews/${theme.id}.webp`)} alt="" width="480" height="333" loading="lazy"/><span class="preview-check"><Check size={15}/></span></span>
+      <span class="theme-option-name">{theme.name}<small>{theme.label}</small></span><span class="theme-option-description">{theme.description}</span>
+    </button>)}
+  </div>
+  <div class="appearance-mode"><span id="mode-label">明暗模式</span><div class="mode-options" role="group" aria-labelledby="mode-label">
+    <button type="button" data-mode-option="light" aria-pressed="false"><Sun size={15}/> 浅色</button>
+    <button type="button" data-mode-option="dark" aria-pressed="false"><Moon size={15}/> 深色</button>
+    <button type="button" data-mode-option="system" aria-pressed="true"><Monitor size={15}/> 系统</button>
+  </div></div>
+  <div class="appearance-footer"><button type="button" class="text-button" id="reset-appearance"><RotateCcw size={14}/>恢复默认</button><span>偏好保存在此浏览器</span></div>
+  <p id="appearance-status" class="sr-only" role="status" aria-live="polite"></p>
+</dialog>

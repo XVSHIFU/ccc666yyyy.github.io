@@ -1,0 +1,811 @@
+/* Original implementation of Shirone's banner, waves and Material reading layout.
+Visual reference: github.com/LyraVoid/Shirone;
+no upstream source or artwork copied. */
+:root{
+  --bg:#f7f1f9;
+  --surface:#fffbff;
+  --surface-2:#eee5f3;
+  --ink:#292330;
+  --muted:#655b6d;
+  --line:#ded3e6;
+  --accent:#76548b;
+  --accent-soft:#edddf6;
+  --on-accent:#fff;
+  --radius:16px;
+  --shadow:none;
+  --max-width:1536px;
+  --display-font:'Noto Sans SC Variable',sans-serif}
+  :root[data-mode='dark']{
+    --bg:#19151f;
+    --surface:#292330;
+    --surface-2:#352c3e;
+    --ink:#f0e7f5;
+    --muted:#c9bcd2;
+    --line:#4c4057;
+    --accent:#d7b3ee;
+    --accent-soft:#4e365e;
+    --on-accent:#352044}
+    body{
+      background:var(--bg);
+      color:var(--ink)}
+      ::selection{
+        background:var(--accent-soft);
+        color:var(--ink)}
+        input,textarea{
+          caret-color:var(--accent)}
+          *{
+            scrollbar-color:var(--line) var(--bg)}
+            a{
+              text-underline-offset:.24em}
+              .site-header{
+                height:64px;
+                background:var(--surface);
+                border:0}
+                .header-inner{
+                  max-width:1536px;
+                  height:64px;
+                  padding:0 24px;
+                  gap:24px;
+                  position:relative}
+                  .brand{
+                    gap:10px}
+                    .brand-symbol{
+                      width:4px;
+                      height:20px;
+                      border-radius:4px;
+                      background:var(--accent);
+                      color:transparent}
+                      .brand-symbol svg{
+                        display:none}
+                        .brand-name{
+                          font-size:19px;
+                          font-weight:750;
+                          letter-spacing:-.025em}
+                          .brand-subtitle{
+                            display:none}
+                            .primary-nav{
+                              position:absolute;
+                              left:50%;
+                              transform:translateX(-50%);
+                              margin:0;
+                              gap:9px}
+                              .primary-nav a{
+                                padding:17px 17px;
+                                font-size:14px;
+                                font-weight:650}
+                                .primary-nav a[aria-current='page']::after{
+                                  height:3px;
+                                  width:auto;
+                                  left:14px;
+                                  right:14px;
+                                  bottom:8px;
+                                  border-radius:4px}
+                                  .header-actions{
+                                    margin-left:auto;
+                                    gap:4px}
+                                    .appearance-trigger{
+                                      border:0;
+                                      background:transparent;
+                                      padding:8px;
+                                      min-width:40px;
+                                      min-height:40px;
+                                      border-radius:50%}
+                                      .appearance-trigger span,.search-trigger kbd{
+                                        display:none}
+                                        .icon-button{
+                                          border-radius:50%}
+                                          .mobile-navigation{
+                                            color:var(--ink)}
+                                            body[data-page='home'] .site-header{
+                                              position:absolute;
+                                              inset:0 0 auto;
+                                              background:transparent;
+                                              color:#fff;
+                                              z-index:40}
+                                              body[data-page='home'] .brand-symbol{
+                                                background:#fff}
+                                                body[data-page='home'] .primary-nav a[aria-current='page']{
+                                                  color:#fff}
+                                                  body[data-page='home'] .primary-nav a[aria-current='page']::after{
+                                                    background:#fff}
+                                                    body[data-page='home'] .site-header :is(.brand:hover,.primary-nav a:hover){
+                                                      color:#fff}
+                                                      body[data-page='home'] .site-header :is(.icon-button:hover,.appearance-trigger:hover){
+                                                        background:#ffffff24;
+                                                        color:#fff}
+                                                        .shirone-banner{
+                                                          position:relative;
+                                                          height:65vh;
+                                                          min-height:440px;
+                                                          overflow:hidden;
+                                                          isolation:isolate;
+                                                          background:#52606b}
+                                                          .shirone-banner::after{
+                                                            content:'';
+                                                            position:absolute;
+                                                            inset:0;
+                                                            background:linear-gradient(#27203235,#24162638);
+                                                            z-index:-1}
+                                                            .shirone-banner-image{
+                                                              position:absolute;
+                                                              inset:0;
+                                                              z-index:-2;
+                                                              width:100%;
+                                                              height:100%;
+                                                              object-fit:cover;
+                                                              object-position:center 48%;
+                                                              animation:shirone-breathe 24s ease-in-out infinite alternate}
+                                                              .shirone-banner-copy{
+                                                                position:absolute;
+                                                                inset:0;
+                                                                display:flex;
+                                                                align-items:center;
+                                                                justify-content:center;
+                                                                flex-direction:column;
+                                                                padding:64px 24px 85px;
+                                                                text-align:center}
+                                                                .shirone-banner-copy h1{
+                                                                  font-size:clamp(50px,6.2vw,80px);
+                                                                  font-weight:800;
+                                                                  line-height:1.2;
+                                                                  letter-spacing:-.03em;
+                                                                  color:#fff;
+                                                                  text-shadow:0 3px 15px #24172c55}
+                                                                  .shirone-banner-copy p{
+                                                                    margin-top:15px;
+                                                                    color:#fff;
+                                                                    font-size:21px;
+                                                                    text-shadow:0 2px 8px #24172c88}
+                                                                    .shirone-banner-down{
+                                                                      position:absolute;
+                                                                      left:calc(50% - 20px);
+                                                                      bottom:67px;
+                                                                      width:40px;
+                                                                      height:40px;
+                                                                      display:grid;
+                                                                      place-items:center;
+                                                                      color:#fff;
+                                                                      transform:rotate(90deg);
+                                                                      z-index:3}
+                                                                      .shirone-banner-down:hover{
+                                                                        color:#fff;
+                                                                        background:#ffffff20;
+                                                                        border-radius:50%}
+                                                                        .shirone-waves{
+                                                                          position:absolute;
+                                                                          inset:auto 0 0;
+                                                                          height:110px;
+                                                                          color:var(--bg);
+                                                                          pointer-events:none}
+                                                                          .shirone-waves svg{
+                                                                            width:100%;
+                                                                            height:100%;
+                                                                            overflow:visible}
+                                                                            .shirone-waves path{
+                                                                              fill:currentColor;
+                                                                              animation:shirone-wave 20s linear infinite alternate}
+                                                                              .shirone-wave-one{
+                                                                                opacity:.25;
+                                                                                animation-duration:16s!important}
+                                                                                .shirone-wave-two{
+                                                                                  opacity:.48;
+                                                                                  animation-direction:alternate-reverse!important;
+                                                                                  animation-duration:22s!important}
+                                                                                  .shirone-wave-three{
+                                                                                    opacity:.72;
+                                                                                    animation-duration:28s!important}
+                                                                                    .shirone-wave-four{
+                                                                                      animation-direction:alternate-reverse!important;
+                                                                                      animation-duration:34s!important}
+                                                                                      .shirone-layout{
+                                                                                        position:relative;
+                                                                                        display:grid;
+                                                                                        grid-template-columns:280px minmax(0,1fr) 280px;
+                                                                                        gap:16px;
+                                                                                        max-width:1536px;
+                                                                                        margin:-16px auto 60px;
+                                                                                        padding:0 16px;
+                                                                                        align-items:start;
+                                                                                        z-index:5}
+                                                                                        .shirone-primary,.shirone-secondary,.shirone-sticky{
+                                                                                          display:grid;
+                                                                                          gap:16px;
+                                                                                          min-width:0}
+                                                                                          .shirone-primary{
+                                                                                            grid-column:1;
+                                                                                            grid-row:1}
+                                                                                            .shirone-secondary{
+                                                                                              grid-column:3;
+                                                                                              grid-row:1}
+                                                                                              .shirone-feed{
+                                                                                                grid-column:2;
+                                                                                                grid-row:1;
+                                                                                                min-width:0;
+                                                                                                padding:0}
+                                                                                                .shirone-panel{
+                                                                                                  padding:20px;
+                                                                                                  background:var(--surface);
+                                                                                                  border-radius:16px}
+                                                                                                  .shirone-panel h2{
+                                                                                                    display:flex;
+                                                                                                    align-items:center;
+                                                                                                    gap:9px;
+                                                                                                    font-size:16px;
+                                                                                                    font-weight:650;
+                                                                                                    margin-bottom:16px}
+                                                                                                    .shirone-panel h2::before{
+                                                                                                      content:'';
+                                                                                                      height:16px;
+                                                                                                      width:4px;
+                                                                                                      flex-shrink:0;
+                                                                                                      background:var(--accent);
+                                                                                                      border-radius:4px}
+                                                                                                      .shirone-panel h2>svg{
+                                                                                                        display:none}
+                                                                                                        .shirone-profile{
+                                                                                                          padding:12px;
+                                                                                                          text-align:center}
+                                                                                                          .shirone-avatar{
+                                                                                                            display:block;
+                                                                                                            position:relative;
+                                                                                                            overflow:hidden;
+                                                                                                            border-radius:12px;
+                                                                                                            aspect-ratio:1}
+                                                                                                            .shirone-avatar img{
+                                                                                                              width:100%;
+                                                                                                              height:100%;
+                                                                                                              object-fit:cover}
+                                                                                                              .shirone-avatar>span{
+                                                                                                                position:absolute;
+                                                                                                                inset:0;
+                                                                                                                display:grid;
+                                                                                                                place-items:center;
+                                                                                                                color:#fff;
+                                                                                                                background:#0000;
+                                                                                                                opacity:0;
+                                                                                                                transition:background .25s,opacity .25s}
+                                                                                                                .shirone-avatar:hover>span,.shirone-avatar:focus-visible>span{
+                                                                                                                  background:#0005;
+                                                                                                                  opacity:1}
+                                                                                                                  .shirone-profile h2{
+                                                                                                                    justify-content:center;
+                                                                                                                    margin:13px 0 5px;
+                                                                                                                    font-size:20px}
+                                                                                                                    .shirone-profile h2::before{
+                                                                                                                      display:none}
+                                                                                                                      .shirone-profile-accent{
+                                                                                                                        display:block;
+                                                                                                                        width:20px;
+                                                                                                                        height:4px;
+                                                                                                                        border-radius:5px;
+                                                                                                                        background:var(--accent);
+                                                                                                                        margin:0 auto 10px}
+                                                                                                                        .shirone-profile p{
+                                                                                                                          font-size:13px;
+                                                                                                                          line-height:1.75;
+                                                                                                                          padding:0 10px}
+                                                                                                                          .shirone-social{
+                                                                                                                            display:flex;
+                                                                                                                            justify-content:center;
+                                                                                                                            gap:8px;
+                                                                                                                            margin:14px 0 5px}
+                                                                                                                            .shirone-social a{
+                                                                                                                              width:36px;
+                                                                                                                              height:36px;
+                                                                                                                              border-radius:50%;
+                                                                                                                              display:grid;
+                                                                                                                              place-items:center;
+                                                                                                                              color:var(--accent)}
+                                                                                                                              .shirone-social a:hover{
+                                                                                                                                background:var(--accent-soft)}
+                                                                                                                                .shirone-announcement p{
+                                                                                                                                  font-size:13px;
+                                                                                                                                  line-height:1.9}
+                                                                                                                                  .shirone-announcement>a{
+                                                                                                                                    display:flex;
+                                                                                                                                    align-items:center;
+                                                                                                                                    justify-content:space-between;
+                                                                                                                                    margin-top:13px;
+                                                                                                                                    color:var(--accent);
+                                                                                                                                    font-size:12px}
+                                                                                                                                    .shirone-categories>a{
+                                                                                                                                      display:flex;
+                                                                                                                                      justify-content:space-between;
+                                                                                                                                      align-items:center;
+                                                                                                                                      padding:9px 0;
+                                                                                                                                      font-size:13px}
+                                                                                                                                      .shirone-categories small{
+                                                                                                                                        padding:1px 9px;
+                                                                                                                                        background:var(--surface-2);
+                                                                                                                                        border-radius:5px;
+                                                                                                                                        font-size:11px;
+                                                                                                                                        color:var(--accent)}
+                                                                                                                                        .shirone-tags{
+                                                                                                                                          display:flex;
+                                                                                                                                          gap:6px;
+                                                                                                                                          flex-wrap:wrap}
+                                                                                                                                          .shirone-tags a{
+                                                                                                                                            padding:3px 8px;
+                                                                                                                                            border-radius:6px;
+                                                                                                                                            background:var(--surface-2);
+                                                                                                                                            font-size:11px;
+                                                                                                                                            color:var(--muted);
+                                                                                                                                            line-height:1.65}
+                                                                                                                                            .shirone-tags a:hover{
+                                                                                                                                              background:var(--accent-soft);
+                                                                                                                                              color:var(--accent)}
+                                                                                                                                              .shirone-category-bar{
+                                                                                                                                                display:flex;
+                                                                                                                                                gap:8px;
+                                                                                                                                                align-items:center;
+                                                                                                                                                overflow-x:auto;
+                                                                                                                                                white-space:nowrap;
+                                                                                                                                                background:var(--surface);
+                                                                                                                                                padding:8px;
+                                                                                                                                                border-radius:16px;
+                                                                                                                                                margin-bottom:16px;
+                                                                                                                                                scrollbar-width:none}
+                                                                                                                                                .shirone-category-bar>*{
+                                                                                                                                                  flex-shrink:0;
+                                                                                                                                                  display:flex;
+                                                                                                                                                  gap:8px;
+                                                                                                                                                  align-items:center;
+                                                                                                                                                  justify-content:center;
+                                                                                                                                                  min-height:32px;
+                                                                                                                                                  padding:5px 12px;
+                                                                                                                                                  border-radius:9px;
+                                                                                                                                                  background:var(--surface-2);
+                                                                                                                                                  font-size:12px;
+                                                                                                                                                  color:var(--muted)}
+                                                                                                                                                  .shirone-category-bar button[aria-pressed='true']{
+                                                                                                                                                    background:var(--accent);
+                                                                                                                                                    color:var(--on-accent)}
+                                                                                                                                                    .shirone-category-bar small{
+                                                                                                                                                      padding:0 4px;
+                                                                                                                                                      border-radius:4px;
+                                                                                                                                                      background:var(--surface);
+                                                                                                                                                      font-size:10px;
+                                                                                                                                                      color:var(--muted)}
+                                                                                                                                                      .shirone-posts{
+                                                                                                                                                        display:grid;
+                                                                                                                                                        gap:16px}
+                                                                                                                                                        .shirone-post.post-card{
+                                                                                                                                                          position:relative;
+                                                                                                                                                          display:block;
+                                                                                                                                                          padding:0;
+                                                                                                                                                          background:var(--surface);
+                                                                                                                                                          border-radius:16px;
+                                                                                                                                                          box-shadow:none;
+                                                                                                                                                          border:0;
+                                                                                                                                                          overflow:hidden}
+                                                                                                                                                          .shirone-post-body{
+                                                                                                                                                            padding:24px 78px 21px 24px;
+                                                                                                                                                            min-height:190px}
+                                                                                                                                                            .shirone-post-has-cover .shirone-post-body{
+                                                                                                                                                              padding-right:calc(28% + 25px)}
+                                                                                                                                                              .shirone-post h2{
+                                                                                                                                                                font-size:21px;
+                                                                                                                                                                line-height:1.45;
+                                                                                                                                                                font-weight:650;
+                                                                                                                                                                letter-spacing:-.02em}
+                                                                                                                                                                .shirone-post h2>a{
+                                                                                                                                                                  display:flex;
+                                                                                                                                                                  align-items:center;
+                                                                                                                                                                  gap:9px;
+                                                                                                                                                                  position:relative}
+                                                                                                                                                                  .shirone-post h2>a::before{
+                                                                                                                                                                    content:'';
+                                                                                                                                                                    height:21px;
+                                                                                                                                                                    flex:0 0 4px;
+                                                                                                                                                                    background:var(--accent);
+                                                                                                                                                                    border-radius:3px}
+                                                                                                                                                                    .shirone-post h2 svg{
+                                                                                                                                                                      flex-shrink:0;
+                                                                                                                                                                      color:var(--accent);
+                                                                                                                                                                      transition:transform .2s}
+                                                                                                                                                                      .shirone-post:hover h2>a{
+                                                                                                                                                                        color:var(--accent)}
+                                                                                                                                                                        .shirone-post:hover h2 svg{
+                                                                                                                                                                          transform:translateX(4px)}
+                                                                                                                                                                          .shirone-meta{
+                                                                                                                                                                            display:flex;
+                                                                                                                                                                            align-items:center;
+                                                                                                                                                                            flex-wrap:wrap;
+                                                                                                                                                                            gap:8px 16px;
+                                                                                                                                                                            margin:14px 0 10px;
+                                                                                                                                                                            font-size:11px;
+                                                                                                                                                                            color:var(--muted)}
+                                                                                                                                                                            .shirone-meta>span,.shirone-meta>a{
+                                                                                                                                                                              display:flex;
+                                                                                                                                                                              align-items:center;
+                                                                                                                                                                              gap:7px}
+                                                                                                                                                                              .shirone-meta i,.shirone-stats dt i{
+                                                                                                                                                                                width:28px;
+                                                                                                                                                                                height:28px;
+                                                                                                                                                                                background:var(--surface-2);
+                                                                                                                                                                                border-radius:7px;
+                                                                                                                                                                                display:grid;
+                                                                                                                                                                                place-items:center;
+                                                                                                                                                                                font-style:normal;
+                                                                                                                                                                                flex-shrink:0}
+                                                                                                                                                                                .shirone-post-body>p{
+                                                                                                                                                                                  font-size:12px;
+                                                                                                                                                                                  line-height:1.9;
+                                                                                                                                                                                  margin-bottom:15px}
+                                                                                                                                                                                  .shirone-post-cover{
+                                                                                                                                                                                    position:absolute;
+                                                                                                                                                                                    right:12px;
+                                                                                                                                                                                    top:12px;
+                                                                                                                                                                                    bottom:12px;
+                                                                                                                                                                                    width:28%;
+                                                                                                                                                                                    border-radius:9px;
+                                                                                                                                                                                    overflow:hidden}
+                                                                                                                                                                                    .shirone-post-cover img{
+                                                                                                                                                                                      width:100%;
+                                                                                                                                                                                      height:100%;
+                                                                                                                                                                                      object-fit:cover}
+                                                                                                                                                                                      .shirone-post-cover>span{
+                                                                                                                                                                                        position:absolute;
+                                                                                                                                                                                        inset:0;
+                                                                                                                                                                                        display:grid;
+                                                                                                                                                                                        place-items:center;
+                                                                                                                                                                                        background:#0000;
+                                                                                                                                                                                        color:#fff;
+                                                                                                                                                                                        opacity:0;
+                                                                                                                                                                                        transition:opacity .25s,background .25s}
+                                                                                                                                                                                        .shirone-post:hover .shirone-post-cover>span{
+                                                                                                                                                                                          opacity:1;
+                                                                                                                                                                                          background:#0005}
+                                                                                                                                                                                          .shirone-post-enter{
+                                                                                                                                                                                            position:absolute;
+                                                                                                                                                                                            top:12px;
+                                                                                                                                                                                            right:12px;
+                                                                                                                                                                                            bottom:12px;
+                                                                                                                                                                                            width:52px;
+                                                                                                                                                                                            border-radius:12px;
+                                                                                                                                                                                            background:var(--surface-2);
+                                                                                                                                                                                            color:var(--accent);
+                                                                                                                                                                                            display:grid;
+                                                                                                                                                                                            place-items:center;
+                                                                                                                                                                                            transition:background .2s}
+                                                                                                                                                                                            .shirone-post:hover .shirone-post-enter{
+                                                                                                                                                                                              background:var(--accent-soft)}
+                                                                                                                                                                                              .shirone-feed-end{
+                                                                                                                                                                                                display:flex;
+                                                                                                                                                                                                align-items:center;
+                                                                                                                                                                                                justify-content:center;
+                                                                                                                                                                                                gap:15px;
+                                                                                                                                                                                                margin:24px 0;
+                                                                                                                                                                                                color:var(--muted);
+                                                                                                                                                                                                font-size:12px}
+                                                                                                                                                                                                .shirone-feed-end>span{
+                                                                                                                                                                                                  display:grid;
+                                                                                                                                                                                                  place-items:center;
+                                                                                                                                                                                                  width:38px;
+                                                                                                                                                                                                  height:38px;
+                                                                                                                                                                                                  border-radius:12px;
+                                                                                                                                                                                                  background:var(--accent);
+                                                                                                                                                                                                  color:var(--on-accent)}
+                                                                                                                                                                                                  .shirone-feed-end>a{
+                                                                                                                                                                                                    display:flex;
+                                                                                                                                                                                                    gap:5px;
+                                                                                                                                                                                                    align-items:center}
+                                                                                                                                                                                                    .shirone-stats dl{
+                                                                                                                                                                                                      margin:0;
+                                                                                                                                                                                                      display:grid;
+                                                                                                                                                                                                      gap:13px}
+                                                                                                                                                                                                      .shirone-stats dl>div{
+                                                                                                                                                                                                        display:flex;
+                                                                                                                                                                                                        justify-content:space-between;
+                                                                                                                                                                                                        align-items:center;
+                                                                                                                                                                                                        gap:10px;
+                                                                                                                                                                                                        font-size:12px}
+                                                                                                                                                                                                        .shirone-stats dt{
+                                                                                                                                                                                                          display:flex;
+                                                                                                                                                                                                          align-items:center;
+                                                                                                                                                                                                          gap:8px;
+                                                                                                                                                                                                          color:var(--muted)}
+                                                                                                                                                                                                          .shirone-stats dd{
+                                                                                                                                                                                                            margin:0;
+                                                                                                                                                                                                            font-weight:650;
+                                                                                                                                                                                                            font-variant-numeric:tabular-nums}
+                                                                                                                                                                                                            .shirone-stats dl>div:last-child dd{
+                                                                                                                                                                                                              font-size:10px}
+                                                                                                                                                                                                              .shirone-calendar h2{
+                                                                                                                                                                                                                font-size:14px}
+                                                                                                                                                                                                                .shirone-calendar-grid{
+                                                                                                                                                                                                                  display:grid;
+                                                                                                                                                                                                                  grid-template-columns:repeat(7,minmax(0,1fr));
+                                                                                                                                                                                                                  gap:5px;
+                                                                                                                                                                                                                  text-align:center;
+                                                                                                                                                                                                                  font-size:12px;
+                                                                                                                                                                                                                  font-variant-numeric:tabular-nums}
+                                                                                                                                                                                                                  .shirone-calendar-grid>*{
+                                                                                                                                                                                                                    display:grid;
+                                                                                                                                                                                                                    place-items:center;
+                                                                                                                                                                                                                    aspect-ratio:1;
+                                                                                                                                                                                                                    color:var(--muted)}
+                                                                                                                                                                                                                    .shirone-calendar-grid small{
+                                                                                                                                                                                                                      font-size:10px}
+                                                                                                                                                                                                                      .shirone-calendar-grid>a{
+                                                                                                                                                                                                                        border-radius:8px;
+                                                                                                                                                                                                                        background:var(--accent);
+                                                                                                                                                                                                                        color:var(--on-accent);
+                                                                                                                                                                                                                        font-weight:650}
+                                                                                                                                                                                                                        .shirone-rss{
+                                                                                                                                                                                                                          display:flex;
+                                                                                                                                                                                                                          align-items:center;
+                                                                                                                                                                                                                          gap:12px;
+                                                                                                                                                                                                                          color:var(--accent)}
+                                                                                                                                                                                                                          .shirone-rss>span{
+                                                                                                                                                                                                                            font-size:13px;
+                                                                                                                                                                                                                            flex:1}
+                                                                                                                                                                                                                            .shirone-rss small{
+                                                                                                                                                                                                                              display:block;
+                                                                                                                                                                                                                              color:var(--muted);
+                                                                                                                                                                                                                              font-size:10px;
+                                                                                                                                                                                                                              margin-top:3px}
+                                                                                                                                                                                                                              .page-layout{
+                                                                                                                                                                                                                                max-width:1360px;
+                                                                                                                                                                                                                                grid-template-columns:minmax(0,1fr) 280px;
+                                                                                                                                                                                                                                gap:20px;
+                                                                                                                                                                                                                                padding:0 20px;
+                                                                                                                                                                                                                                margin:32px auto 64px}
+                                                                                                                                                                                                                                .content-surface{
+                                                                                                                                                                                                                                  padding:36px 44px;
+                                                                                                                                                                                                                                  border-radius:16px;
+                                                                                                                                                                                                                                  box-shadow:none;
+                                                                                                                                                                                                                                  background:var(--surface)}
+                                                                                                                                                                                                                                  .article-header{
+                                                                                                                                                                                                                                    border:0;
+                                                                                                                                                                                                                                    margin-bottom:24px;
+                                                                                                                                                                                                                                    padding-bottom:24px}
+                                                                                                                                                                                                                                    .article-header .post-title{
+                                                                                                                                                                                                                                      font-size:clamp(28px,3.6vw,46px);
+                                                                                                                                                                                                                                      font-weight:700;
+                                                                                                                                                                                                                                      line-height:1.35}
+                                                                                                                                                                                                                                      .article-header .article-meta{
+                                                                                                                                                                                                                                        padding:12px;
+                                                                                                                                                                                                                                        background:var(--surface-2);
+                                                                                                                                                                                                                                        border-radius:10px}
+                                                                                                                                                                                                                                        .article-rail{
+                                                                                                                                                                                                                                          top:88px;
+                                                                                                                                                                                                                                          padding:0;
+                                                                                                                                                                                                                                          order:initial}
+                                                                                                                                                                                                                                          .article-toc{
+                                                                                                                                                                                                                                            border-radius:16px;
+                                                                                                                                                                                                                                            background:var(--surface);
+                                                                                                                                                                                                                                            padding:22px}
+                                                                                                                                                                                                                                            .article-toc a[aria-current='location']{
+                                                                                                                                                                                                                                              background:var(--accent-soft)}
+                                                                                                                                                                                                                                              .article-sidebar-content{
+                                                                                                                                                                                                                                                top:88px}
+                                                                                                                                                                                                                                                .prose{
+                                                                                                                                                                                                                                                  max-width:75ch;
+                                                                                                                                                                                                                                                  margin-inline:auto}
+                                                                                                                                                                                                                                                  .prose h2{
+                                                                                                                                                                                                                                                    position:relative;
+                                                                                                                                                                                                                                                    padding-left:18px}
+                                                                                                                                                                                                                                                    .prose h2::before{
+                                                                                                                                                                                                                                                      content:'';
+                                                                                                                                                                                                                                                      position:absolute;
+                                                                                                                                                                                                                                                      left:0;
+                                                                                                                                                                                                                                                      top:.3em;
+                                                                                                                                                                                                                                                      height:1em;
+                                                                                                                                                                                                                                                      width:4px;
+                                                                                                                                                                                                                                                      background:var(--accent);
+                                                                                                                                                                                                                                                      border-radius:4px}
+                                                                                                                                                                                                                                                      .prose blockquote{
+                                                                                                                                                                                                                                                        border:0;
+                                                                                                                                                                                                                                                        border-radius:12px;
+                                                                                                                                                                                                                                                        background:var(--surface-2)}
+                                                                                                                                                                                                                                                        .profile-card{
+                                                                                                                                                                                                                                                          box-shadow:none;
+                                                                                                                                                                                                                                                          border-radius:16px}
+                                                                                                                                                                                                                                                          .site-footer{
+                                                                                                                                                                                                                                                            max-width:1496px;
+                                                                                                                                                                                                                                                            margin:30px auto 0;
+                                                                                                                                                                                                                                                            border:0;
+                                                                                                                                                                                                                                                            padding:25px 24px;
+                                                                                                                                                                                                                                                            color:var(--muted)}
+                                                                                                                                                                                                                                                            @keyframes shirone-wave{
+                                                                                                                                                                                                                                                              from{
+                                                                                                                                                                                                                                                                transform:translateX(-90px)}
+                                                                                                                                                                                                                                                                to{
+                                                                                                                                                                                                                                                                  transform:translateX(90px)}
+                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                @keyframes shirone-breathe{
+                                                                                                                                                                                                                                                                  from{
+                                                                                                                                                                                                                                                                    transform:scale(1)}
+                                                                                                                                                                                                                                                                    to{
+                                                                                                                                                                                                                                                                      transform:scale(1.045)}
+                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                    @media(max-width:1279px){
+                                                                                                                                                                                                                                                                      .shirone-layout{
+                                                                                                                                                                                                                                                                        grid-template-columns:280px minmax(0,1fr)}
+                                                                                                                                                                                                                                                                        .shirone-secondary{
+                                                                                                                                                                                                                                                                          display:none}
+                                                                                                                                                                                                                                                                          .shirone-banner-copy h1{
+                                                                                                                                                                                                                                                                            font-size:64px}
+                                                                                                                                                                                                                                                                          }
+                                                                                                                                                                                                                                                                          @media(max-width:1023px){
+                                                                                                                                                                                                                                                                            .primary-nav{
+                                                                                                                                                                                                                                                                              display:none}
+                                                                                                                                                                                                                                                                              .mobile-nav-toggle{
+                                                                                                                                                                                                                                                                                display:inline-flex}
+                                                                                                                                                                                                                                                                                .shirone-layout{
+                                                                                                                                                                                                                                                                                  display:flex;
+                                                                                                                                                                                                                                                                                  flex-direction:column;
+                                                                                                                                                                                                                                                                                  margin-top:-8px;
+                                                                                                                                                                                                                                                                                  padding:0 12px;
+                                                                                                                                                                                                                                                                                  gap:24px}
+                                                                                                                                                                                                                                                                                  .shirone-feed{
+                                                                                                                                                                                                                                                                                    width:100%;
+                                                                                                                                                                                                                                                                                    order:0}
+                                                                                                                                                                                                                                                                                    .shirone-primary{
+                                                                                                                                                                                                                                                                                      width:100%;
+                                                                                                                                                                                                                                                                                      order:1;
+                                                                                                                                                                                                                                                                                      grid-template-columns:repeat(2,minmax(0,1fr))}
+                                                                                                                                                                                                                                                                                      .shirone-profile{
+                                                                                                                                                                                                                                                                                        grid-row:span 2}
+                                                                                                                                                                                                                                                                                        .shirone-avatar{
+                                                                                                                                                                                                                                                                                          max-width:200px;
+                                                                                                                                                                                                                                                                                          margin:auto}
+                                                                                                                                                                                                                                                                                          .shirone-sticky{
+                                                                                                                                                                                                                                                                                            display:contents}
+                                                                                                                                                                                                                                                                                            .shirone-banner{
+                                                                                                                                                                                                                                                                                              height:max(70vh,448px);
+                                                                                                                                                                                                                                                                                              min-height:0}
+                                                                                                                                                                                                                                                                                              .shirone-banner-copy h1{
+                                                                                                                                                                                                                                                                                                font-size:44px}
+                                                                                                                                                                                                                                                                                                .shirone-banner-copy p{
+                                                                                                                                                                                                                                                                                                  font-size:18px}
+                                                                                                                                                                                                                                                                                                  .page-layout{
+                                                                                                                                                                                                                                                                                                    grid-template-columns:minmax(0,1fr) 230px;
+                                                                                                                                                                                                                                                                                                    gap:16px}
+                                                                                                                                                                                                                                                                                                    .content-surface{
+                                                                                                                                                                                                                                                                                                      padding:30px}
+                                                                                                                                                                                                                                                                                                      .header-inner{
+                                                                                                                                                                                                                                                                                                        padding:0 16px}
+                                                                                                                                                                                                                                                                                                      }
+                                                                                                                                                                                                                                                                                                      @media(max-width:767px){
+                                                                                                                                                                                                                                                                                                        .header-inner{
+                                                                                                                                                                                                                                                                                                          height:64px;
+                                                                                                                                                                                                                                                                                                          gap:10px}
+                                                                                                                                                                                                                                                                                                          .brand-name{
+                                                                                                                                                                                                                                                                                                            font-size:18px}
+                                                                                                                                                                                                                                                                                                            .header-actions{
+                                                                                                                                                                                                                                                                                                              gap:0}
+                                                                                                                                                                                                                                                                                                              .shirone-layout{
+                                                                                                                                                                                                                                                                                                                padding:0 8px}
+                                                                                                                                                                                                                                                                                                                .shirone-banner-copy{
+                                                                                                                                                                                                                                                                                                                  padding:64px 20px 75px}
+                                                                                                                                                                                                                                                                                                                  .shirone-banner-copy p{
+                                                                                                                                                                                                                                                                                                                    font-size:16px;
+                                                                                                                                                                                                                                                                                                                    max-width:19em;
+                                                                                                                                                                                                                                                                                                                    line-height:1.8}
+                                                                                                                                                                                                                                                                                                                    .shirone-waves{
+                                                                                                                                                                                                                                                                                                                      height:65px}
+                                                                                                                                                                                                                                                                                                                      .shirone-banner-down{
+                                                                                                                                                                                                                                                                                                                        bottom:43px}
+                                                                                                                                                                                                                                                                                                                        .shirone-post-has-cover{
+                                                                                                                                                                                                                                                                                                                          display:flex!important;
+                                                                                                                                                                                                                                                                                                                          flex-direction:column-reverse}
+                                                                                                                                                                                                                                                                                                                          .shirone-post-cover{
+                                                                                                                                                                                                                                                                                                                            position:relative;
+                                                                                                                                                                                                                                                                                                                            inset:auto;
+                                                                                                                                                                                                                                                                                                                            width:auto;
+                                                                                                                                                                                                                                                                                                                            height:auto;
+                                                                                                                                                                                                                                                                                                                            aspect-ratio:2;
+                                                                                                                                                                                                                                                                                                                            margin:16px 16px 0;
+                                                                                                                                                                                                                                                                                                                            border-radius:12px}
+                                                                                                                                                                                                                                                                                                                            .shirone-post-cover>span,.shirone-post-enter{
+                                                                                                                                                                                                                                                                                                                              display:none}
+                                                                                                                                                                                                                                                                                                                              .shirone-post-body,.shirone-post-has-cover .shirone-post-body{
+                                                                                                                                                                                                                                                                                                                                padding:19px 17px;
+                                                                                                                                                                                                                                                                                                                                min-height:0}
+                                                                                                                                                                                                                                                                                                                                .shirone-post h2{
+                                                                                                                                                                                                                                                                                                                                  font-size:20px}
+                                                                                                                                                                                                                                                                                                                                  .shirone-post h2>a::before{
+                                                                                                                                                                                                                                                                                                                                    display:none}
+                                                                                                                                                                                                                                                                                                                                    .shirone-post h2 svg{
+                                                                                                                                                                                                                                                                                                                                      margin-left:auto;
+                                                                                                                                                                                                                                                                                                                                      width:26px;
+                                                                                                                                                                                                                                                                                                                                      height:26px}
+                                                                                                                                                                                                                                                                                                                                      .shirone-meta{
+                                                                                                                                                                                                                                                                                                                                        gap:7px 11px;
+                                                                                                                                                                                                                                                                                                                                        font-size:10px;
+                                                                                                                                                                                                                                                                                                                                        margin:12px 0}
+                                                                                                                                                                                                                                                                                                                                        .shirone-meta i{
+                                                                                                                                                                                                                                                                                                                                          width:25px;
+                                                                                                                                                                                                                                                                                                                                          height:25px}
+                                                                                                                                                                                                                                                                                                                                          .shirone-post-body>p{
+                                                                                                                                                                                                                                                                                                                                            font-size:12px}
+                                                                                                                                                                                                                                                                                                                                            .shirone-primary{
+                                                                                                                                                                                                                                                                                                                                              display:grid;
+                                                                                                                                                                                                                                                                                                                                              grid-template-columns:minmax(0,1fr)}
+                                                                                                                                                                                                                                                                                                                                              .shirone-profile{
+                                                                                                                                                                                                                                                                                                                                                grid-row:auto}
+                                                                                                                                                                                                                                                                                                                                                .shirone-profile p{
+                                                                                                                                                                                                                                                                                                                                                  max-width:260px;
+                                                                                                                                                                                                                                                                                                                                                  margin:auto}
+                                                                                                                                                                                                                                                                                                                                                  .shirone-announcement{
+                                                                                                                                                                                                                                                                                                                                                    display:none}
+                                                                                                                                                                                                                                                                                                                                                    .shirone-sticky{
+                                                                                                                                                                                                                                                                                                                                                      display:grid;
+                                                                                                                                                                                                                                                                                                                                                      grid-template-columns:repeat(2,minmax(0,1fr));
+                                                                                                                                                                                                                                                                                                                                                      align-items:start}
+                                                                                                                                                                                                                                                                                                                                                      .shirone-panel{
+                                                                                                                                                                                                                                                                                                                                                        padding:18px}
+                                                                                                                                                                                                                                                                                                                                                        .shirone-profile{
+                                                                                                                                                                                                                                                                                                                                                          padding:16px}
+                                                                                                                                                                                                                                                                                                                                                          .shirone-categories>a{
+                                                                                                                                                                                                                                                                                                                                                            font-size:12px}
+                                                                                                                                                                                                                                                                                                                                                            .shirone-panel h2{
+                                                                                                                                                                                                                                                                                                                                                              font-size:14px}
+                                                                                                                                                                                                                                                                                                                                                              .page-layout{
+                                                                                                                                                                                                                                                                                                                                                                display:flex;
+                                                                                                                                                                                                                                                                                                                                                                flex-direction:column;
+                                                                                                                                                                                                                                                                                                                                                                padding:0 10px;
+                                                                                                                                                                                                                                                                                                                                                                margin-top:18px;
+                                                                                                                                                                                                                                                                                                                                                                gap:16px}
+                                                                                                                                                                                                                                                                                                                                                                .page-main{
+                                                                                                                                                                                                                                                                                                                                                                  width:100%}
+                                                                                                                                                                                                                                                                                                                                                                  .article-rail{
+                                                                                                                                                                                                                                                                                                                                                                    position:static;
+                                                                                                                                                                                                                                                                                                                                                                    width:100%;
+                                                                                                                                                                                                                                                                                                                                                                    order:-1}
+                                                                                                                                                                                                                                                                                                                                                                    .article-rail>.profile-card{
+                                                                                                                                                                                                                                                                                                                                                                      display:none}
+                                                                                                                                                                                                                                                                                                                                                                      .content-surface{
+                                                                                                                                                                                                                                                                                                                                                                        padding:25px 20px}
+                                                                                                                                                                                                                                                                                                                                                                        .article-header .post-title{
+                                                                                                                                                                                                                                                                                                                                                                          font-size:30px}
+                                                                                                                                                                                                                                                                                                                                                                          .site-footer{
+                                                                                                                                                                                                                                                                                                                                                                            margin:30px 12px 0;
+                                                                                                                                                                                                                                                                                                                                                                            padding:24px 8px}
+                                                                                                                                                                                                                                                                                                                                                                            .footer-links{
+                                                                                                                                                                                                                                                                                                                                                                              gap:15px}
+                                                                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                                                            @media(min-width:480px) and (max-width:767px){
+                                                                                                                                                                                                                                                                                                                                                                              .shirone-banner{
+                                                                                                                                                                                                                                                                                                                                                                                height:max(75vh,500px)}
+                                                                                                                                                                                                                                                                                                                                                                              }
+                                                                                                                                                                                                                                                                                                                                                                              @media(prefers-reduced-motion:reduce){
+                                                                                                                                                                                                                                                                                                                                                                                .shirone-banner-image,.shirone-waves path{
+                                                                                                                                                                                                                                                                                                                                                                                  animation:none!important}
+                                                                                                                                                                                                                                                                                                                                                                                }
+
+/* Shirone keeps its 64px navigation present while its banner scrolls away. */
+/* BannerStage.astro uses a grapheme type/delete/pause cycle, including single-text loops. */
+.shirone-banner-copy reference-typewriter{display:inline-block;position:relative;max-width:100%}
+.shirone-text-measure{visibility:hidden}
+.shirone-typed{position:absolute;inset:0}
+.shirone-typed::after{content:'';display:inline-block;height:1em;width:2px;margin-left:4px;vertical-align:-.1em;background:currentColor;animation:shirone-caret 1s step-end infinite}
+@keyframes shirone-caret{50%{opacity:0}}
+/* BannerWaves.astro continuously tiles a complete period; layers never reverse mid-flow. */
+.shirone-waves path:nth-child(n){animation-name:shirone-flow;animation-direction:normal!important;animation-timing-function:linear;transform:translateX(0)}
+.shirone-waves path:nth-child(2n){animation-direction:reverse!important}
+@keyframes shirone-flow{from{transform:translateX(0)}to{transform:translateX(-720px)}}
+@media(prefers-reduced-motion:reduce){.shirone-waves path:nth-child(n),.shirone-typed::after{animation:none!important}}
+body[data-page='home'] .site-header {
+  position: fixed;
+  height: 64px;
+  transition: background-color 240ms ease, color 240ms ease, box-shadow 240ms ease;
+}
+:root[data-nav-scrolled='true'] body[data-page='home'] .site-header {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--ink) 7%, transparent);
+}
+:root[data-nav-scrolled='true'] body[data-page='home'] .brand-symbol { background: var(--accent); }
+:root[data-nav-scrolled='true'] body[data-page='home'] .primary-nav a[aria-current='page'] { color: var(--accent); }
+:root[data-nav-scrolled='true'] body[data-page='home'] .primary-nav a[aria-current='page']::after { background: var(--accent); }
+:root[data-nav-scrolled='true'] body[data-page='home'] .site-header :is(.brand:hover,.primary-nav a:hover) { color: var(--accent); }
+:root[data-nav-scrolled='true'] body[data-page='home'] .site-header :is(.icon-button:hover,.appearance-trigger:hover) {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-page='home'] .site-header { transition: none; }
+}

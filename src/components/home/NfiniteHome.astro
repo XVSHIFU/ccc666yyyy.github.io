@@ -1,0 +1,43 @@
+---
+import { ArrowUpRight, ArrowDown, Layers, Rss } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate, categoryUrl } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts = await getPosts();
+---
+<div class="nfinite-home">
+  <section class="nfinite-hero" aria-labelledby="nfinite-title"><img class="nfinite-landscape" src={url('media/landscape.webp')} data-theme-cover={url('media/landscape.webp')} width="1983" height="793" alt=""/><div class="nfinite-hero-shade" aria-hidden="true"></div><div class="nfinite-hero-copy"><h1 id="nfinite-title">让细小的想法，<br/>慢慢长成自己的世界。</h1><p>{site.description}</p><a href="#writings" aria-label="向下阅读文章"><ArrowDown size={23}/></a></div></section>
+  <main id="main-content" class="feed nfinite-feed">
+    <section class="nfinite-intro"><h2>关于技术，关于生活。<br/>每一篇文字，都是新的一层。</h2><p>欢迎来到 {site.name} 的个人空间。</p></section>
+    <section class="nfinite-reading" id="writings" aria-labelledby="nfinite-reading-title"><div class="nfinite-reading-title"><h2 id="nfinite-reading-title"><Layers size={23}/>最近写下的文字</h2><a href={url('archives/')}>全部文章<ArrowUpRight size={17}/></a></div><div class="nfinite-posts" data-post-list>{posts.map(post => <article class="post-card nfinite-post" data-category={post.data.category} data-post-key={post.id}><div class="nfinite-post-heading"><h3><a href={getPostUrl(post)}>{post.data.title}</a></h3><div class="nfinite-post-meta"><a href={categoryUrl(post.data.category)}>{post.data.category}</a><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published,true)}</time>{post.data.example && <span class="example-badge">示例</span>}</div></div><p>{post.data.description}</p><a class="nfinite-read" href={getPostUrl(post)} aria-label={`阅读：${post.data.title}`}><ArrowUpRight size={22}/></a></article>)}</div></section>
+    <section class="nfinite-thoughts" aria-labelledby="nfinite-thoughts-title"><div class="nfinite-thoughts-stage"><div class="nfinite-thoughts-copy"><h2 id="nfinite-thoughts-title">从零散片刻，<br/>到一页文字。</h2><p>随手记下的念头，慢慢聚拢。<br/>生活与学习，也在这里连接。</p><span class="nfinite-cloud-caption">向下滚动，翻开下一层。</span></div><nfinite-cloud aria-hidden="true"><canvas></canvas><div class="nfinite-cloud-fallback"><span></span><span></span><span></span></div></nfinite-cloud><div class="nfinite-story-progress" aria-hidden="true"><span></span></div></div></section>
+    <section class="nfinite-outro"><h2>下一页，<br/>继续生长。</h2><a href={url('rss.xml')}><Rss size={18}/>订阅文章更新<ArrowUpRight size={18}/></a><a href={url('about/')}>认识这个小站</a></section>
+  </main>
+</div>
+<script>
+  class NfiniteCloud extends HTMLElement {
+    frame=0; resize?:ResizeObserver; observer?:IntersectionObserver; cleanup?:()=>void;
+    connectedCallback(){
+      const canvas=this.querySelector('canvas');if(!canvas)return;const ctx=canvas.getContext('2d');if(!ctx)return;
+      const story=this.closest<HTMLElement>('.nfinite-thoughts')!;
+      const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+      let width=1,height=1,progress=0,target=0,visible=false,last=0;
+      const random=(i:number)=>{const value=Math.sin(i*127.1+4.5)*43758.5453;return value-Math.floor(value);};
+      const points=Array.from({length:6800},(_,i)=>{const a=random(i+1),b=random(i+16001),c=random(i+32001);return{x:a-.5,y:b-.5,layer:i%3-1,cloudX:(a-.5)*2.9,cloudY:(b-.5)*1.9,cloudZ:(c-.5)*1.6,r:c};});
+      const draw=()=>{
+        ctx.clearRect(0,0,width,height);const p=reduce.matches?1:progress;const phase=Math.max(0,Math.min(1,(p-.06)/.79));const gather=phase*phase*(3-2*phase);const layers=Math.max(.08,Math.min(1,(p-.3)/.5));const small=width<640;const scale=Math.min(width*(small?1.15:.93-gather*.21),height*1.37);const cx=width*(small?.5:.5+gather*.48),cy=height*(small?.66:.53+gather*.09);
+        const project=(x:number,y:number,z:number)=>[cx+(x*.9+y*.49)*scale,cy+(y*.3-x*.07-z*.66)*scale];
+        for(const dot of points){const z=dot.cloudZ*(1-gather)+dot.layer*.32*layers*gather;const x=dot.cloudX*(1-gather)+dot.x*gather;const y=dot.cloudY*(1-gather)+dot.y*gather;const [sx,sy]=project(x,y,z);ctx.fillStyle=dot.layer===0?`rgba(232,237,238,${.42+dot.r*.45})`:`rgba(152,186,223,${.32+dot.r*.4})`;const size=.65+dot.r*.85;ctx.fillRect(sx,sy,size,size);}
+        if(gather>.1){ctx.lineWidth=1;for(const layer of [-1,0,1]){ctx.strokeStyle=layer===0?`rgba(180,187,184,${gather*.55})`:`rgba(150,188,247,${gather*.85})`;ctx.beginPath();for(const [index,point] of [[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5],[-.5,-.5]].entries()){const [x,y]=project(point[0],point[1],layer*.32*layers);index?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();}}
+        story.style.setProperty('--nfinite-progress',String(p));story.style.setProperty('--nfinite-title-scale',String(1-gather*.36));this.dataset.phase=gather>.75?'paper':'cloud';this.dataset.progress=p.toFixed(3);
+      };
+      const tick=(time:number)=>{this.frame=0;if(!visible||document.hidden||!this.isConnected)return;const dt=Math.min(40,time-last||16);last=time;progress+=(target-progress)*(1-Math.exp(-dt/140));if(Math.abs(progress-target)<.001)progress=target;draw();if(progress!==target)this.frame=requestAnimationFrame(tick);};
+      const start=()=>{if(reduce.matches){draw();return;}if(visible&&!document.hidden&&!this.frame){last=0;this.frame=requestAnimationFrame(tick);}};
+      const scroll=()=>{const box=story.getBoundingClientRect();target=Math.max(0,Math.min(1,-box.top/Math.max(1,box.height-innerHeight)));start();};
+      const size=()=>{const box=this.getBoundingClientRect();width=Math.max(1,box.width);height=Math.max(1,box.height);const dpr=Math.min(devicePixelRatio,1.5,Math.sqrt(2200000/(width*height)));canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw();this.classList.add('is-ready');scroll();};
+      this.resize=new ResizeObserver(size);this.resize.observe(this);this.observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible){scroll();start();}else{cancelAnimationFrame(this.frame);this.frame=0;}});this.observer.observe(this);
+      const preference=()=>{cancelAnimationFrame(this.frame);this.frame=0;scroll();draw();};window.addEventListener('scroll',scroll,{passive:true});reduce.addEventListener('change',preference);document.addEventListener('visibilitychange',preference);this.cleanup=()=>{window.removeEventListener('scroll',scroll);reduce.removeEventListener('change',preference);document.removeEventListener('visibilitychange',preference);};size();
+    }
+    disconnectedCallback(){cancelAnimationFrame(this.frame);this.resize?.disconnect();this.observer?.disconnect();this.cleanup?.();this.frame=0}
+  }
+  if(!customElements.get('nfinite-cloud'))customElements.define('nfinite-cloud',NfiniteCloud);
+</script>

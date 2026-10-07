@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import { categoryUrl, formatDate, getPosts, getPostUrl } from '../../lib/content';
+import { url } from '../../lib/site';
+const posts = await getPosts();
+const years = [...new Set(posts.map(post => post.data.published.getFullYear()))];
+---
+<Base title="文章归档" pageType="page" description="沿着时间，翻阅留下的文字。">
+  <section class="content-surface archive-surface">
+    <header class="page-heading"><h1>写过的日子</h1><p class="page-intro">沿着时间，翻阅留下的文字。共 {posts.length} 篇。</p></header>
+    <nav class="index-navigation" aria-label="文章浏览方式"><a aria-current="page" href={url('/archives/')}>按时间</a><a href={url('/categories/')}>按分类</a><a href={url('/tags/')}>按标签</a></nav>
+    {years.map(year => <section class="archive-year" aria-labelledby={`year-${year}`}>
+      <h2 id={`year-${year}`}><a href={url(`/archives/${year}/`)}>{year}</a><span>{posts.filter(post => post.data.published.getFullYear() === year).length} 篇</span></h2>
+      <ol class="archive-list">{posts.filter(post => post.data.published.getFullYear() === year).map(post => <li>
+        <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published, true)}</time>
+        <div><h3><a href={getPostUrl(post)}>{post.data.title}</a>{post.data.example && <span class="example-badge">示例</span>}</h3><a class="archive-category" href={categoryUrl(post.data.category)}>{post.data.category}</a></div>
+      </li>)}</ol>
+    </section>)}
+  </section>
+</Base>

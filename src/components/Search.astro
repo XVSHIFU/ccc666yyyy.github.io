@@ -1,0 +1,8 @@
+---
+import { Search, X } from '@lucide/astro';
+---
+<dialog id="search-dialog" class="search-dialog" aria-label="搜索文章">
+  <div class="search-input-row"><Search size={22}/><label class="sr-only" for="search-input">搜索文章、标签或正文</label><input id="search-input" type="search" placeholder="搜索文章、标签或正文…" autocomplete="off"/><button type="button" data-close-dialog class="icon-button" aria-label="关闭搜索"><X size={20}/></button></div>
+  <div class="search-body"><p id="search-status" role="status" aria-live="polite">输入关键词，找一篇想读的文章。</p><ul id="search-results" class="search-results"></ul></div>
+  <div class="search-footer"><span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span><span><kbd>Esc</kbd> 关闭</span></div>
+</dialog>

@@ -1,0 +1,35 @@
+---
+import { ArrowUpRight, ArrowLeft, ArrowRight, MoveDown, Pause, Play } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate, plainText, readingTime } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts=await getPosts();
+const title='文章目录';
+const excerpt=(body='')=>{const text=plainText(body);return text.length>260?`${text.slice(0,260)}…`:text};
+---
+<main id="main-content" class="feed stefan-home">
+  <stefan-projects class="stefan-projects">
+    <h1 id="home-title" class="stefan-projects-title" aria-label={title}><span aria-hidden="true" class="stefan-title-placeholder">{title}</span>{Array.from({length:6},(_,index)=><span class="stefan-title-slice" aria-hidden="true" style={`--slice:${index}`}><span>{title}</span></span>)}</h1>
+    <div class="stefan-counter" aria-label={`共 ${posts.length} 篇文章`}><span data-stefan-current>01</span><span>/{String(posts.length).padStart(2,'0')}</span></div>
+    <div class="stefan-index" data-post-list aria-label="选择文章预览">{posts.map((post,index)=><article class="post-card stefan-index-item" data-category={post.data.category} data-post-key={post.id}>
+      <h2><a href={getPostUrl(post)} data-stefan-select={index} class:list={['stefan-index-link',{'is-current':index===0}]}><span class="stefan-item-number" aria-hidden="true">{String(index+1).padStart(2,'0')}.</span> {post.data.title}{post.data.example&&<span class="stefan-example">示例</span>}</a></h2>
+    </article>)}</div>
+    <div class="stefan-selected-note"><p data-stefan-description>{posts[0]?.data.description}</p><span class="stefan-scroll-hint"><MoveDown size={13}/>滚动浏览右侧预览</span></div>
+    <div class="stefan-gallery" tabindex="0" role="region" aria-label="文章预览画廊，支持滚轮与方向键">
+      <div class="stefan-gallery-track">{posts.map((post,index)=><section class="stefan-story" data-stefan-story={index} data-title={post.data.title} data-description={post.data.description} hidden={index!==0} aria-label={`${post.data.title}预览`}>
+        <a class="stefan-media-frame stefan-cover-frame" data-stefan-open href={getPostUrl(post)} aria-label={`阅读全文：${post.data.title}`}>
+          <img src={url(post.data.cover||'media/landscape.webp')} alt="" width="1200" height="675" decoding="async"/>
+          <div class="stefan-cover-slices" aria-hidden="true">{Array.from({length:6},(_,slice)=><span style={`--slice:${slice};background-image:url('${url(post.data.cover||'media/landscape.webp')}')`}></span>)}</div>
+          <span class="stefan-frame-caption"><span>{post.data.category}</span><ArrowUpRight size={18}/></span>
+        </a>
+        <div class="stefan-media-frame stefan-statement-frame"><span class="stefan-preview-category">{post.data.category}{post.data.example&&' · 示例文章'}</span><p>{post.data.description}</p><span class="stefan-preview-date">{formatDate(post.data.published)} · {readingTime(post.body)}</span></div>
+        <div class="stefan-media-frame stefan-page-frame"><h3>{post.data.title}</h3><p>{excerpt(post.body)}</p><a href={getPostUrl(post)} data-stefan-open>继续阅读 <ArrowUpRight size={17}/></a></div>
+        <a class="stefan-media-frame stefan-last-frame" href={getPostUrl(post)} data-stefan-open><span>{String(index+1).padStart(2,'0')}</span><h3>{post.data.title}</h3><span class="stefan-last-link">打开这篇文章 <ArrowUpRight size={24}/></span></a>
+      </section>)}</div>
+    </div>
+    <div class="stefan-mobile-controls"><button type="button" data-stefan-previous aria-label="预览上一篇文章"><ArrowLeft size={19}/></button><span data-stefan-mobile-title>{posts[0]?.data.title}</span><button type="button" data-stefan-next aria-label="预览下一篇文章"><ArrowRight size={19}/></button></div>
+    <div class="stefan-projects-bottom"><div><a href={`mailto:${site.email}`}>写封邮件 <ArrowUpRight size={12}/></a><a href={url('rss.xml')}>订阅文章 <ArrowUpRight size={12}/></a></div><button type="button" class="stefan-motion-toggle" data-stefan-motion aria-pressed="false" aria-label="暂停画廊动效"><Pause size={13} class="stefan-pause-icon"/><Play size={13} class="stefan-play-icon"/><span>暂停动效</span></button><span>{new Date().getFullYear()}.</span></div>
+    <div class="stefan-cursor-lines" aria-hidden="true"><span></span><span></span></div>
+    <span class="sr-only" data-stefan-status aria-live="polite"></span>
+  </stefan-projects>
+</main>
+<script>import '../../scripts/stefan-projects';</script>

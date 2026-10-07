@@ -1,0 +1,8 @@
+{
+  "Origin": "Local Playwright rendering of the independent goodfella homepage at .impeccable/review/goodfella-desktop.png; actual 1440x1000 viewport cropped and resized to 480x333. This is the current project UI, not an upstream image or an AI-generated comp.",
+  "prompt": "Origin: Local Playwright rendering of the independent goodfella homepage at .impeccable/review/goodfella-desktop.png; actual 1440x1000 viewport cropped and resized to 480x333. This is the current project UI, not an upstream image or an AI-generated comp.",
+  "source": "http://127.0.0.1:4321/?theme=goodfella",
+  "createdAt": "2026-10-07T11:39:20.237Z",
+  "width": 480,
+  "height": 333
+}

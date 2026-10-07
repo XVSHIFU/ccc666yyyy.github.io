@@ -1,0 +1,74 @@
+---
+import { House, Archive, Folder, Tags, UserRound, Link, CodeXml, Mail, Rss, CalendarDays, Clock3, ChevronRight, BookOpen } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate, readingTime, categoryUrl, tagUrl } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts = await getPosts();
+const categories = [...new Set(posts.map(post => post.data.category))];
+const tags = [...new Set(posts.flatMap(post => post.data.tags))];
+const covers = ['/media/spring.webp', '/media/portrait.webp', '/media/landscape.webp'];
+---
+<koharu-motion>
+<section class="k-cover" aria-labelledby="koharu-title">
+  <img class="k-cover-art" src={url('/media/spring.webp')} alt="" width="1983" height="793" fetchpriority="high" decoding="async" />
+  <div class="k-cover-copy"><p class="k-alternate">{site.name}</p><h1 id="koharu-title">{site.title}</h1><p class="k-subtitle">= {site.description} =</p></div>
+  <svg class="k-waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">{[0, 13, 26].map((offset, index) => <path style={`--wave-y:${offset}px;--wave-duration:${[12,7,4][index]}s;--wave-delay:${[-2,-3,-4][index]}s;--wave-opacity:${[.75,.6,1][index]}`} d={`M-1680 65 ${Array.from({length:126},(_,step)=>{const x=-1680+(step+1)*40;return `L${x} ${(65+Math.sin(x/1680*Math.PI*2)*63).toFixed(2)}`;}).join(' ')} V250 H-1680Z`}/>)}</svg>
+</section>
+<div class="k-layout">
+  <aside class="k-sidebar" aria-label="作者与站点导航">
+    <div class="k-identity"><a href={url('about/')} class="k-avatar" aria-label="关于 qinghe"><img src={url('/media/avatar.webp')} alt="qinghe 的头像" width="120" height="120" /></a><h2>{site.name}</h2><p>{site.description}</p>
+      <div class="k-social"><a href={site.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><CodeXml size={19}/></a><a href={`mailto:${site.email}`} aria-label="发送邮件"><Mail size={19}/></a><a href={url('rss.xml')} aria-label="RSS 订阅"><Rss size={19}/></a></div>
+      <div class="k-stats"><a href={url('archives/')}><strong>{posts.length}</strong><span>文章</span></a><a href={url('categories/')}><strong>{categories.length}</strong><span>分类</span></a><a href={url('tags/')}><strong>{tags.length}</strong><span>标签</span></a></div>
+    </div>
+    <nav class="k-navigation" aria-label="Koharu 站点导航"><a href={url('/')} aria-current="page"><House size={17}/>首页</a><details open><summary><BookOpen size={17}/>文章<ChevronRight size={15}/></summary><div><a href={url('archives/')}><Archive size={15}/>归档</a><a href={url('categories/')}><Folder size={15}/>分类</a><a href={url('tags/')}><Tags size={15}/>标签</a></div></details><a href={url('links/')}><Link size={17}/>链接</a><a href={url('about/')}><UserRound size={17}/>关于</a></nav>
+    <a class="k-source" href="https://github.com/cosZone/astro-koharu" target="_blank" rel="noopener noreferrer">Koharu · 小春日和</a>
+  </aside>
+  <main id="main-content" class="feed k-feed">
+    <h2 class="k-divider" id="writings"><span>文章列表</span></h2>
+    <div class="k-filters" role="group" aria-label="筛选文章分类"><button type="button" data-category-filter="all" aria-pressed="true">全部文章</button>{categories.map(category => <button type="button" data-category-filter={category} aria-pressed="false">{category}</button>)}</div>
+    <div class="post-grid k-posts" data-post-list>{posts.map((post, index) => <article class:list={['post-card k-post', {'k-image-right': index % 2 === 1}]} data-category={post.data.category} data-post-key={post.id}>
+      <a class="k-post-image" href={getPostUrl(post)} tabindex="-1" aria-hidden="true"><img src={url(post.data.cover || covers[index % covers.length])} alt="" width="800" height="500" loading="lazy" decoding="async"/></a>
+      <div class="k-post-body"><div class="k-meta"><a href={categoryUrl(post.data.category)}><Folder size={12}/>{post.data.category}</a><span><CalendarDays size={12}/><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published, true)}</time></span><span class="k-reading"><Clock3 size={12}/>{readingTime(post.body)}</span></div><h3><a href={getPostUrl(post)}>{post.data.title}</a></h3><p class="k-excerpt">{post.data.description}</p><div class="k-tags">{post.data.example && <span class="k-example">示例</span>}{post.data.tags.slice(0, 3).map(tag => <a href={tagUrl(tag)}><Tags size={11}/>{tag}</a>)}</div><a class="k-more" href={getPostUrl(post)} aria-label={`阅读：${post.data.title}`}>more...</a></div>
+    </article>)}</div>
+    <p id="filter-status" class="sr-only" role="status" aria-live="polite"></p>
+    <div class="k-list-end"><span>{posts.length} 篇文章</span><a href={url('archives/')}>全部归档<ChevronRight size={15}/></a></div>
+    <h2 class="k-divider"><span>精选分类</span></h2>
+    <div class="k-categories">{categories.map((category, index) => <a class="k-category" href={categoryUrl(category)}><div class="k-category-inner"><div class="k-category-front"><img src={url(covers[index % covers.length])} alt="" width="800" height="500" loading="lazy"/><h3>{category}</h3><span>{posts.filter(post => post.data.category === category).length} 篇文章</span></div><div class="k-category-back"><h3>{category}</h3>{posts.filter(post => post.data.category === category).slice(0, 3).map(post => <p>{post.data.title}</p>)}<span>查看分类<ChevronRight size={15}/></span></div></div></a>)}</div>
+  </main>
+</div>
+</koharu-motion>
+<script>
+  // Source: Koharu Navigator.tsx/useScrollTrigger.ts. Own implementation for theme mounting.
+  class KoharuMotion extends HTMLElement {
+    private controller?: AbortController;
+    private frame = 0;
+    connectedCallback() {
+      this.controller = new AbortController();
+      const { signal } = this.controller;
+      const root = document.documentElement;
+      let previous = scrollY;
+      let hidden = false;
+      const update = () => {
+        this.frame = 0;
+        const y = Math.max(0, scrollY);
+        const header = document.querySelector('.site-header');
+        const protectedFocus = header?.contains(document.activeElement) || document.querySelector('dialog[open]') || document.querySelector('.mobile-nav-toggle[aria-expanded="true"]');
+        if (y <= innerHeight * .45 || protectedFocus) hidden = false;
+        else if (Math.abs(y - previous) > 4) hidden = y > previous;
+        root.dataset.koharuNavSolid = String(y > innerHeight * .45);
+        root.dataset.koharuNavHidden = String(hidden);
+        previous = y;
+      };
+      const request = () => { if (!this.frame) this.frame = requestAnimationFrame(update); };
+      window.addEventListener('scroll', request, { passive: true, signal });
+      window.addEventListener('resize', request, { passive: true, signal });
+      document.addEventListener('focusin', request, { signal });
+      update();
+    }
+    disconnectedCallback() {
+      this.controller?.abort(); cancelAnimationFrame(this.frame);
+      delete document.documentElement.dataset.koharuNavSolid;
+      delete document.documentElement.dataset.koharuNavHidden;
+    }
+  }
+  if (!customElements.get('koharu-motion')) customElements.define('koharu-motion', KoharuMotion);
+</script>

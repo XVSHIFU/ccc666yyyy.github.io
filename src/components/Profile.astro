@@ -1,0 +1,16 @@
+---
+import { CodeXml as Github, ArrowUpRight, Rss, Mail, Leaf } from '@lucide/astro';
+import { site, url } from '../lib/site';
+const { count = 0 } = Astro.props;
+---
+<section class="profile-card">
+  <a href={url('about/')} class="avatar-link" aria-label="关于 qinghe"><img class="profile-avatar" src={url('media/avatar.webp')} alt="qinghe 的头像" width="88" height="88" /></a>
+  <h2 class="profile-name">qinghe<span class="profile-wave" aria-hidden="true"><Leaf size={17} /></span></h2>
+  <p class="profile-intro">保持好奇，慢慢生长。<br />一个关于生活与技术的小角落。</p>
+  <div class="profile-links">
+    <a href={site.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github size={18} /></a>
+    <a href={`mailto:${site.email}`} aria-label="发送邮件"><Mail size={18} /></a>
+    <a href={url('rss.xml')} aria-label="RSS 订阅"><Rss size={18} /></a>
+  </div>
+  <div class="profile-facts"><a href={url('archives/')}>{count > 0 ? `${count} 篇` : '全部'}<span>文章</span></a><a href={url('about/')}>关于<span>认识我 <ArrowUpRight size={12} /></span></a></div>
+</section>

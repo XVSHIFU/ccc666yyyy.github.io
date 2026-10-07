@@ -1,0 +1,36 @@
+---
+import { ArrowDown, ArrowUpRight } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts = await getPosts();
+---
+<main id="main-content" class="feed milkin-home"><milkin-space>
+  <section class="milkin-intro" aria-labelledby="home-title">
+    <div class="milkin-corner"><span>{site.name.toUpperCase()}</span><span>生活 / 技术 / 记录</span></div>
+    <img class="milkin-stone" src={url('media/milkin-stone.webp')} alt="" aria-hidden="true" width="900" height="600" fetchpriority="high" decoding="async"/>
+    <div class="milkin-manifest"><h1 id="home-title">在日常之间，<br/>留一点空间<br/><span>给新的想法。</span></h1><p>{site.description}</p></div>
+    <div class="milkin-bottom"><span>清和的小站</span><a href="#milkin-writings">往下读 <ArrowDown size={15}/></a><a href={url('about/')}>认识我 <ArrowUpRight size={15}/></a></div>
+  </section>
+  <section class="milkin-work" id="milkin-writings" aria-labelledby="milkin-title">
+    <div class="milkin-work-heading"><h2 id="milkin-title">留下的片段</h2><a href={url('archives/')}>全部文章 <ArrowUpRight size={16}/></a></div>
+    <div class="milkin-gallery" data-post-list>{posts.map((post, index) => <article class="post-card milkin-entry" data-category={post.data.category} data-post-key={post.id}>
+      <a class="milkin-picture" href={getPostUrl(post)} tabindex="-1" aria-hidden="true"><img src={url(post.data.cover || (index % 2 ? 'media/spring.webp' : 'media/landscape.webp'))} alt="" width="900" height="640" loading="lazy" decoding="async"/></a>
+      <div class="milkin-caption"><h3><a href={getPostUrl(post)}>{post.data.title}</a>{post.data.example && <span class="example-badge">示例</span>}</h3><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published,true)}</time></div>
+      <p>{post.data.description}</p>
+    </article>)}</div>
+  </section>
+  <section class="milkin-outro"><p>慢慢写，<br/>也慢慢生活。</p><a href={url('rss.xml')}>订阅后续文章 <ArrowUpRight size={17}/></a></section>
+</milkin-space></main>
+<script>
+  if(!customElements.get('milkin-space'))customElements.define('milkin-space',class extends HTMLElement{
+    controller?:AbortController;frame=0;
+    connectedCallback(){
+      this.controller?.abort();this.controller=new AbortController();const {signal}=this.controller;const intro=this.querySelector<HTMLElement>('.milkin-intro');const stone=this.querySelector<HTMLElement>('.milkin-stone');const copy=this.querySelector<HTMLElement>('.milkin-manifest');const pictures=[...this.querySelectorAll<HTMLElement>('.milkin-picture img')];if(!intro||!stone||!copy)return;
+      const reduce=matchMedia('(prefers-reduced-motion: reduce)');let px=0,py=0;
+      const render=()=>{this.frame=0;if(!this.isConnected)return;const rect=intro.getBoundingClientRect();const progress=reduce.matches?0:Math.max(0,Math.min(1,-rect.top/rect.height));intro.style.setProperty('--stone-x',`${px*35}px`);intro.style.setProperty('--stone-y',`${py*22+progress*170}px`);intro.style.setProperty('--stone-yaw',`${px*16-progress*8}deg`);intro.style.setProperty('--stone-pitch',`${-py*8+progress*5}deg`);intro.style.setProperty('--stone-scale',String(1+progress*.34));intro.style.setProperty('--stone-opacity',String(Math.max(0,1-progress*1.45)));copy.style.transform=`translate3d(${-px*12}px,${-py*8-progress*30}px,0)`;pictures.forEach((picture,index)=>{const r=picture.parentElement!.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;const amount=reduce.matches?0:(r.top+r.height/2-innerHeight/2)/innerHeight;picture.style.setProperty('--gallery-drift',`${Math.max(-32,Math.min(32,amount*(index%2?-44:44)))}px`)});intro.dataset.motionReady='true'};
+      const schedule=()=>{if(!this.frame)this.frame=requestAnimationFrame(render)};
+      intro.addEventListener('pointermove',e=>{if(reduce.matches||e.pointerType!=='mouse')return;const box=intro.getBoundingClientRect();px=(e.clientX-box.left)/box.width-.5;py=(e.clientY-box.top)/box.height-.5;schedule()},{signal});intro.addEventListener('pointerleave',()=>{px=0;py=0;schedule()},{signal});window.addEventListener('scroll',schedule,{signal,passive:true});window.addEventListener('resize',schedule,{signal});reduce.addEventListener('change',()=>{px=0;py=0;schedule()},{signal});render();
+    }
+    disconnectedCallback(){this.controller?.abort();cancelAnimationFrame(this.frame);this.frame=0}
+  });
+</script>

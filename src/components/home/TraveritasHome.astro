@@ -1,0 +1,19 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+import { getPosts, getPostUrl } from '../../lib/content';
+import { url } from '../../lib/site';
+const posts = await getPosts();
+const years = [...new Set(posts.map(post => post.data.published.getFullYear()))];
+const shortDate = (date: Date) => new Intl.DateTimeFormat('zh-CN', { month: '2-digit', day: '2-digit', timeZone: 'Asia/Shanghai' }).format(date).replace('/', '.');
+---
+<traveritas-index class="traveritas-world" data-reverie="false">
+  <main id="main-content" class="feed traveritas-home">
+    <header class="traveritas-head"><div><h1 id="home-title" data-tr-wake="随笔与记录" data-tr-dream="日常的回声">随笔与记录</h1><p data-tr-wake="技术、生活，以及尚未成形的想法。" data-tr-dream="把白昼的片段，留在文字与梦之间。">技术、生活，以及尚未成形的想法。</p></div><button type="button" class="traveritas-reverie" aria-pressed="false" aria-label="梦境氛围"><span aria-hidden="true"></span><span data-reverie-label>醒</span><span class="traveritas-reverie-hint">切换氛围</span></button></header>
+    <div class="traveritas-index" data-post-list>
+      {years.map(year => <section class="traveritas-year" aria-labelledby={`traveritas-${year}`}><h2 id={`traveritas-${year}`}>{year}</h2><div>{posts.filter(post => post.data.published.getFullYear() === year).map(post => <article class="post-card traveritas-row" data-category={post.data.category} data-post-key={post.id}>
+        <a class="traveritas-row-link" href={getPostUrl(post)}><time datetime={post.data.published.toISOString()}>{shortDate(post.data.published)}</time><div><h3><span class="tr-title-ghost" aria-hidden="true">{post.data.title}</span>{post.data.title}</h3><p>{post.data.description}</p>{post.data.example && <span class="example-badge">示例</span>}</div><span class="traveritas-row-aside">{post.data.category}<ArrowUpRight size={14}/></span></a>
+      </article>)}</div></section>)}
+    </div>
+    <div class="traveritas-end"><p>写下来的，留给下一次相遇。</p><a href={url('archives/')}>翻阅全部文章 <ArrowUpRight size={14}/></a></div>
+  </main>
+</traveritas-index>

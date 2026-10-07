@@ -1,0 +1,58 @@
+---
+import { ArrowDownRight, ArrowLeft, ArrowRight } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate } from '../../lib/content';
+import { url } from '../../lib/site';
+const posts=(await getPosts()).reverse();
+const firstYear=posts[0]?.data.published.getFullYear();
+const lastYear=posts.at(-1)?.data.published.getFullYear();
+const point=(t:number)=>{const r=10+t*14;return [600+Math.cos(t)*r*2.05,330+Math.sin(t)*r]};
+const spiral=Array.from({length:721},(_,i)=>{const [x,y]=point(i/720*Math.PI*6);return `${i?'L':'M'}${x.toFixed(2)} ${y.toFixed(2)}`}).join(' ');
+---
+<main id="main-content" class="feed buro-home">
+  <section class="buro-intro" aria-labelledby="home-title">
+    <div class="buro-dates"><span>{firstYear}</span><span>清和的时间线</span><span>{lastYear}</span></div>
+    <h1 id="home-title">那些走过的路，<br/>和还在继续的故事。</h1>
+    <buro-trail class="buro-orbit">
+      <svg viewBox="0 0 1200 660" preserveAspectRatio="none" class="buro-spiral" aria-hidden="true"><path d={spiral} fill="none" stroke="currentColor" stroke-width=".8"/></svg>
+      <div class="buro-date-nodes">{posts.map((post,i)=>{const [x,y]=point(3.3+(i/Math.max(1,posts.length-1))*13.5);return <a style={`--x:${x/12}%;--y:${y/6.6}%`} href={getPostUrl(post)} aria-label={`${formatDate(post.data.published)}，${post.data.title}`}><span></span><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published,true)}</time></a>})}</div>
+      <div class="buro-trail-images" aria-hidden="true"><img src={url('media/spring.webp')} alt="" width="180" height="120"/><img src={url('media/landscape.webp')} alt="" width="180" height="120"/><img src={url('media/portrait.webp')} alt="" width="180" height="120"/></div>
+    </buro-trail>
+    <a class="buro-begin" href="#buro-journey">向前走 <ArrowDownRight size={38}/></a>
+  </section>
+  <buro-journey class="buro-journey" id="buro-journey">
+    <div class="buro-journey-stage">
+    <div class="buro-journey-heading"><h2>写下的日子</h2><div class="buro-track-actions"><button type="button" data-buro-back aria-label="上一篇文章"><ArrowLeft size={22}/></button><button type="button" data-buro-next aria-label="下一篇文章"><ArrowRight size={22}/></button></div></div>
+    <div class="buro-track" data-post-list tabindex="0" role="region" aria-label="按时间浏览文章，可横向滚动">{posts.map((post,i)=><article class="post-card buro-entry" data-category={post.data.category} data-post-key={post.id}>
+      <div class="buro-entry-top"><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published,true)}</time><span>{post.data.category}</span></div>
+      <div class="buro-entry-content"><a href={getPostUrl(post)} class="buro-entry-image" tabindex="-1" aria-hidden="true"><img src={url(post.data.cover||(i%2?'media/spring.webp':'media/landscape.webp'))} alt="" width="700" height="520" loading="lazy"/></a><div><h3><a href={getPostUrl(post)}>{post.data.title}</a></h3>{post.data.example&&<span class="example-badge">示例文章</span>}<p>{post.data.description}</p><a class="buro-read" href={getPostUrl(post)}>读这一篇 <ArrowRight size={19}/></a></div></div>
+    </article>)}</div>
+    <p class="buro-journey-end">故事还在继续。<a href={url('rss.xml')}>订阅新的篇章 <ArrowRight size={17}/></a></p>
+    </div>
+  </buro-journey>
+</main>
+<script>
+  if(!customElements.get('buro-journey'))customElements.define('buro-journey',class extends HTMLElement{
+    controller?:AbortController;resize?:ResizeObserver;frame=0;
+    connectedCallback(){
+      this.controller?.abort();this.controller=new AbortController();const {signal}=this.controller;const track=this.querySelector<HTMLElement>('.buro-track');const back=this.querySelector<HTMLButtonElement>('[data-buro-back]');const next=this.querySelector<HTMLButtonElement>('[data-buro-next]');const cards=[...this.querySelectorAll<HTMLElement>('.buro-entry')];if(!track||!back||!next||!cards.length)return;
+      const reduce=matchMedia('(prefers-reduced-motion: reduce)');const desktop=matchMedia('(min-width:761px)');let enabled=false,max=0,current=-1;
+      const palettes=[['#ebeee2','#402828'],['#e8d9ce','#3c2720'],['#cbb6e4','#291c3b'],['#20201f','#f1efe8']];
+      const stride=()=>cards[0].getBoundingClientRect().width+40;
+      const update=()=>{back.disabled=track.scrollLeft<4;next.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-4;const index=Math.max(0,Math.min(cards.length-1,Math.round(track.scrollLeft/stride())));if(index!==current){current=index;const [bg,ink]=palettes[index%palettes.length];this.style.setProperty('--journey-bg',bg);this.style.setProperty('--journey-ink',ink);this.dataset.chapter=String(index)}};
+      const render=()=>{this.frame=0;if(!this.isConnected)return;if(enabled){const x=Math.max(0,Math.min(max,-this.getBoundingClientRect().top));if(Math.abs(track.scrollLeft-x)>.5)track.scrollLeft=x}update()};const schedule=()=>{if(!this.frame)this.frame=requestAnimationFrame(render)};
+      const measure=()=>{enabled=desktop.matches&&!reduce.matches;if(enabled){this.dataset.scrollStory='true';max=Math.max(0,track.scrollWidth-track.clientWidth);this.style.height=`${Math.max(innerHeight,720)+max}px`;track.setAttribute('aria-label','按时间横向阅读文章，滚轮或方向键推进')}else{this.removeAttribute('data-scroll-story');this.style.removeProperty('height');track.setAttribute('aria-label',desktop.matches?'按时间浏览文章，可横向滚动':'按时间浏览文章');max=0}schedule()};
+      const go=(left:number)=>{const limit=track.scrollWidth-track.clientWidth;const target=Math.max(0,Math.min(limit,left));if(enabled)window.scrollTo({top:scrollY+this.getBoundingClientRect().top+target,behavior:'smooth'});else track.scrollTo({left:target,behavior:reduce.matches?'instant':'smooth'})};
+      back.addEventListener('click',()=>go(track.scrollLeft-stride()),{signal});next.addEventListener('click',()=>go(track.scrollLeft+stride()),{signal});
+      track.addEventListener('keydown',event=>{if(!desktop.matches||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();go(event.key==='Home'?0:event.key==='End'?track.scrollWidth:track.scrollLeft+(event.key==='ArrowLeft'?-1:1)*stride())},{signal});
+      track.addEventListener('wheel',event=>{if(!enabled||Math.abs(event.deltaX)<=Math.abs(event.deltaY)||event.ctrlKey)return;event.preventDefault();window.scrollBy({top:event.deltaX,behavior:'instant'})},{signal,passive:false});
+      track.addEventListener('focusin',event=>{if(!enabled)return;const card=(event.target as Element).closest<HTMLElement>('.buro-entry');if(!card)return;const r=card.getBoundingClientRect();if(r.left<0||r.right>innerWidth)go(cards.indexOf(card)*stride())},{signal});
+      track.addEventListener('scroll',update,{signal,passive:true});window.addEventListener('scroll',schedule,{signal,passive:true});window.addEventListener('resize',measure,{signal});reduce.addEventListener('change',measure,{signal});this.resize=new ResizeObserver(measure);this.resize.observe(track);measure();
+    }
+    disconnectedCallback(){this.controller?.abort();this.resize?.disconnect();cancelAnimationFrame(this.frame);this.frame=0;}
+  });
+  if(!customElements.get('buro-trail'))customElements.define('buro-trail',class extends HTMLElement{
+    controller?:AbortController;last=0;current=0;timers=new Set<ReturnType<typeof setTimeout>>();
+    connectedCallback(){this.controller?.abort();this.controller=new AbortController();if(matchMedia('(prefers-reduced-motion: reduce)').matches||!matchMedia('(pointer: fine)').matches)return;const pictures=Array.from(this.querySelectorAll<HTMLElement>('.buro-trail-images img'));this.addEventListener('pointermove',event=>{if(performance.now()-this.last<150||(event.target as HTMLElement).closest('a'))return;this.last=performance.now();const picture=pictures[this.current++%pictures.length];if(!picture)return;const b=this.getBoundingClientRect();const e=event as PointerEvent;picture.style.left=`${Math.max(0,Math.min(b.width-180,e.clientX-b.left))}px`;picture.style.top=`${Math.max(0,Math.min(b.height-120,e.clientY-b.top))}px`;picture.classList.remove('buro-trail-visible');void picture.offsetWidth;picture.classList.add('buro-trail-visible');const timer=setTimeout(()=>{picture.classList.remove('buro-trail-visible');this.timers.delete(timer)},850);this.timers.add(timer);},{signal:this.controller.signal});}
+    disconnectedCallback(){this.controller?.abort();this.timers.forEach(clearTimeout);this.timers.clear();}
+  });
+</script>

@@ -1,0 +1,54 @@
+---
+import { House, ChevronRight, Folder, Tags, FileText, CalendarDays, Clock, Rss, Mail, CodeXml, BookOpen, Bell, ArrowUpRight } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate, readingTime, categoryUrl, tagUrl } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts = await getPosts();
+const categories = [...new Set(posts.map(post => post.data.category))];
+const tags = [...new Set(posts.flatMap(post => post.data.tags))];
+const latest = posts[0]?.data.published || new Date();
+const localDate = (date: Date) => {
+  const parts = new Intl.DateTimeFormat('en-CA', {year:'numeric', month:'2-digit', day:'2-digit', timeZone:'Asia/Shanghai'}).formatToParts(date);
+  const part = (type: string) => Number(parts.find(item => item.type === type)?.value);
+  return { year:part('year'), month:part('month') - 1, day:part('day') };
+};
+const {year, month} = localDate(latest);
+const blanks = (new Date(Date.UTC(year, month, 1)).getUTCDay() + 6) % 7;
+const days = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+const calendarPosts = posts.filter(post => { const date = localDate(post.data.published); return date.year === year && date.month === month; });
+---
+<section class="shirone-banner" aria-labelledby="shirone-title">
+  <img class="shirone-banner-image" src={url('media/spring.webp')} alt="" width="1536" height="1024" fetchpriority="high" />
+  <div class="shirone-banner-copy"><h1 id="shirone-title">{site.name}</h1><p><reference-typewriter data-text={site.description} data-speed="100" data-delete="50" data-pause="2000" data-loop="true"><span class="shirone-text-measure" aria-hidden="true">{site.description}</span><span class="shirone-typed" data-typed-output aria-hidden="true">{site.description}</span><span class="sr-only">{site.description}</span></reference-typewriter></p></div>
+  <a class="shirone-banner-down" href="#writings" aria-label="开始阅读"><ChevronRight size={25}/></a>
+  <div class="shirone-waves" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path class="shirone-wave-one" d="M-720 64 Q-540 6 -360 64 T0 64 T360 64 T720 64 T1080 64 T1440 64 T1800 64 T2160 64 V150 H-720Z"/><path class="shirone-wave-two" d="M-720 72 Q-540 120 -360 72 T0 72 T360 72 T720 72 T1080 72 T1440 72 T1800 72 T2160 72 V150 H-720Z"/><path class="shirone-wave-three" d="M-720 85 Q-540 32 -360 85 T0 85 T360 85 T720 85 T1080 85 T1440 85 T1800 85 T2160 85 V150 H-720Z"/><path class="shirone-wave-four" d="M-720 100 Q-540 62 -360 100 T0 100 T360 100 T720 100 T1080 100 T1440 100 T1800 100 T2160 100 V150 H-720Z"/></svg></div>
+</section>
+<div class="shirone-layout">
+  <aside class="shirone-primary" aria-label="作者与分类">
+    <section class="shirone-profile shirone-panel">
+      <a class="shirone-avatar" href={url('about/')} aria-label="认识 qinghe"><img src={url('media/avatar.webp')} alt="qinghe 的头像" width="256" height="256"/><span><ArrowUpRight size={40}/></span></a>
+      <h2>{site.name}</h2><i class="shirone-profile-accent" aria-hidden="true"></i><p>{site.description}</p>
+      <div class="shirone-social"><a href={site.github} aria-label="GitHub" target="_blank" rel="noopener noreferrer"><CodeXml size={21}/></a><a href={`mailto:${site.email}`} aria-label="邮件"><Mail size={21}/></a><a href={url('rss.xml')} aria-label="RSS 订阅"><Rss size={20}/></a></div>
+    </section>
+    <section class="shirone-panel shirone-announcement"><h2><Bell size={17}/>小站公告</h2><p>你好，欢迎来到我的小站。<br/>保持好奇，慢慢生长。</p><a href={url('about/')}>关于这里 <ChevronRight size={16}/></a></section>
+    <div class="shirone-sticky">
+      <section class="shirone-panel shirone-categories"><h2><Folder size={17}/>分类</h2>{categories.map(category => <a href={categoryUrl(category)}><span>{category}</span><small>{posts.filter(post => post.data.category === category).length}</small></a>)}</section>
+      <section class="shirone-panel"><h2><Tags size={17}/>标签</h2><div class="shirone-tags">{tags.map(tag => <a href={tagUrl(tag)}>#{tag}</a>)}</div></section>
+    </div>
+  </aside>
+  <main id="main-content" class="feed shirone-feed">
+    <nav class="shirone-category-bar" id="writings" aria-label="筛选文章分类"><button type="button" data-category-filter="all" aria-pressed="true" aria-label="全部文章"><House size={17}/></button><a href={url('archives/')}>归档</a>{categories.map(category => <button type="button" data-category-filter={category} aria-pressed="false">{category}<small>{posts.filter(post => post.data.category === category).length}</small></button>)}</nav>
+    <h2 class="sr-only">最近的文章</h2>
+    <div class="shirone-posts" data-post-list>{posts.map(post => <article class:list={['post-card', 'shirone-post', {'shirone-post-has-cover': !!post.data.cover}]} data-category={post.data.category} data-post-key={post.id}>
+      <div class="shirone-post-body"><h2><a href={getPostUrl(post)}>{post.data.title}<ChevronRight size={22}/></a></h2><div class="shirone-meta"><span><i><CalendarDays size={17}/></i><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published, true)}</time></span><a href={categoryUrl(post.data.category)}><i><Folder size={17}/></i>{post.data.category}</a><span><i><Clock size={17}/></i>{readingTime(post.body)}</span>{post.data.example && <span class="example-badge">示例</span>}</div><p>{post.data.description}</p><div class="shirone-tags">{post.data.tags.map(tag => <a href={tagUrl(tag)}>#{tag}</a>)}</div></div>
+      {post.data.cover ? <a class="shirone-post-cover" href={getPostUrl(post)} tabindex="-1" aria-hidden="true"><img src={url(post.data.cover)} alt="" width="480" height="360" loading="lazy"/><span><ChevronRight size={42}/></span></a> : <a class="shirone-post-enter" href={getPostUrl(post)} tabindex="-1" aria-hidden="true"><ChevronRight size={34}/></a>}
+    </article>)}</div>
+    <p id="filter-status" class="sr-only" role="status" aria-live="polite"></p>
+    <div class="shirone-feed-end"><span aria-current="page">1</span><a href={url('archives/')}>文章归档 <ChevronRight size={16}/></a></div>
+  </main>
+  <aside class="shirone-secondary" aria-label="小站统计">
+    <section class="shirone-panel shirone-stats"><h2>小站统计</h2><dl><div><dt><i><FileText size={17}/></i>文章</dt><dd>{posts.length}</dd></div><div><dt><i><Folder size={17}/></i>分类</dt><dd>{categories.length}</dd></div><div><dt><i><Tags size={17}/></i>标签</dt><dd>{tags.length}</dd></div><div><dt><i><CalendarDays size={17}/></i>最近更新</dt><dd>{formatDate(latest, true)}</dd></div></dl></section>
+    <section class="shirone-panel shirone-calendar"><h2><CalendarDays size={17}/>{year} 年 {month + 1} 月</h2><div class="shirone-calendar-grid" aria-label="文章日历">{['一','二','三','四','五','六','日'].map(day => <small>{day}</small>)}{Array.from({length:blanks}, () => <span aria-hidden="true"></span>)}{Array.from({length:days}, (_, index) => {const day = index + 1; const post = calendarPosts.find(post => localDate(post.data.published).day === day); return post ? <a href={getPostUrl(post)} aria-label={`${month + 1}月${day}日：${post.data.title}`}>{day}</a> : <span>{day}</span>;})}</div></section>
+    <a class="shirone-rss shirone-panel" href={url('rss.xml')}><BookOpen size={20}/><span>订阅小站<small>让新的文字来找你</small></span><Rss size={19}/></a>
+  </aside>
+</div>
+<script>import '../../scripts/reference-typewriter';</script>

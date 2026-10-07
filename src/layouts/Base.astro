@@ -1,0 +1,74 @@
+---
+import { Search, Palette, Menu, ArrowUp, Sprout, ArrowUpRight } from '@lucide/astro';
+import '@fontsource-variable/noto-sans-sc';
+import '@fontsource-variable/noto-serif-sc';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource/bebas-neue';
+import '@fontsource/ibm-plex-mono/400.css';
+import '../styles/base.css';
+import '../styles/content.css';
+import '../styles/ink-transition.css';
+import Appearance from '../components/Appearance.astro';
+import SearchDialog from '../components/Search.astro';
+import KoharuDrawer from '../components/KoharuDrawer.astro';
+import Profile from '../components/Profile.astro';
+import { site, url, base, themes } from '../lib/site';
+interface Props { title?: string; description?: string; pageType?: 'home' | 'article' | 'page'; image?: string; }
+const { title, description = site.description, pageType = 'page', image = '/media/landscape.webp' } = Astro.props;
+const fullTitle = title ? `${title} · ${site.name}` : `${site.name} · 记录生活与技术`;
+const canonical = new URL(Astro.url.pathname, Astro.site || Astro.url.origin);
+const current = Astro.url.pathname;
+const nav = [{path:'/',label:'首页'},{path:'/archives/',label:'文章'},{path:'/categories/',label:'分类'},{path:'/about/',label:'关于'}];
+---
+<!doctype html>
+<html lang="zh-CN" data-theme="firefly" data-mode="light" data-base={base}>
+  <head>
+    <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content={description}/><meta name="color-scheme" content="light dark"/>
+    <title>{fullTitle}</title><link rel="canonical" href={canonical}/><link rel="icon" type="image/svg+xml" href={url('favicon.svg')}/>
+    <link rel="alternate" type="application/rss+xml" title="qinghe RSS" href={url('rss.xml')}/>
+    <meta property="og:type" content={pageType === 'article' ? 'article' : 'website'}/><meta property="og:title" content={fullTitle}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:image" content={new URL(url(image), Astro.site || Astro.url.origin)}/>
+    <script is:inline define:vars={{ assetBase: base, configuredTheme: site.defaultTheme, availableThemes: themes.map(theme => theme.id) }}>
+      (() => {
+        const valid = availableThemes;
+        let theme = valid.includes(configuredTheme) ? configuredTheme : 'firefly', mode = 'system';
+        try {
+          const savedTheme = localStorage.getItem('qinghe-theme');
+          if (valid.includes(savedTheme)) theme = savedTheme;
+          const savedMode = localStorage.getItem('qinghe-mode');
+          if (['light','dark','system'].includes(savedMode)) mode = savedMode;
+        } catch {}
+        const requested = new URL(location.href).searchParams.get('theme');
+        if (valid.includes(requested)) {
+          theme = requested;
+          try { localStorage.setItem('qinghe-theme', theme); } catch {}
+        }
+        const actualMode = mode === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : mode;
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.dataset.mode = actualMode;
+        document.documentElement.dataset.modePreference = mode;
+        const stylesheet = document.createElement('link');
+        stylesheet.id = 'theme-sheet';
+        stylesheet.rel = 'stylesheet';
+        stylesheet.setAttribute('blocking', 'render');
+        stylesheet.href = assetBase + '/themes/' + theme + '.css';
+        document.head.append(stylesheet);
+      })();
+    </script>
+    <noscript><link rel="stylesheet" href={url('themes/firefly.css')}/></noscript>
+  </head>
+  <body data-page={pageType}>
+    <a href="#main-content" class="skip-link">跳到正文</a>
+    <header class="site-header"><div class="header-inner">
+      <a class="brand" href={url('/')} aria-label="qinghe 首页"><span class="brand-symbol"><Sprout size={23} stroke-width={1.8}/></span><span class="brand-name">qinghe<span class="brand-subtitle">的小站</span></span></a>
+      <nav class="primary-nav" aria-label="主导航">{nav.map(item=><a href={url(item.path)} aria-current={current === url(item.path) ? 'page' : undefined}>{item.label}</a>)}</nav>
+      <div class="header-actions"><button type="button" class="icon-button search-trigger" data-open-search aria-label="搜索文章"><Search size={20}/><kbd>/</kbd></button><button type="button" class="appearance-trigger" data-open-appearance aria-label="外观" aria-haspopup="dialog"><Palette size={19}/><span>外观</span></button><button type="button" class="icon-button mobile-nav-toggle" aria-label="打开导航" aria-expanded="false" aria-controls="mobile-navigation"><Menu size={21}/></button></div>
+    </div><nav id="mobile-navigation" class="mobile-navigation" aria-label="手机导航" hidden>{nav.map(item=><a href={url(item.path)} aria-current={current === url(item.path) ? 'page' : undefined}>{item.label}<ArrowUpRight size={16}/></a>)}</nav></header>
+    {pageType === 'home' ? <slot/> : <div class="page-layout"><main id="main-content" class="page-main"><slot/></main><aside class="article-rail"><slot name="sidebar"><Profile/></slot></aside></div>}
+    <footer class="site-footer"><div><a href={url('/')} class="footer-name">qinghe<span>的小站</span></a><p>记录学习的足迹，也收藏生活的片刻。</p></div><div class="footer-links"><a href={url('archives/')}>归档</a><a href={url('links/')}>链接</a><a href={url('rss.xml')}>RSS <ArrowUpRight size={12}/></a><a href={url('about/#关于本站')}>关于本站</a></div><p class="footer-bottom">© {new Date().getFullYear()} qinghe <span> · </span><button type="button" data-open-appearance class="text-button">当前外观：<span data-current-theme>Firefly</span></button></p></footer>
+    <button type="button" id="back-to-top" class="back-to-top icon-button" aria-label="回到顶部" hidden><ArrowUp size={20}/></button>
+    <Appearance/><SearchDialog/><KoharuDrawer/>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script>import '../scripts/app.ts'; import '../scripts/traveritas-motion.ts';</script>
+  </body>
+</html>

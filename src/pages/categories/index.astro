@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import { categoryUrl, getPosts } from '../../lib/content';
+import { url } from '../../lib/site';
+const posts = await getPosts();
+const categories = [...new Set(posts.map(post => post.data.category))];
+const descriptions: Record<string, string> = { 生活: '收藏平凡日子里的细节。', 技术: '让想法慢慢变成可以使用的东西。', 随笔: '阅读、思考，以及未完成的问题。', 起点: '从最初的一句问候开始。' };
+---
+<Base title="文章分类" pageType="page" description="生活、技术与随笔，沿着不同方向阅读。">
+  <section class="content-surface">
+    <header class="page-heading"><h1>几个方向</h1><p class="page-intro">生活有许多侧面，文字也是。</p></header>
+    <nav class="index-navigation" aria-label="文章浏览方式"><a href={url('/archives/')}>按时间</a><a aria-current="page" href={url('/categories/')}>按分类</a><a href={url('/tags/')}>按标签</a></nav>
+    <ul class="category-list">{categories.map(category => <li><a href={categoryUrl(category)}><div><h2>{category}</h2><p>{descriptions[category] || '这个方向里的文字。'}</p></div><span>{posts.filter(post => post.data.category === category).length} 篇</span></a></li>)}</ul>
+  </section>
+</Base>

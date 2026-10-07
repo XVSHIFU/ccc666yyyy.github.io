@@ -1,0 +1,7 @@
+---
+import { getEntry } from 'astro:content';
+import ArticleView from '../../../../components/ArticleView.astro';
+const post = await getEntry('posts', 'post');
+if (!post) throw new Error('Missing preserved post article');
+---
+<ArticleView post={post} />

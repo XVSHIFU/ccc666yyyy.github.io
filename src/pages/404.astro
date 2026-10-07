@@ -1,0 +1,13 @@
+---
+import { ArrowLeft } from '@lucide/astro';
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/site';
+---
+<Base title="页面未找到" pageType="page">
+  <section class="content-surface not-found">
+    <p class="error-code" aria-label="错误代码 404">404</p>
+    <h1>这条小路，还没有通往哪里。</h1>
+    <p class="page-intro">页面可能已移动，也可能是地址写错了。回到首页，或者搜索一篇文章。</p>
+    <div class="not-found-actions"><a class="contact-link" href={url('/')}><ArrowLeft size={17} aria-hidden="true" />回到首页</a><button class="text-button" type="button" data-open-search>搜索文章</button></div>
+  </section>
+</Base>

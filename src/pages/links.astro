@@ -1,0 +1,15 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+import Base from '../layouts/Base.astro';
+const links = [
+  { title: 'Fluid Blog', description: '旧站所用主题的博客。', href: 'https://hexo.fluid-dev.com/' },
+  { title: 'Fluid Docs', description: 'Fluid 主题使用指南。', href: 'https://hexo.fluid-dev.com/docs/' },
+  { title: 'Fluid Repo', description: 'Fluid 的开源代码仓库。', href: 'https://github.com/fluid-dev/hexo-theme-fluid' },
+];
+---
+<Base title="链接" pageType="page" description="留在这里的一些入口。">
+  <section class="content-surface">
+    <header class="page-heading"><h1>从这里出发</h1><p class="page-intro">一些保留下来的入口，也给新的相遇留个位置。</p></header>
+    <ul class="reading-links">{links.map(link => <li><a href={link.href} target="_blank" rel="noopener noreferrer"><div><h2>{link.title}</h2><p>{link.description}</p></div><ArrowUpRight size={22} aria-hidden="true" /></a></li>)}</ul>
+  </section>
+</Base>

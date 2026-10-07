@@ -1,0 +1,17 @@
+---
+import { CodeXml as Github, Mail } from '@lucide/astro';
+import Base from '../layouts/Base.astro';
+import { site, url } from '../lib/site';
+---
+<Base title="关于我" pageType="page" description="一名热爱编程的大学生，专注于网络安全方向。">
+  <section class="content-surface about-surface">
+    <header class="page-heading about-heading"><img class="about-avatar" src={url('/media/avatar.webp')} alt="qinghe 的头像" width="88" height="88" /><div><h1>你好，我是 qinghe。</h1><p class="page-intro">一名热爱编程的大学生，专注于网络安全方向。</p></div></header>
+    <div class="prose about-prose">
+      <h2>关于我</h2><p>一名编程小白，希望在业余时间分享我的学习心得。</p>
+      <h2>开发工具</h2><p>VS · GitHub</p>
+      <h2 id="关于本站">关于本站</h2><p>这里是 qinghe 的个人空间，留给学习心得，也留给生活里的片刻。欢迎随意翻阅，找到一段想读的文字。</p>
+      <h2>保持联系</h2><p>如果想交流学习心得，或者聊聊一篇文章，可以通过下面的方式找到我。</p>
+    </div>
+    <div class="contact-links"><a href={site.github} target="_blank" rel="noopener noreferrer"><Github size={19} aria-hidden="true" />GitHub</a><a href={`mailto:${site.email}`}><Mail size={19} aria-hidden="true" />写一封邮件</a></div>
+  </section>
+</Base>

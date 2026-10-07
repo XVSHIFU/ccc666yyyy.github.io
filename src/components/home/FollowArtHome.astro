@@ -1,0 +1,36 @@
+---
+import { ArrowDown, ArrowUpRight } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate, categoryUrl } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts=await getPosts();
+---
+<main id="main-content" class="feed followart-home"><followart-motion>
+  <section class="followart-hero" aria-labelledby="home-title">
+    <h1 id="home-title"><span class="followart-word">QINGHE.</span><span class="followart-chinese">让想法，<br/>有自己的形状。</span></h1>
+    <div class="followart-deck">{posts.slice(0,3).map((post,i)=><a class="followart-deck-card" href={getPostUrl(post)} style={`--card-index:${i}`}><img src={url(post.data.cover||(i%2?'media/spring.webp':'media/landscape.webp'))} alt="" width="380" height="440"/><span>{post.data.category}<ArrowUpRight size={19}/></span><strong>{post.data.title}</strong>{post.data.example&&<small>示例文章</small>}</a>)}</div>
+    <div class="followart-hero-bottom"><p>{site.description}</p><a href="#followart-posts">翻开看看 <ArrowDown size={20}/></a></div>
+  </section>
+  <section class="followart-writing" id="followart-posts" aria-labelledby="followart-heading">
+    <div class="followart-heading"><h2 id="followart-heading">灵感不必<br/><span>整整齐齐。</span></h2><p>学习、实践和日常，<br/>都可以在这里找到一页。</p></div>
+    <div class="followart-posts" data-post-list>{posts.map((post,i)=><article class="post-card followart-entry" data-category={post.data.category} data-post-key={post.id}>
+      <a class="followart-picture" href={getPostUrl(post)} tabindex="-1" aria-hidden="true"><img src={url(post.data.cover||(i%2?'media/spring.webp':'media/landscape.webp'))} alt="" width="800" height="620" loading="lazy"/></a>
+      <div class="followart-entry-copy"><div class="followart-meta"><a href={categoryUrl(post.data.category)}>{post.data.category}</a><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published,true)}</time></div><h3><a href={getPostUrl(post)}>{post.data.title}</a></h3>{post.data.example&&<span class="example-badge">示例文章</span>}<p>{post.data.description}</p><a class="followart-read" href={getPostUrl(post)} aria-label={`阅读：${post.data.title}`}><ArrowUpRight size={26}/></a></div>
+    </article>)}</div>
+  </section>
+  <section class="followart-note"><p>写一点。<br/>分享一点。<br/><span>继续探索。</span></p><a href={url('archives/')}>所有文章 <ArrowUpRight size={30}/></a></section>
+</followart-motion></main>
+<script>
+  if(!customElements.get('followart-motion'))customElements.define('followart-motion',class extends HTMLElement{
+    controller?:AbortController;frame=0;
+    connectedCallback(){
+      this.controller?.abort();this.controller=new AbortController();const {signal}=this.controller;
+      const hero=this.querySelector<HTMLElement>('.followart-hero');const deck=this.querySelector<HTMLElement>('.followart-deck');const cards=[...this.querySelectorAll<HTMLElement>('.followart-deck-card')];const word=this.querySelector<HTMLElement>('.followart-word');
+      if(!hero||!deck||!word)return;const reduce=matchMedia('(prefers-reduced-motion: reduce)');let px=0,py=0;
+      const render=()=>{this.frame=0;if(!this.isConnected)return;const rect=hero.getBoundingClientRect();const progress=reduce.matches?0:Math.max(0,Math.min(1,-rect.top/rect.height));const small=innerWidth<761;cards.forEach((card,index)=>{const offset=index-1;card.style.setProperty('--deck-x',`${offset*progress*(small?18:95)+px*(index===1?6:13)}px`);card.style.setProperty('--deck-y',`${(1-index)*13-progress*(index===1?25:58)+py*10}px`);card.style.setProperty('--deck-z',`${index===1?45:0}px`);card.style.setProperty('--deck-roll',`${offset*(11+progress*13)+px*3}deg`);card.style.setProperty('--deck-yaw',`${offset*progress*25+px*14}deg`);card.style.setProperty('--deck-pitch',`${-py*9-progress*8}deg`)});word.style.setProperty('--word-stretch',String((small?1.28:1.7)-progress*.25));hero.dataset.motionReady='true'};
+      const schedule=()=>{if(!this.frame)this.frame=requestAnimationFrame(render)};
+      hero.addEventListener('pointermove',e=>{if(reduce.matches||e.pointerType!=='mouse')return;const box=hero.getBoundingClientRect();px=(e.clientX-box.left)/box.width-.5;py=(e.clientY-box.top)/box.height-.5;schedule()},{signal});hero.addEventListener('pointerleave',()=>{px=0;py=0;schedule()},{signal});
+      window.addEventListener('scroll',schedule,{signal,passive:true});window.addEventListener('resize',schedule,{signal});reduce.addEventListener('change',()=>{px=0;py=0;schedule()},{signal});render();
+    }
+    disconnectedCallback(){this.controller?.abort();cancelAnimationFrame(this.frame);this.frame=0}
+  });
+</script>

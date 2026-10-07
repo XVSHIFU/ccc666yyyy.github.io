@@ -1,0 +1,621 @@
+/* Original implementation of the Hexo Solitude magazine layout.
+Visual reference: github.com/everfu/hexo-theme-solitude;
+no upstream code or assets copied. */
+/* Source scrollFn/percent: scrolling down trades desktop menus for the page title;
+   scrolling up restores menus. Progress is calculated from the actual document. */
+.solitude-page-label,.solitude-scroll-progress{display:none}
+@media(min-width:900px){
+  .solitude-page-label{display:block;position:absolute;left:50%;top:9px;max-width:40%;padding:9px 20px;border-radius:99px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;visibility:hidden;transform:translate(-50%,22px) scale(.9);transition:transform .3s,opacity .3s,visibility .3s}
+  :root[data-solitude-nav] .primary-nav{transition:transform .3s,opacity .3s,visibility .3s}
+  :root[data-solitude-nav='reading'] .primary-nav{opacity:0;visibility:hidden;transform:translate(-50%,-35px) scale(.85)}
+  :root[data-solitude-nav='reading'] .solitude-page-label{opacity:1;visibility:visible;transform:translate(-50%,0) scale(1)}
+  .solitude-scroll-progress{display:block;max-width:0;min-height:36px;padding:0;opacity:0;visibility:hidden;overflow:hidden;font-size:11px;font-variant-numeric:tabular-nums;white-space:nowrap;transition:opacity .25s,max-width .25s,padding .25s;background:var(--accent);color:var(--on-accent);border-radius:20px}
+  :root[data-solitude-scrolled='true'] .solitude-scroll-progress{max-width:86px;padding-inline:12px;opacity:1;visibility:visible}
+}
+@media(prefers-reduced-motion:reduce){.solitude-page-label,.solitude-scroll-progress,:root[data-solitude-nav] .primary-nav{transition:none}}
+:root{
+  --bg:#f7f9fe;
+  --surface:#fff;
+  --surface-2:#edf1fb;
+  --ink:#36373b;
+  --muted:#626573;
+  --line:#dee5fa;
+  --accent:#425aef;
+  --accent-soft:#e9edff;
+  --on-accent:#fff;
+  --radius:12px;
+  --shadow:none;
+  --max-width:1400px;
+  --display-font:'Noto Sans SC Variable',sans-serif;
+  --solitude-profile:#485cf0}
+  :root[data-mode='dark']{
+    --bg:#18191e;
+    --surface:#22232b;
+    --surface-2:#2c2e39;
+    --ink:#f1f1f3;
+    --muted:#b8b9c3;
+    --line:#393b48;
+    --accent:#ffc848;
+    --accent-soft:#463b25;
+    --on-accent:#24201a;
+    --solitude-profile:#343b77}
+    solitude-motion{display:block}
+    body{
+      background:var(--bg);
+      color:var(--ink)}
+      ::selection{
+        background:var(--accent);
+        color:var(--on-accent)}
+        *{
+          scrollbar-color:var(--line) var(--bg)}
+          input,textarea{
+            caret-color:var(--accent)}
+            a{
+              text-underline-offset:.25em}
+              .site-header{
+                height:60px;
+                position:sticky;
+                top:0;
+                background:var(--bg);
+                border:0;
+                z-index:30}
+                .header-inner{
+                  height:60px;
+                  max-width:1400px;
+                  padding:0 24px;
+                  position:relative;
+                  gap:20px}
+                  .brand{
+                    gap:0;
+                    border-radius:24px;
+                    min-height:38px;
+                    padding:0 10px;
+                    transition:background .2s}
+                    .brand:hover{
+                      background:var(--accent);
+                      color:var(--on-accent)}
+                      .brand-symbol{
+                        display:none}
+                        .brand-name{
+                          font-size:21px;
+                          font-weight:750;
+                          letter-spacing:-.025em}
+                          .brand-subtitle{
+                            display:none}
+                            .primary-nav{
+                              position:absolute;
+                              left:50%;
+                              transform:translateX(-50%);
+                              margin:0;
+                              gap:7px}
+                              .primary-nav a{
+                                font-size:14px;
+                                font-weight:650;
+                                padding:8px 17px;
+                                border-radius:24px}
+                                .primary-nav a[aria-current='page']{
+                                  color:var(--ink)}
+                                  .primary-nav a[aria-current='page']::after{
+                                    display:none}
+                                    .primary-nav a:hover{
+                                      color:var(--on-accent);
+                                      background:var(--accent)}
+                                      .header-actions{
+                                        margin-left:auto;
+                                        gap:5px}
+                                        .header-actions .icon-button{
+                                          border-radius:50%;
+                                          width:38px;
+                                          height:38px;
+                                          min-height:38px;
+                                          min-width:38px}
+                                          .appearance-trigger{
+                                            border:0;
+                                            border-radius:50%;
+                                            padding:8px;
+                                            min-width:38px;
+                                            min-height:38px;
+                                            background:transparent}
+                                            .appearance-trigger span,.search-trigger kbd{
+                                              display:none}
+                                              .mobile-navigation{
+                                                top:calc(100% + 5px)}
+                                                .solitude-home{
+                                                  max-width:1400px;
+                                                  padding:0 24px;
+                                                  margin:8px auto 70px;
+                                                  min-height:calc(100vh - 230px)}
+                                                  .solitude-category-bar{
+                                                    display:flex;
+                                                    align-items:center;
+                                                    justify-content:space-between;
+                                                    gap:16px;
+                                                    margin-bottom:11px;
+                                                    min-width:0}
+                                                    .solitude-category-scroll{
+                                                      display:flex;
+                                                      align-items:center;
+                                                      gap:10px;
+                                                      overflow-x:auto;
+                                                      white-space:nowrap;
+                                                      scrollbar-width:none;
+                                                      min-width:0}
+                                                      .solitude-category-scroll>*{
+                                                        display:flex;
+                                                        align-items:center;
+                                                        justify-content:center;
+                                                        gap:6px;
+                                                        min-height:38px;
+                                                        padding:8px 18px;
+                                                        border:1px solid var(--line);
+                                                        border-radius:999px;
+                                                        background:var(--surface);
+                                                        font-size:13px;
+                                                        font-weight:650;
+                                                        white-space:nowrap;
+                                                        flex-shrink:0;
+                                                        line-height:1.2}
+                                                        .solitude-category-scroll button[aria-pressed='true']{
+                                                          background:var(--accent);
+                                                          border-color:var(--accent);
+                                                          color:var(--on-accent)}
+                                                          .solitude-category-scroll>*:hover{
+                                                            background:var(--accent);
+                                                            border-color:var(--accent);
+                                                            color:var(--on-accent)}
+                                                            .solitude-more{
+                                                              display:flex;
+                                                              gap:6px;
+                                                              align-items:center;
+                                                              border:1px solid var(--line);
+                                                              border-radius:999px;
+                                                              min-height:38px;
+                                                              padding:8px 17px;
+                                                              background:var(--surface);
+                                                              font-size:13px;
+                                                              flex-shrink:0}
+                                                              .solitude-more:hover{
+                                                                background:var(--accent);
+                                                                color:var(--on-accent);
+                                                                border-color:var(--accent)}
+                                                                .solitude-columns{
+                                                                  display:grid;
+                                                                  grid-template-columns:minmax(0,1fr) 285px;
+                                                                  gap:15px;
+                                                                  align-items:start}
+                                                                  .solitude-feed{
+                                                                    min-width:0;
+                                                                    padding:0}
+                                                                    .solitude-posts{
+                                                                      display:grid;
+                                                                      grid-template-columns:repeat(2,minmax(0,1fr));
+                                                                      gap:10px}
+                                                                      .solitude-post.post-card{
+                                                                        display:flex;
+                                                                        flex-direction:column;
+                                                                        border:1px solid var(--line);
+                                                                        border-radius:12px;
+                                                                        background:var(--surface);
+                                                                        overflow:hidden;
+                                                                        box-shadow:none;
+                                                                        transition:border-color .25s}
+                                                                        .solitude-post.post-card:hover{
+                                                                          border-color:var(--accent);
+                                                                          box-shadow:none}
+                                                                          .solitude-post-cover{
+                                                                            height:225px;
+                                                                            width:100%;
+                                                                            display:block;
+                                                                            overflow:hidden;
+                                                                            background:var(--surface-2)}
+                                                                            .solitude-post-cover img{
+                                                                              width:100%;
+                                                                              height:100%;
+                                                                              object-fit:cover;
+                                                                              transition:transform .3s,filter .3s}
+                                                                              .solitude-post:hover .solitude-post-cover img{
+                                                                                transform:scale(1.03);
+                                                                                filter:brightness(.85)}
+                                                                                .solitude-post-info{
+                                                                                  display:flex;
+                                                                                  flex-direction:column;
+                                                                                  justify-content:space-between;
+                                                                                  min-width:0;
+                                                                                  min-height:165px;
+                                                                                  padding:20px 30px 22px;
+                                                                                  gap:30px;
+                                                                                  flex:1}
+                                                                                  .solitude-post-tips{
+                                                                                    display:flex;
+                                                                                    align-items:center;
+                                                                                    gap:9px;
+                                                                                    font-size:10px;
+                                                                                    color:var(--muted);
+                                                                                    margin-bottom:4px;
+                                                                                    min-height:18px}
+                                                                                    .solitude-post-tips .example-badge{
+                                                                                      padding:0 5px;
+                                                                                      line-height:1.4;
+                                                                                      font-size:9px;
+                                                                                      min-height:0}
+                                                                                      .solitude-post h2{
+                                                                                        font-size:21px;
+                                                                                        line-height:1.45;
+                                                                                        font-weight:700;
+                                                                                        letter-spacing:-.015em}
+                                                                                        .solitude-post:hover h2{
+                                                                                          color:var(--accent)}
+                                                                                          .solitude-post-meta{
+                                                                                            display:flex;
+                                                                                            justify-content:space-between;
+                                                                                            align-items:center;
+                                                                                            gap:10px;
+                                                                                            font-size:11px;
+                                                                                            font-variant-numeric:tabular-nums}
+                                                                                            .solitude-post-meta>div{
+                                                                                              display:flex;
+                                                                                              gap:7px;
+                                                                                              min-width:0;
+                                                                                              overflow:hidden}
+                                                                                              .solitude-post-meta a{
+                                                                                                white-space:nowrap}
+                                                                                                .solitude-post-meta a>span{
+                                                                                                  color:var(--muted);
+                                                                                                  opacity:.7;
+                                                                                                  font-weight:700;
+                                                                                                  margin-right:3px}
+                                                                                                  .solitude-post-meta time{
+                                                                                                    white-space:nowrap;
+                                                                                                    color:var(--muted);
+                                                                                                    font-size:10px}
+                                                                                                    .solitude-pagination{
+                                                                                                      display:flex;
+                                                                                                      justify-content:center;
+                                                                                                      margin-top:12px}
+                                                                                                      .solitude-pagination>span{
+                                                                                                        width:40px;
+                                                                                                        height:40px;
+                                                                                                        border-radius:50%;
+                                                                                                        display:grid;
+                                                                                                        place-items:center;
+                                                                                                        background:var(--accent);
+                                                                                                        color:var(--on-accent);
+                                                                                                        font-weight:500;
+                                                                                                        font-size:16px}
+                                                                                                        .solitude-aside{
+                                                                                                          min-width:0;
+                                                                                                          display:grid;
+                                                                                                          gap:12px}
+                                                                                                          .solitude-author{
+                                                                                                            height:320px;
+                                                                                                            border-radius:12px;
+                                                                                                            position:relative;
+                                                                                                            overflow:hidden;
+                                                                                                            background:var(--solitude-profile);
+                                                                                                            color:#fff;
+                                                                                                            padding:20px}
+                                                                                                            .solitude-hello{
+                                                                                                              display:flex;
+                                                                                                              gap:6px;
+                                                                                                              align-items:center;
+                                                                                                              justify-content:center;
+                                                                                                              position:relative;
+                                                                                                              z-index:2;
+                                                                                                              margin:auto;
+                                                                                                              width:fit-content;
+                                                                                                              padding:5px 11px;
+                                                                                                              border-radius:12px;
+                                                                                                              background:#ffffff25;
+                                                                                                              color:#fff;
+                                                                                                              font-size:10px;
+                                                                                                              line-height:1.5}
+                                                                                                              .solitude-avatar{
+                                                                                                                position:absolute;
+                                                                                                                left:calc(50% - 59px);
+                                                                                                                top:90px;
+                                                                                                                width:118px;
+                                                                                                                height:118px;
+                                                                                                                transition:transform .3s cubic-bezier(.69,.39,0,1.21);
+                                                                                                                transform-origin:center bottom;
+                                                                                                                z-index:3}
+                                                                                                                .solitude-avatar img{
+                                                                                                                  width:100%;
+                                                                                                                  height:100%;
+                                                                                                                  border:5px solid #fff;
+                                                                                                                  border-radius:50%;
+                                                                                                                  object-fit:cover}
+                                                                                                                  .solitude-author-detail{
+                                                                                                                    position:absolute;
+                                                                                                                    left:24px;
+                                                                                                                    right:24px;
+                                                                                                                    top:90px;
+                                                                                                                    opacity:0;
+                                                                                                                    transform:translateY(8px);
+                                                                                                                    transition:opacity .25s,transform .25s;
+                                                                                                                    visibility:hidden}
+                                                                                                                    .solitude-author-detail p{
+                                                                                                                      font-size:25px;
+                                                                                                                      font-weight:650;
+                                                                                                                      line-height:1.55;
+                                                                                                                      color:#fff}
+                                                                                                                      .solitude-author-detail>a{
+                                                                                                                        display:flex;
+                                                                                                                        align-items:center;
+                                                                                                                        gap:8px;
+                                                                                                                        margin-top:13px;
+                                                                                                                        font-size:12px;
+                                                                                                                        color:#fff}
+                                                                                                                        .solitude-author:hover .solitude-avatar,.solitude-author:focus-within .solitude-avatar{
+                                                                                                                          transform:scale(0)}
+                                                                                                                          .solitude-author:hover .solitude-author-detail,.solitude-author:focus-within .solitude-author-detail{
+                                                                                                                            visibility:visible;
+                                                                                                                            opacity:1;
+                                                                                                                            transform:translateY(0)}
+                                                                                                                            .solitude-author-bottom{
+                                                                                                                              position:absolute;
+                                                                                                                              left:20px;
+                                                                                                                              right:20px;
+                                                                                                                              bottom:20px;
+                                                                                                                              display:flex;
+                                                                                                                              align-items:flex-end;
+                                                                                                                              gap:7px}
+                                                                                                                              .solitude-author-bottom>div:first-child{
+                                                                                                                                flex:1;
+                                                                                                                                min-width:0}
+                                                                                                                                .solitude-author-bottom h2{
+                                                                                                                                  font-size:22px;
+                                                                                                                                  font-weight:750;
+                                                                                                                                  color:#fff;
+                                                                                                                                  line-height:1.2;
+                                                                                                                                  letter-spacing:-.025em}
+                                                                                                                                  .solitude-author-bottom p{
+                                                                                                                                    font-size:10px;
+                                                                                                                                    color:#eef0ff;
+                                                                                                                                    line-height:1.5;
+                                                                                                                                    margin-top:4px;
+                                                                                                                                    max-width:150px}
+                                                                                                                                    .solitude-social{
+                                                                                                                                      display:flex;
+                                                                                                                                      gap:5px}
+                                                                                                                                      .solitude-social a{
+                                                                                                                                        width:32px;
+                                                                                                                                        height:32px;
+                                                                                                                                        border-radius:50%;
+                                                                                                                                        background:#ffffff25;
+                                                                                                                                        color:#fff;
+                                                                                                                                        display:grid;
+                                                                                                                                        place-items:center}
+                                                                                                                                        .solitude-social a:hover{
+                                                                                                                                          background:#fff;
+                                                                                                                                          color:var(--solitude-profile)}
+                                                                                                                                          .solitude-site-info,.solitude-tag-card{
+                                                                                                                                            border:1px solid var(--line);
+                                                                                                                                            border-radius:12px;
+                                                                                                                                            background:var(--surface);
+                                                                                                                                            padding:17px 20px}
+                                                                                                                                            .solitude-site-info dl{
+                                                                                                                                              margin:0;
+                                                                                                                                              display:grid;
+                                                                                                                                              gap:6px}
+                                                                                                                                              .solitude-site-info dl>div{
+                                                                                                                                                display:flex;
+                                                                                                                                                justify-content:space-between;
+                                                                                                                                                gap:10px;
+                                                                                                                                                font-size:12px}
+                                                                                                                                                .solitude-site-info dd{
+                                                                                                                                                  margin:0;
+                                                                                                                                                  font-variant-numeric:tabular-nums}
+                                                                                                                                                  .solitude-aside-sticky{
+                                                                                                                                                    display:grid;
+                                                                                                                                                    gap:12px;
+                                                                                                                                                    position:sticky;
+                                                                                                                                                    top:78px}
+                                                                                                                                                    .solitude-tag-card h2{
+                                                                                                                                                      display:flex;
+                                                                                                                                                      gap:8px;
+                                                                                                                                                      align-items:center;
+                                                                                                                                                      font-size:14px;
+                                                                                                                                                      margin-bottom:13px}
+                                                                                                                                                      .solitude-tag-card>div{
+                                                                                                                                                        display:flex;
+                                                                                                                                                        flex-wrap:wrap;
+                                                                                                                                                        gap:8px 10px}
+                                                                                                                                                        .solitude-tag-card a{
+                                                                                                                                                          font-size:12px;
+                                                                                                                                                          color:var(--muted)}
+                                                                                                                                                          .solitude-tag-card a:hover{
+                                                                                                                                                            color:var(--accent)}
+                                                                                                                                                            .solitude-rss{
+                                                                                                                                                              display:flex;
+                                                                                                                                                              align-items:center;
+                                                                                                                                                              gap:9px;
+                                                                                                                                                              border:1px solid var(--line);
+                                                                                                                                                              border-radius:12px;
+                                                                                                                                                              background:var(--surface);
+                                                                                                                                                              padding:15px 20px;
+                                                                                                                                                              font-size:12px}
+                                                                                                                                                              .solitude-rss>svg{
+                                                                                                                                                                color:var(--accent)}
+                                                                                                                                                                .solitude-rss>svg:last-child{
+                                                                                                                                                                  margin-left:auto}
+                                                                                                                                                                  .page-layout{
+                                                                                                                                                                    max-width:1400px;
+                                                                                                                                                                    grid-template-columns:minmax(0,1fr) 285px;
+                                                                                                                                                                    gap:20px;
+                                                                                                                                                                    margin:24px auto 70px;
+                                                                                                                                                                    padding:0 24px}
+                                                                                                                                                                    .content-surface{
+                                                                                                                                                                      border:1px solid var(--line);
+                                                                                                                                                                      border-radius:12px;
+                                                                                                                                                                      background:var(--surface);
+                                                                                                                                                                      padding:42px;
+                                                                                                                                                                      box-shadow:none}
+                                                                                                                                                                      .article-header{
+                                                                                                                                                                        margin:-42px -42px 32px;
+                                                                                                                                                                        padding:42px;
+                                                                                                                                                                        background:var(--accent);
+                                                                                                                                                                        border-radius:11px 11px 0 0;
+                                                                                                                                                                        border:0;
+                                                                                                                                                                        color:var(--on-accent)}
+                                                                                                                                                                        .article-header .post-title{
+                                                                                                                                                                          color:var(--on-accent);
+                                                                                                                                                                          font-size:clamp(30px,4vw,48px);
+                                                                                                                                                                          font-weight:750;
+                                                                                                                                                                          line-height:1.35}
+                                                                                                                                                                          .article-header :is(p,a,.post-meta,time,.post-category){
+                                                                                                                                                                            color:var(--on-accent)}
+                                                                                                                                                                            .article-header .back-link{
+                                                                                                                                                                              opacity:.85}
+                                                                                                                                                                              .article-header .article-description{
+                                                                                                                                                                                opacity:.9}
+                                                                                                                                                                                .article-header .example-badge{
+                                                                                                                                                                                  color:var(--on-accent);
+                                                                                                                                                                                  background:#ffffff18;
+                                                                                                                                                                                  border-color:currentColor}
+                                                                                                                                                                                  .article-rail{
+                                                                                                                                                                                    top:80px;
+                                                                                                                                                                                    order:initial}
+                                                                                                                                                                                    .article-sidebar-content{
+                                                                                                                                                                                      top:80px}
+                                                                                                                                                                                      .article-toc{
+                                                                                                                                                                                        border:1px solid var(--line);
+                                                                                                                                                                                        border-radius:12px;
+                                                                                                                                                                                        padding:22px;
+                                                                                                                                                                                        background:var(--surface)}
+                                                                                                                                                                                        .article-toc a[aria-current='location']{
+                                                                                                                                                                                          background:var(--accent);
+                                                                                                                                                                                          color:var(--on-accent)}
+                                                                                                                                                                                          .prose{
+                                                                                                                                                                                            max-width:75ch;
+                                                                                                                                                                                            margin-inline:auto}
+                                                                                                                                                                                            .prose h2{
+                                                                                                                                                                                              font-weight:750}
+                                                                                                                                                                                              .prose blockquote{
+                                                                                                                                                                                                border:0;
+                                                                                                                                                                                                border-radius:9px;
+                                                                                                                                                                                                background:var(--accent-soft)}
+                                                                                                                                                                                                .profile-card{
+                                                                                                                                                                                                  border:1px solid var(--line);
+                                                                                                                                                                                                  border-radius:12px;
+                                                                                                                                                                                                  background:var(--surface);
+                                                                                                                                                                                                  box-shadow:none}
+                                                                                                                                                                                                  .site-footer{
+                                                                                                                                                                                                    max-width:1400px;
+                                                                                                                                                                                                    margin:0 auto;
+                                                                                                                                                                                                    padding:28px 24px;
+                                                                                                                                                                                                    border-top:1px solid var(--line);
+                                                                                                                                                                                                    color:var(--muted)}
+                                                                                                                                                                                                    .footer-name{
+                                                                                                                                                                                                      font-size:18px}
+                                                                                                                                                                                                      @media(min-width:769px) and (max-width:1299px){
+                                                                                                                                                                                                        .solitude-posts{
+                                                                                                                                                                                                          grid-template-columns:1fr}
+                                                                                                                                                                                                          .solitude-post.post-card{
+                                                                                                                                                                                                            flex-direction:row}
+                                                                                                                                                                                                            .solitude-post-cover{
+                                                                                                                                                                                                              height:220px;
+                                                                                                                                                                                                              flex:0 0 43%;
+                                                                                                                                                                                                              width:43%}
+                                                                                                                                                                                                              .solitude-post-info{
+                                                                                                                                                                                                                padding:22px 28px;
+                                                                                                                                                                                                                min-height:220px}
+                                                                                                                                                                                                                .solitude-post h2{
+                                                                                                                                                                                                                  font-size:22px}
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                                @media(max-width:1199px){
+                                                                                                                                                                                                                  .solitude-columns{
+                                                                                                                                                                                                                    grid-template-columns:minmax(0,1fr)}
+                                                                                                                                                                                                                    .solitude-aside{
+                                                                                                                                                                                                                      display:none}
+                                                                                                                                                                                                                      .page-layout{
+                                                                                                                                                                                                                        grid-template-columns:minmax(0,1fr) 230px;
+                                                                                                                                                                                                                        gap:16px}
+                                                                                                                                                                                                                        .primary-nav a{
+                                                                                                                                                                                                                          padding-inline:13px}
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                        @media(max-width:768px){
+                                                                                                                                                                                                                          .header-inner{
+                                                                                                                                                                                                                            padding:0 12px;
+                                                                                                                                                                                                                            height:60px;
+                                                                                                                                                                                                                            gap:10px}
+                                                                                                                                                                                                                            .brand{
+                                                                                                                                                                                                                              padding:0 7px}
+                                                                                                                                                                                                                              .brand-name{
+                                                                                                                                                                                                                                font-size:20px}
+                                                                                                                                                                                                                                .primary-nav{
+                                                                                                                                                                                                                                  display:none}
+                                                                                                                                                                                                                                  .mobile-nav-toggle{
+                                                                                                                                                                                                                                    display:inline-flex}
+                                                                                                                                                                                                                                    .header-actions{
+                                                                                                                                                                                                                                      gap:1px}
+                                                                                                                                                                                                                                      .solitude-home{
+                                                                                                                                                                                                                                        padding:0 16px;
+                                                                                                                                                                                                                                        margin-top:8px;
+                                                                                                                                                                                                                                        margin-bottom:45px}
+                                                                                                                                                                                                                                        .solitude-category-bar{
+                                                                                                                                                                                                                                          gap:8px;
+                                                                                                                                                                                                                                          margin-bottom:12px}
+                                                                                                                                                                                                                                          .solitude-category-scroll{
+                                                                                                                                                                                                                                            gap:7px}
+                                                                                                                                                                                                                                            .solitude-category-scroll>*{
+                                                                                                                                                                                                                                              min-height:36px;
+                                                                                                                                                                                                                                              font-size:12px;
+                                                                                                                                                                                                                                              padding:7px 14px}
+                                                                                                                                                                                                                                              .solitude-more{
+                                                                                                                                                                                                                                                padding:7px 12px;
+                                                                                                                                                                                                                                                min-height:36px;
+                                                                                                                                                                                                                                                font-size:12px}
+                                                                                                                                                                                                                                                .solitude-more svg{
+                                                                                                                                                                                                                                                  display:none}
+                                                                                                                                                                                                                                                  .solitude-posts{
+                                                                                                                                                                                                                                                    grid-template-columns:minmax(0,1fr);
+                                                                                                                                                                                                                                                    gap:12px}
+                                                                                                                                                                                                                                                    .solitude-post.post-card{
+                                                                                                                                                                                                                                                      flex-direction:column}
+                                                                                                                                                                                                                                                      .solitude-post-cover{
+                                                                                                                                                                                                                                                        height:170px;
+                                                                                                                                                                                                                                                        flex:auto;
+                                                                                                                                                                                                                                                        width:100%}
+                                                                                                                                                                                                                                                        .solitude-post-info{
+                                                                                                                                                                                                                                                          padding:17px 22px 19px;
+                                                                                                                                                                                                                                                          min-height:150px;
+                                                                                                                                                                                                                                                          gap:26px}
+                                                                                                                                                                                                                                                          .solitude-post h2{
+                                                                                                                                                                                                                                                            font-size:21px}
+                                                                                                                                                                                                                                                            .solitude-post-meta{
+                                                                                                                                                                                                                                                              font-size:11px}
+                                                                                                                                                                                                                                                              .solitude-post-meta time{
+                                                                                                                                                                                                                                                                font-size:10px}
+                                                                                                                                                                                                                                                                .page-layout{
+                                                                                                                                                                                                                                                                  display:flex;
+                                                                                                                                                                                                                                                                  flex-direction:column;
+                                                                                                                                                                                                                                                                  padding:0 12px;
+                                                                                                                                                                                                                                                                  margin-top:16px;
+                                                                                                                                                                                                                                                                  gap:16px}
+                                                                                                                                                                                                                                                                  .page-main{
+                                                                                                                                                                                                                                                                    width:100%}
+                                                                                                                                                                                                                                                                    .article-rail{
+                                                                                                                                                                                                                                                                      position:static;
+                                                                                                                                                                                                                                                                      width:100%;
+                                                                                                                                                                                                                                                                      order:-1}
+                                                                                                                                                                                                                                                                      .article-rail>.profile-card{
+                                                                                                                                                                                                                                                                        display:none}
+                                                                                                                                                                                                                                                                        .content-surface{
+                                                                                                                                                                                                                                                                          padding:24px 21px}
+                                                                                                                                                                                                                                                                          .article-header{
+                                                                                                                                                                                                                                                                            margin:-24px -21px 26px;
+                                                                                                                                                                                                                                                                            padding:29px 24px}
+                                                                                                                                                                                                                                                                            .article-header .post-title{
+                                                                                                                                                                                                                                                                              font-size:31px}
+                                                                                                                                                                                                                                                                              .article-toc{
+                                                                                                                                                                                                                                                                                padding:16px 20px}
+                                                                                                                                                                                                                                                                                .site-footer{
+                                                                                                                                                                                                                                                                                  padding:25px 20px;
+                                                                                                                                                                                                                                                                                  margin-top:0}
+                                                                                                                                                                                                                                                                                  .footer-links{
+                                                                                                                                                                                                                                                                                    gap:15px}
+                                                                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                                                                  @media(prefers-reduced-motion:reduce){
+                                                                                                                                                                                                                                                                                    .solitude-avatar,.solitude-author-detail,.solitude-post-cover img{
+                                                                                                                                                                                                                                                                                      transition:none}
+                                                                                                                                                                                                                                                                                    }

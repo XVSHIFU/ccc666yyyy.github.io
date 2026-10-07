@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import { formatDate, getPosts, getPostUrl, type Post } from '../../lib/content';
+import { url } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const periods = new Set<string>();
+  for (const post of posts) {
+    const date = post.data.published;
+    periods.add(`${date.getFullYear()}`);
+    periods.add(`${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}`);
+  }
+  return [...periods].map(period => ({ params: { period }, props: {
+    period,
+    posts: posts.filter(post => {
+      const date = post.data.published;
+      const month = `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}`;
+      return month.startsWith(period);
+    }),
+  } }));
+}
+interface Props { period: string; posts: Post[] }
+const { period, posts } = Astro.props;
+const [year, month] = period.split('/');
+const title = `${year} 年${month ? ` ${Number(month)} 月` : ''}`;
+---
+<Base title={`${title}归档`} pageType="page">
+  <section class="content-surface archive-surface">
+    <header class="page-heading"><a class="back-link" href={url('/archives/')}>返回全部归档</a><h1>{title}</h1><p class="page-intro">这一段时间，留下了 {posts.length} 篇文字。</p></header>
+    <ol class="archive-list">{posts.map(post => <li><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published, true)}</time><div><h2><a href={getPostUrl(post)}>{post.data.title}</a>{post.data.example && <span class="example-badge">示例</span>}</h2><p>{post.data.description}</p></div></li>)}</ol>
+  </section>
+</Base>

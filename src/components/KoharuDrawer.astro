@@ -1,0 +1,158 @@
+---
+import { X, House, Archive, Folder, Tags, BookOpen, ChevronRight, Link, UserRound, Mail, Rss, CodeXml } from '@lucide/astro';
+import { getPosts } from '../lib/content';
+import { site, url } from '../lib/site';
+
+// Independently authored from the documented Koharu drawer composition:
+// github.com/cosZone/astro-koharu — HomeInfo.astro, HomeSider.astro,
+// MobileDrawer.astro and styles/components/sider.css. No upstream code copied.
+const posts = await getPosts();
+const categoryCount = new Set(posts.map(post => post.data.category)).size;
+const tagCount = new Set(posts.flatMap(post => post.data.tags)).size;
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (path: string) => current === (url(path).replace(/\/$/, '') || '/');
+const articleLinks = [
+  { path: 'archives/', label: '归档', icon: Archive },
+  { path: 'categories/', label: '分类', icon: Folder },
+  { path: 'tags/', label: '标签', icon: Tags },
+];
+const stats = [
+  { path: 'archives/', label: '文章', count: posts.length },
+  { path: 'categories/', label: '分类', count: categoryCount },
+  { path: 'tags/', label: '标签', count: tagCount },
+];
+---
+<dialog id="koharu-navigation" aria-labelledby="koharu-navigation-title">
+  <div class="drawer-head">
+    <button type="button" class="drawer-close" data-close-dialog aria-label="关闭小站导航"><X size={23}/></button>
+    <h2 id="koharu-navigation-title">小站导航</h2>
+  </div>
+  <div class="drawer-scroll">
+    <div class="drawer-profile">
+      <a class="drawer-avatar" href={url('about/')} aria-label="关于 qinghe"><img src={url('media/avatar.webp')} alt="qinghe 的头像" width="64" height="64" loading="lazy"/></a>
+      <div class="drawer-identity"><a class="drawer-name" href={url('about/')}>{site.name}</a><p>{site.description}</p>
+        <div class="drawer-social"><a href={site.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><CodeXml size={17}/></a><a href={`mailto:${site.email}`} aria-label="发送邮件"><Mail size={17}/></a><a href={url('rss.xml')} aria-label="RSS 订阅"><Rss size={17}/></a></div>
+      </div>
+    </div>
+    <div class="drawer-stats" aria-label="小站统计">{stats.map(stat => <a href={url(stat.path)}><strong>{stat.count}</strong><span>{stat.label}</span></a>)}</div>
+    <nav class="drawer-navigation" aria-label="Koharu 手机侧栏导航">
+      <a href={url('/')} aria-current={isCurrent('/') ? 'page' : undefined}><House size={18}/><span>首页</span></a>
+      <details open><summary><BookOpen size={18}/><span>文章</span><ChevronRight size={16}/></summary><div class="drawer-article-links">{articleLinks.map(({path,label,icon:Icon}) => <a href={url(path)} aria-current={isCurrent(path) ? 'page' : undefined}><Icon size={16}/><span>{label}</span></a>)}</div></details>
+      <a href={url('links/')} aria-current={isCurrent('links/') ? 'page' : undefined}><Link size={18}/><span>链接</span></a>
+      <a href={url('about/')} aria-current={isCurrent('about/') ? 'page' : undefined}><UserRound size={18}/><span>关于</span></a>
+    </nav>
+    <a class="drawer-source" href="https://github.com/cosZone/astro-koharu" target="_blank" rel="noopener noreferrer">Koharu · 小春日和</a>
+  </div>
+</dialog>
+
+<style>
+  #koharu-navigation {
+    position: fixed;
+    inset: 0 auto 0 0;
+    margin: 0;
+    width: min(320px, 85vw);
+    max-width: 85vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    padding: 0;
+    border: 0;
+    border-radius: 0 16px 16px 0;
+    overflow: hidden;
+    overscroll-behavior: contain;
+    background: var(--bg, #fdfbfc);
+    color: var(--ink, #44404c);
+    box-shadow: 14px 0 48px rgb(56 28 53 / 22%);
+  }
+  #koharu-navigation[open] {
+    display: flex;
+    flex-direction: column;
+    animation: koharu-drawer-enter 280ms cubic-bezier(.16, 1, .3, 1);
+  }
+  #koharu-navigation::backdrop {
+    background: rgb(35 23 43 / 45%);
+    backdrop-filter: none;
+  }
+  .drawer-head {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 9px;
+    min-height: 62px;
+    padding: max(9px, env(safe-area-inset-top)) 16px 7px max(13px, env(safe-area-inset-left));
+  }
+  .drawer-head h2 { font-size: 13px; font-weight: 550; letter-spacing: .08em; color: var(--muted); }
+  .drawer-close {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    color: var(--accent);
+    background: transparent;
+  }
+  .drawer-close:hover { background: var(--accent-soft); }
+  .drawer-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 11px 23px max(24px, env(safe-area-inset-bottom)) max(23px, env(safe-area-inset-left));
+    scrollbar-color: var(--line) transparent;
+  }
+  .drawer-profile { display: flex; align-items: center; gap: 15px; }
+  .drawer-avatar {
+    display: block;
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgb(182 59 100 / 17%);
+  }
+  .drawer-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .drawer-identity { min-width: 0; }
+  .drawer-name { font-size: 19px; font-weight: 650; letter-spacing: -.02em; }
+  .drawer-identity p { margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+  .drawer-social { display: flex; gap: 3px; margin: 3px 0 -5px -5px; }
+  .drawer-social a { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: var(--accent); }
+  .drawer-social a:nth-child(2) { color: var(--blue, var(--accent)); }
+  .drawer-social a:hover { background: var(--accent-soft); }
+  .drawer-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 24px 0 22px; }
+  .drawer-stats a { display: flex; flex-direction: column; align-items: center; gap: 2px; position: relative; padding: 3px 0; }
+  .drawer-stats a + a::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--line); }
+  .drawer-stats strong { font-size: 22px; font-weight: 550; font-variant-numeric: tabular-nums; line-height: 1.5; }
+  .drawer-stats span { font-size: 12px; color: var(--muted); }
+  .drawer-navigation { display: flex; flex-direction: column; gap: 5px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .drawer-navigation > a, .drawer-navigation summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    padding: 10px 13px;
+    border-radius: 9px;
+    font-size: 14px;
+    list-style: none;
+    cursor: pointer;
+  }
+  .drawer-navigation summary::-webkit-details-marker { display: none; }
+  .drawer-navigation summary > svg:last-child { margin-left: auto; transition: transform 180ms ease-out; }
+  .drawer-navigation details[open] summary > svg:last-child { transform: rotate(90deg); }
+  .drawer-navigation > a:hover, .drawer-navigation summary:hover { background: var(--accent-soft); color: var(--accent); }
+  .drawer-navigation > a[aria-current='page'] { background: var(--accent-soft); color: var(--accent); font-weight: 650; }
+  .drawer-article-links { display: grid; gap: 2px; margin: 3px 0 7px 21px; padding-left: 19px; border-left: 1px solid var(--line); }
+  .drawer-article-links a { display: flex; gap: 10px; align-items: center; min-height: 40px; padding: 7px 9px; border-radius: 7px; color: var(--muted); font-size: 13px; }
+  .drawer-article-links a:hover, .drawer-article-links a[aria-current='page'] { color: var(--accent); background: var(--accent-soft); }
+  .drawer-source { display: block; width: fit-content; margin: 29px auto 0; font-size: 11px; color: var(--muted); }
+  #koharu-navigation :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  :global(html[data-mode='dark']) #koharu-navigation { box-shadow: 14px 0 48px rgb(0 0 0 / 40%); }
+  :global(html[data-mode='dark']) #koharu-navigation::backdrop { background: rgb(7 4 12 / 64%); }
+  @keyframes koharu-drawer-enter { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    #koharu-navigation[open] { animation: none; }
+    .drawer-navigation summary > svg:last-child { transition: none; }
+  }
+</style>

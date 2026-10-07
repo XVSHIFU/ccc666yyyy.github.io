@@ -1,0 +1,1472 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T12:24:05.084Z",
+  "title": "Design System: 清和的小站",
+  "extensions": {
+    "colorMeta": {
+      "koharu-bg": {
+        "role": "neutral",
+        "displayName": "koharu bg",
+        "tonalRamp": [
+          "oklch(15% 0.0025 345.21)",
+          "oklch(26% 0.0025 345.21)",
+          "oklch(38% 0.0025 345.21)",
+          "oklch(49% 0.0025 345.21)",
+          "oklch(61% 0.0025 345.21)",
+          "oklch(72% 0.0025 345.21)",
+          "oklch(84% 0.0025 345.21)",
+          "oklch(95% 0.0025 345.21)"
+        ]
+      },
+      "koharu-surface": {
+        "role": "neutral",
+        "displayName": "koharu surface",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "koharu-ink": {
+        "role": "neutral",
+        "displayName": "koharu ink",
+        "tonalRamp": [
+          "oklch(15% 0.0208 300.61)",
+          "oklch(26% 0.0208 300.61)",
+          "oklch(38% 0.0208 300.61)",
+          "oklch(49% 0.0208 300.61)",
+          "oklch(61% 0.0208 300.61)",
+          "oklch(72% 0.0208 300.61)",
+          "oklch(84% 0.0208 300.61)",
+          "oklch(95% 0.0208 300.61)"
+        ]
+      },
+      "koharu-muted": {
+        "role": "neutral",
+        "displayName": "koharu muted",
+        "tonalRamp": [
+          "oklch(15% 0.0203 311.42)",
+          "oklch(26% 0.0203 311.42)",
+          "oklch(38% 0.0203 311.42)",
+          "oklch(49% 0.0203 311.42)",
+          "oklch(61% 0.0203 311.42)",
+          "oklch(72% 0.0203 311.42)",
+          "oklch(84% 0.0203 311.42)",
+          "oklch(95% 0.0203 311.42)"
+        ]
+      },
+      "koharu-accent": {
+        "role": "primary",
+        "displayName": "koharu accent",
+        "tonalRamp": [
+          "oklch(15% 0.1613 3.88)",
+          "oklch(26% 0.1613 3.88)",
+          "oklch(38% 0.1613 3.88)",
+          "oklch(49% 0.1613 3.88)",
+          "oklch(61% 0.1613 3.88)",
+          "oklch(72% 0.1613 3.88)",
+          "oklch(84% 0.1613 3.88)",
+          "oklch(95% 0.1613 3.88)"
+        ]
+      },
+      "koharu-blue": {
+        "role": "secondary",
+        "displayName": "koharu blue",
+        "tonalRamp": [
+          "oklch(15% 0.0950 228.85)",
+          "oklch(26% 0.0950 228.85)",
+          "oklch(38% 0.0950 228.85)",
+          "oklch(49% 0.0950 228.85)",
+          "oklch(61% 0.0950 228.85)",
+          "oklch(72% 0.0950 228.85)",
+          "oklch(84% 0.0950 228.85)",
+          "oklch(95% 0.0950 228.85)"
+        ]
+      },
+      "koharu-dark-bg": {
+        "role": "neutral",
+        "displayName": "koharu dark bg",
+        "tonalRamp": [
+          "oklch(15% 0.0252 294.90)",
+          "oklch(26% 0.0252 294.90)",
+          "oklch(38% 0.0252 294.90)",
+          "oklch(49% 0.0252 294.90)",
+          "oklch(61% 0.0252 294.90)",
+          "oklch(72% 0.0252 294.90)",
+          "oklch(84% 0.0252 294.90)",
+          "oklch(95% 0.0252 294.90)"
+        ]
+      },
+      "koharu-dark-ink": {
+        "role": "neutral",
+        "displayName": "koharu dark ink",
+        "tonalRamp": [
+          "oklch(15% 0.0154 325.70)",
+          "oklch(26% 0.0154 325.70)",
+          "oklch(38% 0.0154 325.70)",
+          "oklch(49% 0.0154 325.70)",
+          "oklch(61% 0.0154 325.70)",
+          "oklch(72% 0.0154 325.70)",
+          "oklch(84% 0.0154 325.70)",
+          "oklch(95% 0.0154 325.70)"
+        ]
+      },
+      "koharu-dark-accent": {
+        "role": "primary",
+        "displayName": "koharu dark accent",
+        "tonalRamp": [
+          "oklch(15% 0.1197 358.60)",
+          "oklch(26% 0.1197 358.60)",
+          "oklch(38% 0.1197 358.60)",
+          "oklch(49% 0.1197 358.60)",
+          "oklch(61% 0.1197 358.60)",
+          "oklch(72% 0.1197 358.60)",
+          "oklch(84% 0.1197 358.60)",
+          "oklch(95% 0.1197 358.60)"
+        ]
+      },
+      "koharu-dark-blue": {
+        "role": "secondary",
+        "displayName": "koharu dark blue",
+        "tonalRamp": [
+          "oklch(15% 0.0761 225.95)",
+          "oklch(26% 0.0761 225.95)",
+          "oklch(38% 0.0761 225.95)",
+          "oklch(49% 0.0761 225.95)",
+          "oklch(61% 0.0761 225.95)",
+          "oklch(72% 0.0761 225.95)",
+          "oklch(84% 0.0761 225.95)",
+          "oklch(95% 0.0761 225.95)"
+        ]
+      },
+      "firefly-bg": {
+        "role": "neutral",
+        "displayName": "firefly bg",
+        "tonalRamp": [
+          "oklch(15% 0.0100 164.87)",
+          "oklch(26% 0.0100 164.87)",
+          "oklch(38% 0.0100 164.87)",
+          "oklch(49% 0.0100 164.87)",
+          "oklch(61% 0.0100 164.87)",
+          "oklch(72% 0.0100 164.87)",
+          "oklch(84% 0.0100 164.87)",
+          "oklch(95% 0.0100 164.87)"
+        ]
+      },
+      "firefly-surface": {
+        "role": "neutral",
+        "displayName": "firefly surface",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "firefly-ink": {
+        "role": "neutral",
+        "displayName": "firefly ink",
+        "tonalRamp": [
+          "oklch(15% 0.0154 169.13)",
+          "oklch(26% 0.0154 169.13)",
+          "oklch(38% 0.0154 169.13)",
+          "oklch(49% 0.0154 169.13)",
+          "oklch(61% 0.0154 169.13)",
+          "oklch(72% 0.0154 169.13)",
+          "oklch(84% 0.0154 169.13)",
+          "oklch(95% 0.0154 169.13)"
+        ]
+      },
+      "firefly-muted": {
+        "role": "neutral",
+        "displayName": "firefly muted",
+        "tonalRamp": [
+          "oklch(15% 0.0255 163.86)",
+          "oklch(26% 0.0255 163.86)",
+          "oklch(38% 0.0255 163.86)",
+          "oklch(49% 0.0255 163.86)",
+          "oklch(61% 0.0255 163.86)",
+          "oklch(72% 0.0255 163.86)",
+          "oklch(84% 0.0255 163.86)",
+          "oklch(95% 0.0255 163.86)"
+        ]
+      },
+      "firefly-accent": {
+        "role": "primary",
+        "displayName": "firefly accent",
+        "tonalRamp": [
+          "oklch(15% 0.1016 169.74)",
+          "oklch(26% 0.1016 169.74)",
+          "oklch(38% 0.1016 169.74)",
+          "oklch(49% 0.1016 169.74)",
+          "oklch(61% 0.1016 169.74)",
+          "oklch(72% 0.1016 169.74)",
+          "oklch(84% 0.1016 169.74)",
+          "oklch(95% 0.1016 169.74)"
+        ]
+      },
+      "firefly-dark-bg": {
+        "role": "neutral",
+        "displayName": "firefly dark bg",
+        "tonalRamp": [
+          "oklch(15% 0.0175 170.28)",
+          "oklch(26% 0.0175 170.28)",
+          "oklch(38% 0.0175 170.28)",
+          "oklch(49% 0.0175 170.28)",
+          "oklch(61% 0.0175 170.28)",
+          "oklch(72% 0.0175 170.28)",
+          "oklch(84% 0.0175 170.28)",
+          "oklch(95% 0.0175 170.28)"
+        ]
+      },
+      "firefly-dark-ink": {
+        "role": "neutral",
+        "displayName": "firefly dark ink",
+        "tonalRamp": [
+          "oklch(15% 0.0125 164.79)",
+          "oklch(26% 0.0125 164.79)",
+          "oklch(38% 0.0125 164.79)",
+          "oklch(49% 0.0125 164.79)",
+          "oklch(61% 0.0125 164.79)",
+          "oklch(72% 0.0125 164.79)",
+          "oklch(84% 0.0125 164.79)",
+          "oklch(95% 0.0125 164.79)"
+        ]
+      },
+      "firefly-dark-accent": {
+        "role": "primary",
+        "displayName": "firefly dark accent",
+        "tonalRamp": [
+          "oklch(15% 0.1071 170.06)",
+          "oklch(26% 0.1071 170.06)",
+          "oklch(38% 0.1071 170.06)",
+          "oklch(49% 0.1071 170.06)",
+          "oklch(61% 0.1071 170.06)",
+          "oklch(72% 0.1071 170.06)",
+          "oklch(84% 0.1071 170.06)",
+          "oklch(95% 0.1071 170.06)"
+        ]
+      },
+      "shirone-bg": {
+        "role": "neutral",
+        "displayName": "shirone bg",
+        "tonalRamp": [
+          "oklch(15% 0.0123 317.74)",
+          "oklch(26% 0.0123 317.74)",
+          "oklch(38% 0.0123 317.74)",
+          "oklch(49% 0.0123 317.74)",
+          "oklch(61% 0.0123 317.74)",
+          "oklch(72% 0.0123 317.74)",
+          "oklch(84% 0.0123 317.74)",
+          "oklch(95% 0.0123 317.74)"
+        ]
+      },
+      "shirone-surface": {
+        "role": "neutral",
+        "displayName": "shirone surface",
+        "tonalRamp": [
+          "oklch(15% 0.0067 325.63)",
+          "oklch(26% 0.0067 325.63)",
+          "oklch(38% 0.0067 325.63)",
+          "oklch(49% 0.0067 325.63)",
+          "oklch(61% 0.0067 325.63)",
+          "oklch(72% 0.0067 325.63)",
+          "oklch(84% 0.0067 325.63)",
+          "oklch(95% 0.0067 325.63)"
+        ]
+      },
+      "shirone-ink": {
+        "role": "neutral",
+        "displayName": "shirone ink",
+        "tonalRamp": [
+          "oklch(15% 0.0252 305.74)",
+          "oklch(26% 0.0252 305.74)",
+          "oklch(38% 0.0252 305.74)",
+          "oklch(49% 0.0252 305.74)",
+          "oklch(61% 0.0252 305.74)",
+          "oklch(72% 0.0252 305.74)",
+          "oklch(84% 0.0252 305.74)",
+          "oklch(95% 0.0252 305.74)"
+        ]
+      },
+      "shirone-muted": {
+        "role": "neutral",
+        "displayName": "shirone muted",
+        "tonalRamp": [
+          "oklch(15% 0.0309 310.08)",
+          "oklch(26% 0.0309 310.08)",
+          "oklch(38% 0.0309 310.08)",
+          "oklch(49% 0.0309 310.08)",
+          "oklch(61% 0.0309 310.08)",
+          "oklch(72% 0.0309 310.08)",
+          "oklch(84% 0.0309 310.08)",
+          "oklch(95% 0.0309 310.08)"
+        ]
+      },
+      "shirone-accent": {
+        "role": "primary",
+        "displayName": "shirone accent",
+        "tonalRamp": [
+          "oklch(15% 0.0932 311.74)",
+          "oklch(26% 0.0932 311.74)",
+          "oklch(38% 0.0932 311.74)",
+          "oklch(49% 0.0932 311.74)",
+          "oklch(61% 0.0932 311.74)",
+          "oklch(72% 0.0932 311.74)",
+          "oklch(84% 0.0932 311.74)",
+          "oklch(95% 0.0932 311.74)"
+        ]
+      },
+      "shirone-dark-bg": {
+        "role": "neutral",
+        "displayName": "shirone dark bg",
+        "tonalRamp": [
+          "oklch(15% 0.0204 302.91)",
+          "oklch(26% 0.0204 302.91)",
+          "oklch(38% 0.0204 302.91)",
+          "oklch(49% 0.0204 302.91)",
+          "oklch(61% 0.0204 302.91)",
+          "oklch(72% 0.0204 302.91)",
+          "oklch(84% 0.0204 302.91)",
+          "oklch(95% 0.0204 302.91)"
+        ]
+      },
+      "shirone-dark-ink": {
+        "role": "neutral",
+        "displayName": "shirone dark ink",
+        "tonalRamp": [
+          "oklch(15% 0.0209 313.83)",
+          "oklch(26% 0.0209 313.83)",
+          "oklch(38% 0.0209 313.83)",
+          "oklch(49% 0.0209 313.83)",
+          "oklch(61% 0.0209 313.83)",
+          "oklch(72% 0.0209 313.83)",
+          "oklch(84% 0.0209 313.83)",
+          "oklch(95% 0.0209 313.83)"
+        ]
+      },
+      "shirone-dark-accent": {
+        "role": "primary",
+        "displayName": "shirone dark accent",
+        "tonalRamp": [
+          "oklch(15% 0.0898 311.97)",
+          "oklch(26% 0.0898 311.97)",
+          "oklch(38% 0.0898 311.97)",
+          "oklch(49% 0.0898 311.97)",
+          "oklch(61% 0.0898 311.97)",
+          "oklch(72% 0.0898 311.97)",
+          "oklch(84% 0.0898 311.97)",
+          "oklch(95% 0.0898 311.97)"
+        ]
+      },
+      "solitude-bg": {
+        "role": "neutral",
+        "displayName": "solitude bg",
+        "tonalRamp": [
+          "oklch(15% 0.0070 268.55)",
+          "oklch(26% 0.0070 268.55)",
+          "oklch(38% 0.0070 268.55)",
+          "oklch(49% 0.0070 268.55)",
+          "oklch(61% 0.0070 268.55)",
+          "oklch(72% 0.0070 268.55)",
+          "oklch(84% 0.0070 268.55)",
+          "oklch(95% 0.0070 268.55)"
+        ]
+      },
+      "solitude-surface": {
+        "role": "neutral",
+        "displayName": "solitude surface",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "solitude-ink": {
+        "role": "neutral",
+        "displayName": "solitude ink",
+        "tonalRamp": [
+          "oklch(15% 0.0071 274.77)",
+          "oklch(26% 0.0071 274.77)",
+          "oklch(38% 0.0071 274.77)",
+          "oklch(49% 0.0071 274.77)",
+          "oklch(61% 0.0071 274.77)",
+          "oklch(72% 0.0071 274.77)",
+          "oklch(84% 0.0071 274.77)",
+          "oklch(95% 0.0071 274.77)"
+        ]
+      },
+      "solitude-muted": {
+        "role": "neutral",
+        "displayName": "solitude muted",
+        "tonalRamp": [
+          "oklch(15% 0.0224 275.99)",
+          "oklch(26% 0.0224 275.99)",
+          "oklch(38% 0.0224 275.99)",
+          "oklch(49% 0.0224 275.99)",
+          "oklch(61% 0.0224 275.99)",
+          "oklch(72% 0.0224 275.99)",
+          "oklch(84% 0.0224 275.99)",
+          "oklch(95% 0.0224 275.99)"
+        ]
+      },
+      "solitude-accent": {
+        "role": "primary",
+        "displayName": "solitude accent",
+        "tonalRamp": [
+          "oklch(15% 0.2237 270.00)",
+          "oklch(26% 0.2237 270.00)",
+          "oklch(38% 0.2237 270.00)",
+          "oklch(49% 0.2237 270.00)",
+          "oklch(61% 0.2237 270.00)",
+          "oklch(72% 0.2237 270.00)",
+          "oklch(84% 0.2237 270.00)",
+          "oklch(95% 0.2237 270.00)"
+        ]
+      },
+      "solitude-solitude-profile": {
+        "role": "secondary",
+        "displayName": "solitude solitude profile",
+        "tonalRamp": [
+          "oklch(15% 0.2211 271.15)",
+          "oklch(26% 0.2211 271.15)",
+          "oklch(38% 0.2211 271.15)",
+          "oklch(49% 0.2211 271.15)",
+          "oklch(61% 0.2211 271.15)",
+          "oklch(72% 0.2211 271.15)",
+          "oklch(84% 0.2211 271.15)",
+          "oklch(95% 0.2211 271.15)"
+        ]
+      },
+      "solitude-dark-bg": {
+        "role": "neutral",
+        "displayName": "solitude dark bg",
+        "tonalRamp": [
+          "oklch(15% 0.0099 276.58)",
+          "oklch(26% 0.0099 276.58)",
+          "oklch(38% 0.0099 276.58)",
+          "oklch(49% 0.0099 276.58)",
+          "oklch(61% 0.0099 276.58)",
+          "oklch(72% 0.0099 276.58)",
+          "oklch(84% 0.0099 276.58)",
+          "oklch(95% 0.0099 276.58)"
+        ]
+      },
+      "solitude-dark-ink": {
+        "role": "neutral",
+        "displayName": "solitude dark ink",
+        "tonalRamp": [
+          "oklch(15% 0.0027 286.35)",
+          "oklch(26% 0.0027 286.35)",
+          "oklch(38% 0.0027 286.35)",
+          "oklch(49% 0.0027 286.35)",
+          "oklch(61% 0.0027 286.35)",
+          "oklch(72% 0.0027 286.35)",
+          "oklch(84% 0.0027 286.35)",
+          "oklch(95% 0.0027 286.35)"
+        ]
+      },
+      "solitude-dark-accent": {
+        "role": "primary",
+        "displayName": "solitude dark accent",
+        "tonalRamp": [
+          "oklch(15% 0.1521 84.66)",
+          "oklch(26% 0.1521 84.66)",
+          "oklch(38% 0.1521 84.66)",
+          "oklch(49% 0.1521 84.66)",
+          "oklch(61% 0.1521 84.66)",
+          "oklch(72% 0.1521 84.66)",
+          "oklch(84% 0.1521 84.66)",
+          "oklch(95% 0.1521 84.66)"
+        ]
+      },
+      "solitude-dark-solitude-profile": {
+        "role": "secondary",
+        "displayName": "solitude dark solitude profile",
+        "tonalRamp": [
+          "oklch(15% 0.1014 275.46)",
+          "oklch(26% 0.1014 275.46)",
+          "oklch(38% 0.1014 275.46)",
+          "oklch(49% 0.1014 275.46)",
+          "oklch(61% 0.1014 275.46)",
+          "oklch(72% 0.1014 275.46)",
+          "oklch(84% 0.1014 275.46)",
+          "oklch(95% 0.1014 275.46)"
+        ]
+      },
+      "redefine-bg": {
+        "role": "neutral",
+        "displayName": "redefine bg",
+        "tonalRamp": [
+          "oklch(15% 0.0017 247.84)",
+          "oklch(26% 0.0017 247.84)",
+          "oklch(38% 0.0017 247.84)",
+          "oklch(49% 0.0017 247.84)",
+          "oklch(61% 0.0017 247.84)",
+          "oklch(72% 0.0017 247.84)",
+          "oklch(84% 0.0017 247.84)",
+          "oklch(95% 0.0017 247.84)"
+        ]
+      },
+      "redefine-surface": {
+        "role": "neutral",
+        "displayName": "redefine surface",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "redefine-ink": {
+        "role": "neutral",
+        "displayName": "redefine ink",
+        "tonalRamp": [
+          "oklch(15% 0.0097 260.72)",
+          "oklch(26% 0.0097 260.72)",
+          "oklch(38% 0.0097 260.72)",
+          "oklch(49% 0.0097 260.72)",
+          "oklch(61% 0.0097 260.72)",
+          "oklch(72% 0.0097 260.72)",
+          "oklch(84% 0.0097 260.72)",
+          "oklch(95% 0.0097 260.72)"
+        ]
+      },
+      "redefine-muted": {
+        "role": "neutral",
+        "displayName": "redefine muted",
+        "tonalRamp": [
+          "oklch(15% 0.0159 258.37)",
+          "oklch(26% 0.0159 258.37)",
+          "oklch(38% 0.0159 258.37)",
+          "oklch(49% 0.0159 258.37)",
+          "oklch(61% 0.0159 258.37)",
+          "oklch(72% 0.0159 258.37)",
+          "oklch(84% 0.0159 258.37)",
+          "oklch(95% 0.0159 258.37)"
+        ]
+      },
+      "redefine-accent": {
+        "role": "primary",
+        "displayName": "redefine accent",
+        "tonalRamp": [
+          "oklch(15% 0.1764 17.92)",
+          "oklch(26% 0.1764 17.92)",
+          "oklch(38% 0.1764 17.92)",
+          "oklch(49% 0.1764 17.92)",
+          "oklch(61% 0.1764 17.92)",
+          "oklch(72% 0.1764 17.92)",
+          "oklch(84% 0.1764 17.92)",
+          "oklch(95% 0.1764 17.92)"
+        ]
+      },
+      "redefine-dark-bg": {
+        "role": "neutral",
+        "displayName": "redefine dark bg",
+        "tonalRamp": [
+          "oklch(15% 0.0157 269.06)",
+          "oklch(26% 0.0157 269.06)",
+          "oklch(38% 0.0157 269.06)",
+          "oklch(49% 0.0157 269.06)",
+          "oklch(61% 0.0157 269.06)",
+          "oklch(72% 0.0157 269.06)",
+          "oklch(84% 0.0157 269.06)",
+          "oklch(95% 0.0157 269.06)"
+        ]
+      },
+      "redefine-dark-ink": {
+        "role": "neutral",
+        "displayName": "redefine dark ink",
+        "tonalRamp": [
+          "oklch(15% 0.0071 268.55)",
+          "oklch(26% 0.0071 268.55)",
+          "oklch(38% 0.0071 268.55)",
+          "oklch(49% 0.0071 268.55)",
+          "oklch(61% 0.0071 268.55)",
+          "oklch(72% 0.0071 268.55)",
+          "oklch(84% 0.0071 268.55)",
+          "oklch(95% 0.0071 268.55)"
+        ]
+      },
+      "redefine-dark-accent": {
+        "role": "primary",
+        "displayName": "redefine dark accent",
+        "tonalRamp": [
+          "oklch(15% 0.1048 11.54)",
+          "oklch(26% 0.1048 11.54)",
+          "oklch(38% 0.1048 11.54)",
+          "oklch(49% 0.1048 11.54)",
+          "oklch(61% 0.1048 11.54)",
+          "oklch(72% 0.1048 11.54)",
+          "oklch(84% 0.1048 11.54)",
+          "oklch(95% 0.1048 11.54)"
+        ]
+      },
+      "cactus-bg": {
+        "role": "neutral",
+        "displayName": "cactus bg",
+        "tonalRamp": [
+          "oklch(15% 0.0029 84.56)",
+          "oklch(26% 0.0029 84.56)",
+          "oklch(38% 0.0029 84.56)",
+          "oklch(49% 0.0029 84.56)",
+          "oklch(61% 0.0029 84.56)",
+          "oklch(72% 0.0029 84.56)",
+          "oklch(84% 0.0029 84.56)",
+          "oklch(95% 0.0029 84.56)"
+        ]
+      },
+      "cactus-surface": {
+        "role": "neutral",
+        "displayName": "cactus surface",
+        "tonalRamp": [
+          "oklch(15% 0.0029 84.56)",
+          "oklch(26% 0.0029 84.56)",
+          "oklch(38% 0.0029 84.56)",
+          "oklch(49% 0.0029 84.56)",
+          "oklch(61% 0.0029 84.56)",
+          "oklch(72% 0.0029 84.56)",
+          "oklch(84% 0.0029 84.56)",
+          "oklch(95% 0.0029 84.56)"
+        ]
+      },
+      "cactus-ink": {
+        "role": "neutral",
+        "displayName": "cactus ink",
+        "tonalRamp": [
+          "oklch(15% 0.0055 271.24)",
+          "oklch(26% 0.0055 271.24)",
+          "oklch(38% 0.0055 271.24)",
+          "oklch(49% 0.0055 271.24)",
+          "oklch(61% 0.0055 271.24)",
+          "oklch(72% 0.0055 271.24)",
+          "oklch(84% 0.0055 271.24)",
+          "oklch(95% 0.0055 271.24)"
+        ]
+      },
+      "cactus-muted": {
+        "role": "neutral",
+        "displayName": "cactus muted",
+        "tonalRamp": [
+          "oklch(15% 0.0048 271.32)",
+          "oklch(26% 0.0048 271.32)",
+          "oklch(38% 0.0048 271.32)",
+          "oklch(49% 0.0048 271.32)",
+          "oklch(61% 0.0048 271.32)",
+          "oklch(72% 0.0048 271.32)",
+          "oklch(84% 0.0048 271.32)",
+          "oklch(95% 0.0048 271.32)"
+        ]
+      },
+      "cactus-accent": {
+        "role": "primary",
+        "displayName": "cactus accent",
+        "tonalRamp": [
+          "oklch(15% 0.1553 17.93)",
+          "oklch(26% 0.1553 17.93)",
+          "oklch(38% 0.1553 17.93)",
+          "oklch(49% 0.1553 17.93)",
+          "oklch(61% 0.1553 17.93)",
+          "oklch(72% 0.1553 17.93)",
+          "oklch(84% 0.1553 17.93)",
+          "oklch(95% 0.1553 17.93)"
+        ]
+      },
+      "cactus-cactus-link": {
+        "role": "secondary",
+        "displayName": "cactus cactus link",
+        "tonalRamp": [
+          "oklch(15% 0.0913 183.90)",
+          "oklch(26% 0.0913 183.90)",
+          "oklch(38% 0.0913 183.90)",
+          "oklch(49% 0.0913 183.90)",
+          "oklch(61% 0.0913 183.90)",
+          "oklch(72% 0.0913 183.90)",
+          "oklch(84% 0.0913 183.90)",
+          "oklch(95% 0.0913 183.90)"
+        ]
+      },
+      "cactus-dark-bg": {
+        "role": "neutral",
+        "displayName": "cactus dark bg",
+        "tonalRamp": [
+          "oklch(15% 0.0116 270.94)",
+          "oklch(26% 0.0116 270.94)",
+          "oklch(38% 0.0116 270.94)",
+          "oklch(49% 0.0116 270.94)",
+          "oklch(61% 0.0116 270.94)",
+          "oklch(72% 0.0116 270.94)",
+          "oklch(84% 0.0116 270.94)",
+          "oklch(95% 0.0116 270.94)"
+        ]
+      },
+      "cactus-dark-ink": {
+        "role": "neutral",
+        "displayName": "cactus dark ink",
+        "tonalRamp": [
+          "oklch(15% 0.0042 271.37)",
+          "oklch(26% 0.0042 271.37)",
+          "oklch(38% 0.0042 271.37)",
+          "oklch(49% 0.0042 271.37)",
+          "oklch(61% 0.0042 271.37)",
+          "oklch(72% 0.0042 271.37)",
+          "oklch(84% 0.0042 271.37)",
+          "oklch(95% 0.0042 271.37)"
+        ]
+      },
+      "cactus-dark-accent": {
+        "role": "primary",
+        "displayName": "cactus dark accent",
+        "tonalRamp": [
+          "oklch(15% 0.1101 161.29)",
+          "oklch(26% 0.1101 161.29)",
+          "oklch(38% 0.1101 161.29)",
+          "oklch(49% 0.1101 161.29)",
+          "oklch(61% 0.1101 161.29)",
+          "oklch(72% 0.1101 161.29)",
+          "oklch(84% 0.1101 161.29)",
+          "oklch(95% 0.1101 161.29)"
+        ]
+      },
+      "cactus-dark-cactus-link": {
+        "role": "secondary",
+        "displayName": "cactus dark cactus link",
+        "tonalRamp": [
+          "oklch(15% 0.1081 345.31)",
+          "oklch(26% 0.1081 345.31)",
+          "oklch(38% 0.1081 345.31)",
+          "oklch(49% 0.1081 345.31)",
+          "oklch(61% 0.1081 345.31)",
+          "oklch(72% 0.1081 345.31)",
+          "oklch(84% 0.1081 345.31)",
+          "oklch(95% 0.1081 345.31)"
+        ]
+      },
+      "traveritas-bg": {
+        "displayName": "traveritas bg",
+        "role": "neutral"
+      },
+      "traveritas-surface": {
+        "displayName": "traveritas surface",
+        "role": "neutral"
+      },
+      "traveritas-ink": {
+        "displayName": "traveritas ink",
+        "role": "neutral"
+      },
+      "traveritas-muted": {
+        "displayName": "traveritas muted",
+        "role": "neutral"
+      },
+      "traveritas-accent": {
+        "displayName": "traveritas accent",
+        "role": "primary"
+      },
+      "traveritas-dark-bg": {
+        "displayName": "traveritas dark bg",
+        "role": "neutral"
+      },
+      "traveritas-dark-ink": {
+        "displayName": "traveritas dark ink",
+        "role": "neutral"
+      },
+      "traveritas-dark-accent": {
+        "displayName": "traveritas dark accent",
+        "role": "primary"
+      },
+      "radar-bg": {
+        "displayName": "radar bg",
+        "role": "neutral"
+      },
+      "radar-surface": {
+        "displayName": "radar surface",
+        "role": "neutral"
+      },
+      "radar-ink": {
+        "displayName": "radar ink",
+        "role": "neutral"
+      },
+      "radar-muted": {
+        "displayName": "radar muted",
+        "role": "neutral"
+      },
+      "radar-accent": {
+        "displayName": "radar accent",
+        "role": "primary"
+      },
+      "radar-dark-bg": {
+        "displayName": "radar dark bg",
+        "role": "neutral"
+      },
+      "radar-dark-ink": {
+        "displayName": "radar dark ink",
+        "role": "neutral"
+      },
+      "radar-dark-accent": {
+        "displayName": "radar dark accent",
+        "role": "primary"
+      },
+      "goodfella-bg": {
+        "displayName": "goodfella bg",
+        "role": "neutral"
+      },
+      "goodfella-surface": {
+        "displayName": "goodfella surface",
+        "role": "neutral"
+      },
+      "goodfella-ink": {
+        "displayName": "goodfella ink",
+        "role": "neutral"
+      },
+      "goodfella-muted": {
+        "displayName": "goodfella muted",
+        "role": "neutral"
+      },
+      "goodfella-accent": {
+        "displayName": "goodfella accent",
+        "role": "primary"
+      },
+      "goodfella-dark-bg": {
+        "displayName": "goodfella dark bg",
+        "role": "neutral"
+      },
+      "goodfella-dark-ink": {
+        "displayName": "goodfella dark ink",
+        "role": "neutral"
+      },
+      "goodfella-dark-accent": {
+        "displayName": "goodfella dark accent",
+        "role": "primary"
+      },
+      "ava-bg": {
+        "displayName": "ava bg",
+        "role": "neutral"
+      },
+      "ava-surface": {
+        "displayName": "ava surface",
+        "role": "neutral"
+      },
+      "ava-ink": {
+        "displayName": "ava ink",
+        "role": "neutral"
+      },
+      "ava-muted": {
+        "displayName": "ava muted",
+        "role": "neutral"
+      },
+      "ava-accent": {
+        "displayName": "ava accent",
+        "role": "primary"
+      },
+      "ava-dark-bg": {
+        "displayName": "ava dark bg",
+        "role": "neutral"
+      },
+      "ava-dark-ink": {
+        "displayName": "ava dark ink",
+        "role": "neutral"
+      },
+      "ava-dark-accent": {
+        "displayName": "ava dark accent",
+        "role": "primary"
+      },
+      "nfinite-bg": {
+        "displayName": "nfinite bg",
+        "role": "neutral"
+      },
+      "nfinite-surface": {
+        "displayName": "nfinite surface",
+        "role": "neutral"
+      },
+      "nfinite-ink": {
+        "displayName": "nfinite ink",
+        "role": "neutral"
+      },
+      "nfinite-muted": {
+        "displayName": "nfinite muted",
+        "role": "neutral"
+      },
+      "nfinite-accent": {
+        "displayName": "nfinite accent",
+        "role": "primary"
+      },
+      "nfinite-dark-bg": {
+        "displayName": "nfinite dark bg",
+        "role": "neutral"
+      },
+      "nfinite-dark-ink": {
+        "displayName": "nfinite dark ink",
+        "role": "neutral"
+      },
+      "nfinite-dark-accent": {
+        "displayName": "nfinite dark accent",
+        "role": "primary"
+      },
+      "followart-bg": {
+        "displayName": "followart bg",
+        "role": "neutral"
+      },
+      "followart-surface": {
+        "displayName": "followart surface",
+        "role": "neutral"
+      },
+      "followart-ink": {
+        "displayName": "followart ink",
+        "role": "neutral"
+      },
+      "followart-muted": {
+        "displayName": "followart muted",
+        "role": "neutral"
+      },
+      "followart-accent": {
+        "displayName": "followart accent",
+        "role": "primary"
+      },
+      "followart-dark-bg": {
+        "displayName": "followart dark bg",
+        "role": "neutral"
+      },
+      "followart-dark-ink": {
+        "displayName": "followart dark ink",
+        "role": "neutral"
+      },
+      "followart-dark-accent": {
+        "displayName": "followart dark accent",
+        "role": "primary"
+      },
+      "milkin-bg": {
+        "displayName": "milkin bg",
+        "role": "neutral"
+      },
+      "milkin-surface": {
+        "displayName": "milkin surface",
+        "role": "neutral"
+      },
+      "milkin-ink": {
+        "displayName": "milkin ink",
+        "role": "neutral"
+      },
+      "milkin-muted": {
+        "displayName": "milkin muted",
+        "role": "neutral"
+      },
+      "milkin-accent": {
+        "displayName": "milkin accent",
+        "role": "primary"
+      },
+      "milkin-dark-bg": {
+        "displayName": "milkin dark bg",
+        "role": "neutral"
+      },
+      "milkin-dark-ink": {
+        "displayName": "milkin dark ink",
+        "role": "neutral"
+      },
+      "milkin-dark-accent": {
+        "displayName": "milkin dark accent",
+        "role": "primary"
+      },
+      "digilab-bg": {
+        "displayName": "digilab bg",
+        "role": "neutral"
+      },
+      "digilab-surface": {
+        "displayName": "digilab surface",
+        "role": "neutral"
+      },
+      "digilab-ink": {
+        "displayName": "digilab ink",
+        "role": "neutral"
+      },
+      "digilab-muted": {
+        "displayName": "digilab muted",
+        "role": "neutral"
+      },
+      "digilab-accent": {
+        "displayName": "digilab accent",
+        "role": "primary"
+      },
+      "digilab-dark-bg": {
+        "displayName": "digilab dark bg",
+        "role": "neutral"
+      },
+      "digilab-dark-ink": {
+        "displayName": "digilab dark ink",
+        "role": "neutral"
+      },
+      "digilab-dark-accent": {
+        "displayName": "digilab dark accent",
+        "role": "primary"
+      },
+      "stefan-bg": {
+        "displayName": "stefan bg",
+        "role": "neutral"
+      },
+      "stefan-surface": {
+        "displayName": "stefan surface",
+        "role": "neutral"
+      },
+      "stefan-ink": {
+        "displayName": "stefan ink",
+        "role": "neutral"
+      },
+      "stefan-muted": {
+        "displayName": "stefan muted",
+        "role": "neutral"
+      },
+      "stefan-accent": {
+        "displayName": "stefan accent",
+        "role": "primary"
+      },
+      "stefan-dark-bg": {
+        "displayName": "stefan dark bg",
+        "role": "neutral"
+      },
+      "stefan-dark-ink": {
+        "displayName": "stefan dark ink",
+        "role": "neutral"
+      },
+      "stefan-dark-accent": {
+        "displayName": "stefan dark accent",
+        "role": "primary"
+      },
+      "buro-bg": {
+        "displayName": "buro bg",
+        "role": "neutral"
+      },
+      "buro-surface": {
+        "displayName": "buro surface",
+        "role": "neutral"
+      },
+      "buro-ink": {
+        "displayName": "buro ink",
+        "role": "neutral"
+      },
+      "buro-muted": {
+        "displayName": "buro muted",
+        "role": "neutral"
+      },
+      "buro-accent": {
+        "displayName": "buro accent",
+        "role": "primary"
+      },
+      "buro-dark-bg": {
+        "displayName": "buro dark bg",
+        "role": "neutral"
+      },
+      "buro-dark-ink": {
+        "displayName": "buro dark ink",
+        "role": "neutral"
+      },
+      "buro-dark-accent": {
+        "displayName": "buro dark accent",
+        "role": "primary"
+      },
+      "ink-light-core": {
+        "displayName": "ink light core",
+        "role": "neutral"
+      },
+      "ink-light-text": {
+        "displayName": "ink light text",
+        "role": "neutral"
+      },
+      "ink-light-cancel-border": {
+        "displayName": "ink light cancel border",
+        "role": "neutral"
+      },
+      "ink-light-cancel-surface": {
+        "displayName": "ink light cancel surface",
+        "role": "neutral"
+      },
+      "ink-light-cancel-hover": {
+        "displayName": "ink light cancel hover",
+        "role": "neutral"
+      },
+      "ink-dark-core": {
+        "displayName": "ink dark core",
+        "role": "neutral"
+      },
+      "ink-dark-text": {
+        "displayName": "ink dark text",
+        "role": "neutral"
+      },
+      "ink-dark-cancel-border": {
+        "displayName": "ink dark cancel border",
+        "role": "neutral"
+      },
+      "ink-dark-cancel-surface": {
+        "displayName": "ink dark cancel surface",
+        "role": "neutral"
+      },
+      "ink-dark-cancel-hover": {
+        "displayName": "ink dark cancel hover",
+        "role": "neutral"
+      }
+    },
+    "typographyMeta": {
+      "body": {
+        "displayName": "body",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "article-body": {
+        "displayName": "article-body",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "article-headline": {
+        "displayName": "article-headline",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "dialog-title": {
+        "displayName": "dialog-title",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "koharu-display": {
+        "displayName": "koharu-display",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "firefly-display": {
+        "displayName": "firefly-display",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "shirone-display": {
+        "displayName": "shirone-display",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "solitude-post-title": {
+        "displayName": "solitude-post-title",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "redefine-display": {
+        "displayName": "redefine-display",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "cactus-title": {
+        "displayName": "cactus-title",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "cactus-body": {
+        "displayName": "cactus-body",
+        "purpose": "Theme-scoped role; see normative DESIGN.md frontmatter."
+      },
+      "ink-status": {
+        "displayName": "Ink status",
+        "purpose": "Centered polite status while the full-screen transition is covered; not a page heading."
+      }
+    },
+    "shadows": [
+      {
+        "name": "koharu-surface",
+        "value": "0 6px 18px #493c4914",
+        "purpose": "Koharu light reading surfaces."
+      },
+      {
+        "name": "koharu-surface-dark",
+        "value": "0 7px 20px #08070d42",
+        "purpose": "Koharu dark surfaces."
+      },
+      {
+        "name": "redefine-surface",
+        "value": "0 7px 22px #172b4010",
+        "purpose": "Redefine reading cards."
+      },
+      {
+        "name": "redefine-surface-dark",
+        "value": "0 8px 28px #0003",
+        "purpose": "Redefine dark cards."
+      },
+      {
+        "name": "dialog",
+        "value": "0 22px 100px #10281940",
+        "purpose": "Shared modal dialogs."
+      },
+      {
+        "name": "koharu-drawer",
+        "value": "14px 0 48px rgb(56 28 53 / 22%)",
+        "purpose": "Native left profile drawer."
+      },
+      {
+        "name": "koharu-drawer-dark",
+        "value": "14px 0 48px rgb(0 0 0 / 40%)",
+        "purpose": "Dark profile drawer."
+      },
+      {
+        "name": "flat-surfaces",
+        "value": "none",
+        "purpose": "Firefly/Shirone homepage cards, Solitude bordered panels and Cactus index."
+      }
+    ],
+    "motion": [
+      {
+        "name": "dialog-enter",
+        "value": ".22s cubic-bezier(.2,.8,.2,1)",
+        "purpose": "Modal entrance."
+      },
+      {
+        "name": "koharu-drawer-enter",
+        "value": "280ms cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Drawer translateX(-100%) to zero."
+      },
+      {
+        "name": "koharu-category-flip",
+        "value": ".7s cubic-bezier(.65,0,.35,1)",
+        "purpose": "Category flip."
+      },
+      {
+        "name": "firefly-nav-retreat",
+        "value": "280ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "Scroll-directed navigation."
+      },
+      {
+        "name": "shirone-nav-color",
+        "value": "240ms ease",
+        "purpose": "Navigation after banner."
+      },
+      {
+        "name": "redefine-typewriter",
+        "value": "2.5s steps(19,end)",
+        "purpose": "Subtitle reveal."
+      },
+      {
+        "name": "reduced-motion",
+        "value": ".01ms",
+        "purpose": "Global suppression, plus component animation:none."
+      },
+      {
+        "name": "ink-cover",
+        "value": "900ms",
+        "purpose": "Click-origin domain-warped field and broad soft alpha edge; CSS/images load concurrently. Progress exponent 1.45; procedural mask, not fluid simulation."
+      },
+      {
+        "name": "ink-reveal",
+        "value": "650ms",
+        "purpose": "Opposite-origin field reveal after layout and reading-position restoration; progress exponent 1.25."
+      },
+      {
+        "name": "ink-fade",
+        "value": "100ms",
+        "purpose": "100ms cover and reveal fades for reduced motion or unavailable Canvas; reduced motion has no covered pause."
+      },
+      {
+        "name": "ink-cancel-mid-cover",
+        "value": "140ms",
+        "purpose": "Fade the existing partial ink on pre-commit cancellation."
+      },
+      {
+        "name": "ink-feedback",
+        "value": "120ms ease-out",
+        "purpose": "Status opacity and cancel background; disabled for reduced motion."
+      },
+      {
+        "name": "ink-delayed-cancel",
+        "value": "900ms",
+        "purpose": "Show cancel only if still waiting after complete coverage."
+      },
+      {
+        "name": "ink-covered-pause",
+        "value": "550ms",
+        "purpose": "After full coverage; overlaps resource loading, aborts immediately on cancel, omitted for reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "shared-mobile-max",
+        "value": "760px"
+      },
+      {
+        "name": "appearance-sheet-max",
+        "value": "480px"
+      },
+      {
+        "name": "koharu-drawer-max",
+        "value": "992px"
+      },
+      {
+        "name": "koharu-stacked-card-max",
+        "value": "768px"
+      },
+      {
+        "name": "firefly-shirone-right-rail-max",
+        "value": "1279px"
+      },
+      {
+        "name": "firefly-shirone-phone-max",
+        "value": "767px"
+      },
+      {
+        "name": "shirone-feed-first-max",
+        "value": "1023px"
+      },
+      {
+        "name": "solitude-row-layout-max",
+        "value": "1299px"
+      },
+      {
+        "name": "solitude-hide-aside-max",
+        "value": "1199px"
+      },
+      {
+        "name": "solitude-phone-max",
+        "value": "768px"
+      },
+      {
+        "name": "redefine-phone-max",
+        "value": "640px"
+      },
+      {
+        "name": "cactus-phone-max",
+        "value": "639px"
+      },
+      {
+        "name": "cactus-side-toc-min",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "共用图标按钮",
+      "kind": "button",
+      "refersTo": "icon-button",
+      "description": "搜索、关闭与返回顶部的基础按钮；主题导航可覆盖形状。",
+      "html": "<button class=\"ds-icon-button\" type=\"button\" aria-label=\"搜索文章\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg></button>",
+      "css": ".ds-icon-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:40px;min-height:40px;padding:8px;border:0;background:none;color:var(--ink,#29332f);border-radius:10px;cursor:pointer;transition:background .18s,color .18s}.ds-icon-button:hover{background:var(--surface-2,#e4f3ec);color:var(--accent,#138064)}.ds-icon-button:focus-visible{outline:3px solid var(--accent,#138064);outline-offset:4px;}@media(prefers-reduced-motion:reduce){.ds-icon-button{transition:none}}"
+    },
+    {
+      "name": "水墨等待与取消",
+      "kind": "custom",
+      "refersTo": "ink-waiting",
+      "description": "纸白/炭灰完全覆盖后的静态等待状态。实际扩散是域变形柔边程序遮罩：900ms 覆盖、550ms 停留、650ms 揭开。",
+      "html": "<section class=\"ds-ink-waiting\" data-tone=\"light\" style=\"--ink-transition-ink:#f0efec;--ink-transition-text:#383633;--ink-transition-border:#96918a;--ink-transition-button:#e5e2dc;--ink-transition-hover:#d9d5cf\" aria-label=\"外观切换等待状态\"><p role=\"status\" aria-live=\"polite\">正在切换至 Koharu</p><button class=\"ds-ink-cancel\" type=\"button\">取消切换</button></section>",
+      "css": ".ds-ink-waiting{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:24px;min-height:220px;background:var(--ink-transition-ink,#f0efec);color:var(--ink-transition-text,#383633);font-family:\"Noto Sans SC Variable\",\"Microsoft YaHei\",sans-serif}.ds-ink-waiting p{margin:0;color:var(--ink-transition-text,#383633);font-size:14px;font-weight:450;letter-spacing:.08em;line-height:1.8;text-align:center;text-wrap:balance}.ds-ink-cancel{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin:0;padding:8px 18px;border:1px solid var(--ink-transition-border,#96918a);border-radius:8px;color:var(--ink-transition-text,#383633);background:var(--ink-transition-button,#e5e2dc);box-shadow:none;font-family:inherit;font-size:13px;line-height:1.6;letter-spacing:0;cursor:pointer;transition:background-color 120ms ease-out}.ds-ink-cancel:hover{color:var(--ink-transition-text,#383633);background:var(--ink-transition-hover,#d9d5cf)}.ds-ink-cancel:focus-visible{outline:2px solid var(--ink-transition-text,#383633);outline-offset:4px}.ds-ink-cancel:disabled{cursor:progress;opacity:.65}@media(prefers-reduced-motion:reduce){.ds-ink-cancel{transition:none}}"
+    },
+    {
+      "name": "明暗分段选项",
+      "kind": "button",
+      "refersTo": "mode-button",
+      "description": "外观弹窗的独立明暗选择；预览展示选中状态，不运行持久化逻辑。",
+      "html": "<div class=\"ds-mode\" role=\"group\" aria-label=\"明暗模式\"><button type=\"button\" aria-pressed=\"false\">浅色</button><button type=\"button\" aria-pressed=\"false\">深色</button><button type=\"button\" aria-pressed=\"true\">系统</button></div>",
+      "css": ".ds-mode{display:flex;gap:3px;background:var(--surface-2,#e4f3ec);padding:4px;border-radius:9px;font-family:'Noto Sans SC Variable',sans-serif;}.ds-mode button{border:0;padding:6px 10px;border-radius:6px;font:500 11px/1.75 \"Noto Sans SC Variable\",sans-serif;color:var(--muted,#64766d);background:transparent;cursor:pointer}.ds-mode button[aria-pressed=\"true\"]{background:var(--surface,#fff);color:var(--accent,#138064);box-shadow:0 2px 6px #0001}.ds-mode button:hover{color:var(--accent,#138064)}.ds-mode button:focus-visible{outline:3px solid var(--accent,#138064);outline-offset:4px;}"
+    },
+    {
+      "name": "搜索输入行",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "搜索输入与关闭按钮；输入自身不额外描边，关闭按钮保留焦点圈。",
+      "html": "<div class=\"ds-search\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><label class=\"ds-search-label\" for=\"ds-search-input\">搜索文章、标签或正文</label><input id=\"ds-search-input\" type=\"search\" placeholder=\"搜索文章、标签或正文…\" autocomplete=\"off\"/><button type=\"button\" aria-label=\"关闭搜索\"><svg viewBox=\"0 0 24 24\" width=\"23\" height=\"23\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m18 6-12 12M6 6l12 12\"/></svg></button></div>",
+      "css": ".ds-search{display:flex;align-items:center;gap:14px;padding:18px 22px;border-bottom:1px solid var(--line,#d7e9df);background:var(--surface,#fff);color:var(--accent,#138064);font-family:'Noto Sans SC Variable',sans-serif;}.ds-search>svg{flex-shrink:0}.ds-search-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.ds-search input{min-width:0;width:100%;border:0;outline:0;background:transparent;color:var(--ink,#29332f);font:15px/2.5 \"Noto Sans SC Variable\",sans-serif;caret-color:var(--accent,#138064)}.ds-search input::placeholder{color:var(--muted,#64766d)}.ds-search button{display:grid;place-items:center;min-width:40px;min-height:40px;padding:8px;border:0;border-radius:10px;color:var(--ink,#29332f);background:transparent;cursor:pointer;transition:background .18s,color .18s}.ds-search button:hover{background:var(--surface-2,#e4f3ec);color:var(--accent,#138064)}.ds-search button:focus-visible{outline:3px solid var(--accent,#138064);outline-offset:4px;}@media(max-width:480px){.ds-search{padding:13px 15px;gap:10px}}"
+    },
+    {
+      "name": "Koharu 资料抽屉",
+      "kind": "nav",
+      "refersTo": "koharu-drawer",
+      "description": "原生模态抽屉的资料和菜单局部；完整页面由 showModal、Esc、遮罩与焦点恢复控制。",
+      "html": "<section class=\"ds-drawer\" aria-label=\"小站导航\"><header><button type=\"button\" aria-label=\"关闭小站导航\"><svg viewBox=\"0 0 24 24\" width=\"23\" height=\"23\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m18 6-12 12M6 6l12 12\"/></svg></button><h2>小站导航</h2></header><div class=\"ds-drawer-body\"><div class=\"ds-drawer-profile\"><img src=\"data:image/webp;base64,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\" alt=\"qinghe 的头像\" width=\"64\" height=\"64\"/><div><a href=\"#about\">qinghe</a><p>记录学习的足迹，也收藏生活的片刻。</p></div></div><nav aria-label=\"Koharu 手机侧栏导航\"><a href=\"#home\" aria-current=\"page\">首页</a><details open><summary>文章<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m9 18 6-6-6-6\"/></svg></summary><div><a href=\"#archives\">归档</a><a href=\"#categories\">分类</a><a href=\"#tags\">标签</a></div></details><a href=\"#about\">关于</a></nav></div></section>",
+      "css": ".ds-drawer{width:min(320px,85vw);border-radius:0 16px 16px 0;background:var(--bg,#fdfbfc);color:var(--ink,#44404c);box-shadow:14px 0 48px rgb(56 28 53 / 22%);font-family:'Noto Sans SC Variable',sans-serif;}.ds-drawer header{display:flex;align-items:center;gap:9px;min-height:62px;padding:9px 16px 7px 13px}.ds-drawer header button{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--accent,#b63b64);cursor:pointer}.ds-drawer h2{font-size:13px;font-weight:550;letter-spacing:.08em;color:var(--muted,#716a76)}.ds-drawer-body{padding:11px 23px 24px}.ds-drawer-profile{display:flex;align-items:center;gap:15px}.ds-drawer-profile img{width:64px;height:64px;object-fit:cover;border-radius:50%;box-shadow:0 6px 16px rgb(182 59 100 / 17%)}.ds-drawer-profile a{font-size:19px;font-weight:650;letter-spacing:-.02em}.ds-drawer p{margin:4px 0 0;color:var(--muted,#716a76);font-size:11px;line-height:1.7}.ds-drawer nav{display:flex;flex-direction:column;gap:5px;margin-top:24px;padding-top:16px;border-top:1px solid var(--line,#e7dfe7)}.ds-drawer a{color:inherit;text-decoration:none}.ds-drawer nav>a,.ds-drawer summary{display:flex;align-items:center;gap:12px;min-height:44px;padding:10px 13px;border-radius:9px;font-size:14px;list-style:none;cursor:pointer}.ds-drawer summary svg{margin-left:auto;transition:transform 180ms ease-out}.ds-drawer details[open] summary svg{transform:rotate(90deg)}.ds-drawer details>div{display:grid;margin:3px 0 7px 21px;padding-left:19px;border-left:1px solid var(--line,#e7dfe7)}.ds-drawer details a{padding:7px 9px;min-height:40px;font-size:13px;border-radius:7px;color:var(--muted,#716a76)}.ds-drawer a[aria-current],.ds-drawer a:hover,.ds-drawer summary:hover,.ds-drawer button:hover{background:var(--accent-soft,#fbe7ef);color:var(--accent,#b63b64)}.ds-drawer :focus-visible{outline:2px solid var(--accent,#b63b64);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-drawer summary svg{transition:none}}"
+    },
+    {
+      "name": "Firefly 无封面文章",
+      "kind": "card",
+      "refersTo": "firefly-post",
+      "description": "无封面文章使用右侧浅绿进入区，保留粗标题竖标与标签。",
+      "html": "<article class=\"ds-firefly\"><div class=\"ds-firefly-body\"><h3><a href=\"#article\">Hello World</a></h3><p class=\"ds-firefly-meta\">2025-12-18 · 站点记录</p><p>无封面文章卡片的结构样本。</p><a class=\"ds-firefly-tag\" href=\"#tag\">#记录</a></div><a class=\"ds-firefly-enter\" href=\"#article\" aria-label=\"阅读 Hello World\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m9 18 6-6-6-6\"/></svg></a></article>",
+      "css": ".ds-firefly{display:flex;position:relative;min-height:232px;max-width:550px;border-radius:16px;background:var(--surface,#fff);color:var(--ink,#29332f);overflow:hidden;font-family:'Noto Sans SC Variable',sans-serif;}.ds-firefly a{text-decoration:none;color:inherit}.ds-firefly-body{width:calc(100% - 70px);padding:27px 8px 27px 35px}.ds-firefly h3{position:relative;font-size:23px;font-weight:750;line-height:1.5;letter-spacing:0;margin:0 0 13px}.ds-firefly h3:before{content:\"\";position:absolute;left:-18px;top:8px;width:4px;height:18px;border-radius:3px;background:var(--accent,#138064)}.ds-firefly p{font-size:13px;line-height:1.9;color:var(--muted,#64766d)}.ds-firefly .ds-firefly-meta{font-size:11px;line-height:1.6}.ds-firefly .ds-firefly-tag{display:inline-block;padding:1px 7px;border-radius:14px;background:var(--accent-soft,#e1f4ec);color:var(--accent,#138064);font-size:10px}.ds-firefly .ds-firefly-enter{position:absolute;right:12px;top:12px;bottom:12px;width:46px;border-radius:12px;background:var(--accent-soft,#e1f4ec);color:var(--accent,#138064);display:grid;place-items:center}.ds-firefly-enter:hover,.ds-firefly-tag:hover{background:var(--line,#d7e9df)}.ds-firefly h3 a:hover{color:var(--accent,#138064)}.ds-firefly a:focus-visible{outline:3px solid var(--accent,#138064);outline-offset:4px;}"
+    },
+    {
+      "name": "Shirone 标签组",
+      "kind": "chip",
+      "refersTo": "shirone-panel",
+      "description": "Material 色面上的紧凑标签；每个标签链接到对应列表。",
+      "html": "<div class=\"ds-shirone-tags\"><a href=\"#writing\">#写作</a><a href=\"#technology\">#技术</a><a href=\"#reading\">#阅读</a></div>",
+      "css": ".ds-shirone-tags{display:flex;gap:6px;flex-wrap:wrap;font-family:'Noto Sans SC Variable',sans-serif;}.ds-shirone-tags a{padding:3px 8px;border-radius:6px;background:var(--surface-2,#eee5f3);font-size:11px;color:var(--muted,#655b6d);line-height:1.65;text-decoration:none}.ds-shirone-tags a:hover{background:var(--accent-soft,#edddf6);color:var(--accent,#76548b)}.ds-shirone-tags a:focus-visible{outline:3px solid var(--accent,#138064);outline-offset:4px;}"
+    },
+    {
+      "name": "Solitude 蓝色作者卡",
+      "kind": "card",
+      "refersTo": "solitude-author",
+      "description": "hover 或焦点进入时由头像切换至介绍，底部身份保持可见。",
+      "html": "<section class=\"ds-author\"><span class=\"ds-author-hello\">你好，很高兴遇见你</span><a class=\"ds-author-avatar\" href=\"#about\" aria-label=\"认识 qinghe\"><img src=\"data:image/webp;base64,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\" alt=\"qinghe 的头像\" width=\"118\" height=\"118\"/></a><div class=\"ds-author-detail\"><p>保持好奇，<br/>慢慢生长。</p><a href=\"#about\">走近这个小站<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m9 18 6-6-6-6\"/></svg></a></div><div class=\"ds-author-bottom\"><h2>qinghe</h2><p>记录学习的足迹，也收藏生活的片刻。</p></div></section>",
+      "css": ".ds-author{height:320px;width:285px;position:relative;overflow:hidden;border-radius:12px;background:var(--solitude-profile,#485cf0);color:#fff;padding:20px;font-family:'Noto Sans SC Variable',sans-serif;}.ds-author a{text-decoration:none;color:#fff}.ds-author-hello{display:block;width:fit-content;margin:auto;padding:5px 11px;border-radius:12px;background:#ffffff25;font-size:10px;line-height:1.5}.ds-author-avatar{position:absolute;left:calc(50% - 59px);top:90px;width:118px;height:118px;transition:transform .3s cubic-bezier(.69,.39,0,1.21);transform-origin:center bottom;z-index:3}.ds-author-avatar img{width:100%;height:100%;object-fit:cover;border:5px solid #fff;border-radius:50%}.ds-author-detail{position:absolute;left:24px;right:24px;top:90px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;visibility:hidden}.ds-author-detail p{font-size:25px;font-weight:650;line-height:1.55;margin:0}.ds-author-detail>a{display:flex;align-items:center;gap:8px;margin-top:13px;font-size:12px}.ds-author:hover .ds-author-avatar,.ds-author:focus-within .ds-author-avatar{transform:scale(0)}.ds-author:hover .ds-author-detail,.ds-author:focus-within .ds-author-detail{visibility:visible;opacity:1;transform:translateY(0)}.ds-author-bottom{position:absolute;left:20px;right:20px;bottom:20px}.ds-author h2{font-size:22px;font-weight:750;line-height:1.2;letter-spacing:-.025em;margin:0}.ds-author-bottom p{font-size:10px;line-height:1.5;margin:4px 0 0;color:#eef0ff}.ds-author a:hover{color:#fff}.ds-author a:focus-visible{outline:3px solid #fff;outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-author-avatar,.ds-author-detail{transition:none}}"
+    },
+    {
+      "name": "Redefine 首屏滚动按钮",
+      "kind": "button",
+      "refersTo": "redefine-scroll",
+      "description": "全屏影像底部的圆形玻璃入口；深色底板仅展示白色控件。",
+      "html": "<div class=\"ds-redefine-canvas\"><a class=\"ds-redefine-scroll\" href=\"#writings\" aria-label=\"向下阅读文章\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M12 5v14m7-7-7 7-7-7\"/></svg></a></div>",
+      "css": ".ds-redefine-canvas{padding:24px;background:var(--ink,#34373c)}.ds-redefine-scroll{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:#ffffff32;border:1px solid #ffffff55;backdrop-filter:blur(15px);box-shadow:0 5px 16px #102c3420;color:#fff}.ds-redefine-scroll svg{transition:transform .2s ease}.ds-redefine-scroll:hover{color:#fff;background:#ffffff4a}.ds-redefine-scroll:hover svg{transform:translateY(4px)}.ds-redefine-scroll:focus-visible{outline:3px solid var(--accent,#138064);outline-offset:4px;}@media(prefers-reduced-motion:reduce){.ds-redefine-scroll svg{transition:none}}"
+    },
+    {
+      "name": "Cactus 日期索引",
+      "kind": "custom",
+      "refersTo": "cactus-row",
+      "description": "无卡片背景的日期和文章标题；手机将日期移至上一行。",
+      "html": "<article class=\"ds-cactus-row\"><time datetime=\"2025-12-18\">2025-12-18</time><h3><a href=\"#article\">Hello World</a></h3></article>",
+      "css": ".ds-cactus-row{display:grid;grid-template-columns:120px minmax(0,1fr);align-items:baseline;gap:12px;padding:0;background:none;color:var(--ink,#2f3033);font-family:\"Cascadia Code\",\"SFMono-Regular\",Consolas,\"Noto Sans SC Variable\",monospace;font-size:14px}.ds-cactus-row time{font-size:12px;font-weight:600;line-height:1.85;color:var(--muted,#67686b);font-variant-numeric:tabular-nums}.ds-cactus-row h3{font-size:14px;line-height:1.85;font-weight:400;letter-spacing:0;margin:0;overflow-wrap:anywhere}.ds-cactus-row a{color:var(--cactus-link,#087b70);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.24em}.ds-cactus-row a:hover{text-decoration-thickness:2px}.ds-cactus-row a:focus-visible{outline:3px solid var(--accent,#138064);outline-offset:4px;}@media(max-width:639px){.ds-cactus-row{grid-template-columns:minmax(0,1fr);gap:2px}.ds-cactus-row time{font-size:11px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "十六个独立的阅读世界",
+    "overview": "这套系统保留最初的 Koharu、Firefly、Shirone、Solitude、Redefine、Cactus 六个阅读世界，并加入 Traveritas、Radar、Good Fella、AVA、Nfinite、Follow Art、Milkin、Digilab、Stefan、Büro18 十个来源明确的独立博客适配。各主题拥有自己的空间、节奏和形状；qinghe 的身份和文章保持一致。\r\n\r\n这是使用 Astro 独立编写的适配实现。最初六套并非上游主题原样安装；新增十套也不是原站完整移植。十六套首页分别拥有自己的组件树，只挂载当前选择的首页，样式按需加载。共享层负责正文、文章标识、路由、搜索、外观偏好和阅读位置，不规定通用首页构图。\r\n\r\n**当前状态：** 已根据官方源码、作者实现说明与连续交互证据补强动态，重点修正 Traveritas /articles 与 Stefan /projects，并重新研究其余主题。只对本次改动的关键动作做定点确认，不重复全站测试。下文明确列出仍有差异的模型、素材和机制，不宣称十六套均为原站的完整复刻。\n\r\n本文件记录 2026-10-07 的本地实现，不代替独立的视觉与交互验收。前言中的颜色、字体、间距、圆角和组件值为规范层；未列出的响应式覆盖以对应主题 CSS 为准。`colors.<theme>-*` 表示浅色，`colors.<theme>-dark-*` 表示深色。组件令牌中的主题颜色表示浅色样本；运行时使用当前 `--bg`、`--surface`、`--ink`、`--accent` 等变量。\r\n\r\n**Key Characteristics:**\r\n\r\n- 十六套独立首页结构；不以统一 hero 和文章卡换色替代原主题构图。\r\n- 中文优先；本地 Noto Sans SC Variable 负责共用正文，Cactus 以等宽字体表达正文与导航。\r\n- 主题与明暗模式独立；颜色、正文和控件保持语义一致。\r\n- 封面、头像和示例文章均使用本站有来源的内容，不复制演示站身份。\r\n\r\n实现证据：`src/styles/base.css`、`src/styles/content.css`、`src/styles/ink-transition.css`、`src/scripts/ink-transition.ts`、`public/themes/*.css`、`src/components/home/*.astro`、`src/components/KoharuDrawer.astro`、`Appearance.astro`、`Search.astro`、`src/layouts/Base.astro` 和 `src/scripts/app.ts`。旧首页的 `.hero`、`.home-layout` 等未挂载规则不构成本设计系统。\r\n\r\n| 主题 | 官方来源 | 本地保留的识别特征 |\r\n| --- | --- | --- |\r\n| Koharu | [cosZone/astro-koharu](https://github.com/cosZone/astro-koharu) | 波浪封面、左侧资料与纵向导航、交错斜切文章、对角 more 按钮、翻转分类 |\r\n| Firefly | [CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly) | 浮动导航、波浪横幅、双侧栏、方形头像、内缩右封面、分类条 |\r\n| Shirone | [LyraVoid/Shirone](https://github.com/LyraVoid/Shirone) | 紫色 Material 色面、通栏横幅、四层波浪、统计与文章日历 |\r\n| Solitude | [everfu/hexo-theme-solitude](https://github.com/everfu/hexo-theme-solitude) | 无首页封面、分类胶囊、杂志网格、右侧蓝色作者名片 |\r\n| Redefine | [evannotfound/hexo-theme-redefine](https://github.com/evannotfound/hexo-theme-redefine) | 全屏风景、居中标题、底部滚动与社交控件、后续双栏文章流 |\r\n| Astro Cactus | [chrismwilliams/astro-theme-cactus](https://github.com/chrismwilliams/astro-theme-cactus) | 窄版等宽索引、两行导航、日期列、无封面文章列表 |\r\n\r\n| Traveritas | [Traveritas](https://traveritas.github.io/articles/) | 衬线年份索引、长按醒梦、拼合/错开的流动方块场、字标轮转、文字换面、标题叠影 |\n| Radar | [Radar](https://radarlaboratory.com/) | 固定黑绿雷达首屏、分类控制台、日期档案 |\r\n| Good Fella | [Good Fella](https://good-fella.com/) | 黑色声明、橙色分离加号、头像生成的 ASCII 肖像、大幅展开式菜单 |\n| AVA | [AVA](https://srg.ava-digital.site/) | 角落信息、原创点阵 Q、中央菜单、红色联系区 |\r\n| Nfinite | [Nfinite](https://nfinitepaper.com/) | 本地风景首屏、青色文章带、随滚动聚合的粒子与三层纸面 |\n| Follow Art | [Follow Art](https://follow.art/) | 橙色首屏、指针与滚动驱动的三维文章卡组、错位画廊 |\n| Milkin | [Milkin](https://www.maxmilkin.com/) | 苔绿空间、原创石头图片的指针旋转与滚动推进、错位画廊视差 |\n| Digilab | [Digilab](https://digilab.co/) | 淡纸影像、深紫字、点击入口推进场景、随滚动揭开的章节 |\n| Stefan | [Stefan /projects](https://stefanvitasovic.dev/projects) | 固定目录、悬停选择、右侧独立惯性画廊、切片标题、媒体变形 |\n| Büro18 | [Büro18](https://18.burocratik.com/) | 原创螺旋文章轨迹、局部图片尾迹、纵向滚轮驱动横向章节 |\n\r\n研究快照、所核对的提交与原主题截图在 `.references/koharu-firefly-notes.md`、`.references/shirone-solitude-notes.md`、`.references/redefine-cactus-notes.md`。这些资料解释来源，不覆盖实际实现值。原主题组件、字体和演示插画未作为上游包分发；保留的用户头像、原有风景及本地生成替代插画见 `ASSETS.md`，十六张外观缩略图是本站本地页面截图。原始内容和明确标记的可删除示例遵循 `PRODUCT.md` 与 `README.md`。\r\n\r\n新增来源记录见 .references/reference-themes-a/implementation-notes.md、.references/reference-themes-b/source-notes.md 与 .references/traveritas-adaptation.md，并核对 [Traveritas 官方仓库](https://github.com/Traveritas/traveritas.github.io)。Follow.art 直接访问遇到 Cloudflare，视觉依据补充自 [设计方案例](https://videinfra.com/work/follow-art) 及 [设计过程](https://videinfra.com/blog/the-art-of-getting-noticed-product-design-and-development-for-an-artist-social-network-startup)，未绕过限制。商业 WebGL、声音、视频、模型、专有字体和商业文案均未复制。Milkin 当前使用本站原创透明石头 public/media/milkin-stone.webp，不是原站模型；来源笔记的早期空白已由后续补记取代。\r\n\r\n## Colors\r\n\r\n十六套主题各自拥有页面底色、主要色面、正文、弱化文字、分隔线、强调色、弱强调底和强调色上的文字。当前颜色以 hex 为规范；导航透明度和投影中保留实际使用的 `color-mix()`、`rgb()` 与带透明度 hex。上游 Firefly 研究中的 OKLCH 未用于当前样式，不能冒充本地令牌。\r\n\r\n### Primary\r\n\r\n- Koharu：莓粉用于标题、链接和当前项；深色模式改为明亮粉色。粉桃渐变用于当前纵向导航项与 more 按钮。\r\n- Firefly：森林绿用于分类、图标底、标题竖标与选中项；深色模式采用清亮薄荷绿。\r\n- Shirone：柔和紫用于 Material 面板中的当前项、短竖标、日期与社交控件；深色采用浅紫。\r\n- Solitude：亮蓝用于分类、文章页标题区和链接；深色强调色变为金黄，作者卡另用专属底色。\r\n- Redefine：珊瑚红用于阅读区链接与控件；影像中的文字和玻璃控件保持白色。\r\n- Cactus：浅色以莓红区分导航/章节，以独立青绿色显示正文链接；深色改为薄荷导航与粉色正文链接。\r\n\r\n新增主题的背景、文字与强调色分别收录为主题前缀 token。固定色面有明确边界：Radar 首页 header 与雷达首屏固定黑绿，档案和正文仍响应明暗；Good Fella 首屏/页头/页脚固定 #141314、品牌橙 #ff531f；AVA 中央菜单 #252322、联系区 #b5262f；Nfinite 图片白字与粒子区 #10151d 固定，阅读面板随模式改变；Follow Art 首屏 #f87836、收尾 #dce9b7 固定。不要将局部固定色面误记为明暗模式失效。\r\n\r\n### Secondary\r\n\r\n`*-accent-soft` 用于弱选中、标签、元数据和 hover 色面。Koharu 的 `blue` 是标题 hover 与邮件图标的第二强调色。Solitude 的 `solitude-profile` 专供作者名片；Cactus 的 `cactus-link` 专供文字链接。\r\n\r\n### Neutral\r\n\r\n`bg` 是页面底色，`surface` 是主要阅读面，`surface-2` 是辅助面。`ink` 用于正文，`muted` 用于简介与日期，`line` 用于分隔和边界。Cactus 的页面与主要阅读面同色；Firefly、Shirone、Solitude 的无阴影表面依靠底色差和边界分区。\r\n\r\n**The Theme Boundary Rule.** 主题前缀标识适用范围。一个主题的强调色、圆角或布局不能成为其余主题的默认值。\r\n\r\n切换遮罩使用独立的纸白/炭灰中性色：浅色主底 #f0efec、文字 #383633，深色主底 #302f2d、文字 #f0efec。边缘纹理将浅色纸面与 RGB (42,40,37) 颜料、深色纸面与 RGB (177,172,164) 颜料按低密度混合，不使用青灰色或粗黑描边。启动时按当前模式设置 data-tone，材质锁定在对话框私有 --ink-transition-* 行内变量中；底下的主题样式变化不会改变墨色。这是十六套外观共用的等待材质。\r\n\r\n## Typography\r\n\r\n**Display Font:** 最初五套图像/面板主题保持 Noto Sans SC Variable，Cactus 使用等宽栈。新增 Traveritas 用 Noto Serif SC Variable；Good Fella、AVA、Nfinite、Follow Art、Stefan、Büro18 用 Space Grotesk Variable 搭配中文回退。Radar、Good Fella、Follow Art 及 Milkin 的部分 Latin 品牌字用 Bebas Neue；部分日期、标注和按钮用 IBM Plex Mono。新增四款字体经 Fontsource 自托管，不复制原站专有字体。Milkin、Digilab 中文展示字仍用 Noto Sans SC。\r\n\r\n**Body Font:** 共用中文界面使用 Noto Sans SC Variable，回退 Microsoft YaHei 和 sans-serif。Cactus 全文与标题采用同一等宽栈；其外观和搜索弹窗仍使用中文无衬线字体。\r\n\r\n**Label/Mono Font:** 元数据继承当前主题字体，日期和统计使用等宽数字。代码使用 Cascadia Code、SFMono-Regular、Consolas、monospace。\r\n\r\n### Hierarchy\r\n\r\n- 首页展示字分别使用 `koharu-display`、`firefly-display`、`shirone-display`、`redefine-display`。Solitude 直接以文章标题进入阅读；Cactus 的 `cactus-title` 是索引引言。\r\n- 首页文章标题分别使用主题角色。Koharu 与 Firefly 通常显示单列行卡，Solitude 以双列杂志标题呈现，Cactus 保留正文尺度的链接。\r\n- 共享正文使用 `article-body`；Koharu、Firefly、Shirone、Solitude 的阅读宽度分别为 72ch、73ch、75ch、75ch。Redefine 为 16px / 1.9，手机为 15px；Cactus 为 `cactus-body`。\r\n- 通用文章标题使用 `article-headline`；Shirone 覆盖为 `clamp(28px,3.6vw,46px)` / 700 / 1.35，Solitude 为 `clamp(30px,4vw,48px)` / 750 / 1.35，Redefine 为 `clamp(30px,4.6vw,50px)` / 650 / 1.35，Cactus 为 27px / 650 / 1.55。Koharu 文章标题使用强调色。\r\n- 元数据主要为 10–13px，这是局部密度选择，不是正文尺度。对话框标题使用 `dialog-title`，手机为 20px。\r\n\r\n**The Shared Reading Rule.** 正文语义、稳定标题锚点和文章地址共用；切换外观不能重建文章正文或改变其内容。\r\n\r\n## Layout\r\n\r\n首页入口为 `HomeWorlds.astro` 的十六份 inert template；页面内只有当前主题的首页 DOM 与一个 `main#main-content`。`data-post-key` 让首页切换时寻找同一篇文章；正文通过当前可见的标题、段落、代码或表格恢复位置。\r\n\r\n| 主题 | 桌面空间与顺序 | 手机与中间宽度 |\r\n| --- | --- | --- |\r\n| Koharu | 60svh 封面（340–800px）；1280px 外框、256px 左栏；文章列内边距 28px 40px 40px，列表间距 22px | ≤1100px 左栏 240px；≤992px 隐藏侧栏并开放资料抽屉；≤768px 图片统一置顶且去斜切；≤480px 分类卡一列、封面最小 360px |\r\n| Firefly | 65svh 横幅（420–850px）；`min(92vw,1600px)` 外框，280px / 弹性 / 280px，16px 间隔，内容上叠 56px | ≤1279px 隐藏右栏；≤980px 左栏 240px；≤767px 文章先呈现、资料分类统计排在后面，封面变为 2:1 上图，横幅最小 400px |\r\n| Shirone | 65vh 横幅、最小 440px；1536px 外框，280px / 弹性 / 280px，16px 间隔，内容上叠 16px | ≤1279px 隐藏右栏；≤1023px 文章在前、作者分类在后；≤767px 上图下文；480–767px 横幅 `max(75vh,500px)` |\r\n| Solitude | 60px 导航后直接开始分类条；1400px 外框、弹性文章区 + 285px 右栏；文章双列、10px 间隔 | 769–1299px 文章改为左图横行；≤1199px 隐藏作者栏；≤768px 单列上图、封面高 170px |\r\n| Redefine | 70px 固定导航；100svh 影像首屏、最小 600px；阅读区宽 80%、最大 1200px，240px 左栏、38px 间隔 | ≤1024px 宽 86%、左栏 220px；≤768px 宽 90%、左栏 190px；≤640px 隐藏侧栏，首屏最小 520px |\r\n| Cactus | 768px 索引框、32px 内边距形成 704px 内容；顶部留白 64px，两行页头后留白 112px；日期列 120px | ≤639px 两侧留白 16px，页头单行并开放菜单，日期堆叠于标题上；文章 ≥1280px 可在 704px 正文右侧增设 180px 目录 |\r\n\r\n| Traveritas | 960px 主框、32px 内边距；日期 65px / 题目 / 类别 90px | 760px 以下日期、标题、类别堆叠 |\r\n| Radar | 1320px 框；双列首屏、430px 雷达；220px 分类栏 | 639px 以下单列、245px 雷达、分类换行 |\r\n| Good Fella | 黑色双列声明与字符雕塑；1320px 图文文章流 | 639px 以下纵排、雕塑 330px、文章上图下文 |\r\n| AVA | 1440px 框、中央点阵 Q 与两侧信息；交替图文 | 639px 以下 Q 310px、菜单换行、图片在前 |\r\n| Nfinite | 100svh 影像；920px 引言；宽青色文章带 | 639px 以下紧凑文章行、粒子章节纵排 |\r\n| Follow Art | 橙色三卡；两列文章偶数项下移 100px | 760px 以下缩小三卡，文章单列并去错位 |\r\n| Milkin | 苔绿石头首屏；双列画廊、13vw 间隔、错位 150px | 760px 以下单列并保留小幅交替侧边留白 |\r\n| Digilab | 淡纸影像；紫色陈述；170px 日期 / 正文 / 32% 图片 | 760px 以下图文纵排 |\r\n| Stefan | 蓝色大字和横线；150px 日期 / 题目 / 摘要 / 48px 箭头 | 760px 以下元数据、题目与摘要堆叠 |\r\n| Büro18 | 螺旋文章入口；75vw、最大 1080px 时间线卡片 | 760px 以下卡片纵排、隐藏箭头和尾迹 |\r\n\r\n各主题文章页将背景、侧栏位置、标题区、圆角和目录视觉带入共享正文。文章页最大宽度依次为 Koharu 1280px、Firefly 1280px、Shirone 1360px、Solitude 1400px、Redefine 1200px；Cactus 保持窄版。正文表格和代码块各自横向滚动，不将整页推出视口。\r\n\r\n前言间距不强制十六套首页使用同一网格。新增主题基础导航在 760px 收起；首页 639px 断点不等于导航断点。外观对话框最大 1040px，桌面四列，≤900px 三列，≤600px 两列；≤480px 贴底。标题保持 sticky，分组为全部 16、博客主题 6、视觉参考 10；筛选以 aria-pressed 表达选中，只控制图库可见项。搜索保留视口内侧间距。\r\n\r\n## Elevation & Depth\r\n\r\nKoharu 和 Redefine 使用轻柔投影抬升阅读卡；Firefly 与 Shirone 主要以纯色面区分；Solitude 用细描边；Cactus 用留白与文字。玻璃效果限于已有导航、封面社交控件与对话框遮罩。\r\n\r\n新增十套的主题级 --shadow 均为 none；Follow Art 首屏卡片另有局部阴影 0 20px 38px #59260626，不扩展为全站卡片阴影。\r\n\r\n### Shadow Vocabulary\r\n\r\n- Koharu 阅读面：`0 6px 18px #493c4914`；深色为 `0 7px 20px #08070d42`。\r\n- Redefine 阅读面：`0 7px 22px #172b4010`；深色为 `0 8px 28px #0003`。\r\n- Firefly 辅助浮层变量：`0 7px 22px #193f2e08`；深色为 `0 8px 25px #0002`。首页文章卡明确无阴影。\r\n- 共享对话框：`0 22px 100px #10281940`；遮罩 `#10231970`，模糊 5px。\r\n- Koharu 抽屉：`14px 0 48px rgb(56 28 53 / 22%)`；深色为 `14px 0 48px rgb(0 0 0 / 40%)`。抽屉遮罩不模糊。\r\n\r\n**The Native Depth Rule.** 深度服从各主题：Koharu 和 Redefine 使用柔和抬升，Firefly 与 Shirone 以色面为主，Solitude 使用描边，Cactus 以留白和文字建立层级。\r\n\r\n动效是局部特征：Koharu 三层连续横向波浪为 12/7/4s，导航随滚动方向收起和恢复；Firefly 四层连续波浪为 8/9/10/11s，副标题使用现有简介的两个分句循环输入/停留/回删；Shirone 保留四层连续波浪并补循环打字；Solitude 下滚将导航换为页名胶囊，上滚恢复菜单，按钮显示真实阅读进度；Redefine 使用 100ms 输入、80ms 回删、1500ms 停留的循环，并在滚过 70px 后收窄导航；Cactus 保持安静索引，支持原生跨文档 View Transition。所有主题服从 `prefers-reduced-motion`；外观切换仍单独使用下述水墨遮罩。\n\r\n### Ink Theme Transition\r\n\r\n点击外观卡片时，纸白或炭灰墨迹从实际指针位置向整个视口扩散；键盘选择以卡片中心为起点，缺省使用视口中心。每次生成随机噪声场，多尺度噪声和域变形改变连贯边缘，较宽的透明度过渡形成柔软渗化。完整覆盖后背景成为不透明纸面；揭开从对角方向扩散。这是原创 Canvas 2D 程序遮罩，不是物理流体模拟，没有复制参考站的精灵图或视频。\r\n\r\n覆盖为 900ms，完整覆盖后停留 550ms，再用 650ms 揭开；资源已就绪时约 2.1s，另加必要的布局稳定时间。停留与网络加载重叠，不在网络完成后另加等待；如果仍在加载，保持静态覆盖。覆盖中取消把已有墨迹在 140ms 内淡出。减弱动态效果时覆盖和揭开各用 100ms 淡变，不增加停留；Canvas 不可用也退化为 100ms 淡变，但普通动态模式仍保留停留。状态/取消控件反馈为 120ms ease-out，减弱动态效果时移除这些 CSS 过渡。\r\n\r\n遮罩场最长边不超过 512px，主 Canvas 按约 220 万像素预算计算、像素倍率最多 1.25，平滑采样放大纹理。覆盖/揭开分别以进度的 1.45 / 1.25 次幂推进，避免前段过快填满。只在覆盖和揭开期间绘制，等待时静止，后台暂停，离开释放资源。图片解码与样式加载在墨迹进入时并行开展。\r\n\r\n研究记录见 .references/ink-research-notes.md，参考 [CodyHouse Ink Transition](https://codyhouse.co/gem/ink-transition-effect) 的透明度边缘及 [Codrops CSS Masks](https://tympanus.net/codrops/2016/09/29/transition-effect-with-css-masks/) 的遮罩方法；两者代码和素材均未随本站分发。\r\n\r\n**The Opaque Swap Rule.** 新主题只能在水墨完全覆盖、所需样式与首屏图片准备完成后提交；布局稳定并恢复阅读位置后才揭开。\r\n\r\n### Reference-theme Motion Status\r\n\r\nTraveritas：2200ms 长按唤醒、1300ms 长按入梦，中途释放回退；醒态沿 14° 流动，梦态保留累计位置并定距回溯，方块放大错开；字标循环、文字随线换面、少量梦态字符扰动、标题暖色叠影与阅读轨。Radar 点选真实文章；Good Fella 的 ASCII 头像随指针偏转、菜单展开时背景退后；AVA 的 Q 点阵跨首屏停留并随滚动改变姿态；Nfinite 的粒子随滚动形成三层纸面；Follow Art 卡组透视展开；Milkin 石头推进和画廊视差；Digilab 入口推进与章节揭幕；Stefan 悬停选择媒体、独立惯性画廊与媒体变形；Büro18 纵向滚动驱动横向章节。装饰保留减少动态、暂停或卸载清理，文章和操作共用。\n\r\n动态证据来自真实操作、公开运行代码或作者工程说明；静态截图仅证明外观。实际适配与原作仍有边界，见下节。商业站的同名练习仓库不能作为官方完整工程或模型来源。\n\n### 源码与动态还原记录\n\n核对日期：2026-10-07。原六套均核对官方 GitHub；Traveritas 已读取其真实工程。其他设计案例分别核对作者仓库、官网运行代码和作者技术说明。「未找到匹配工程」仅表示本次调查结果，不等于断言闭源。当前代码按博客生命周期独立实现，原站身份、业务数据和文章没有混入本站。\n\n| 主题 | 一手实现依据 | 本地仍有的差异 |\n| --- | --- | --- |\n| Koharu | 官方 `wave.css`、`Navigator.tsx`；提交 `c8392cb` | 未移植卡片滚动显现和持久化路由变形；封面为本站素材 |\n| Firefly | 官方 `waves-draw.ts`、`TypewriterText.astro`；`6d82554` | 波浪以 SVG 表达，保留四层时序；没有引入整个上游运行环境 |\n| Shirone | 官方 `BannerStage.astro`、`BannerWaves.astro`；`557ccf1` | 当前为一张选定封面，没有演示站多图轮播 |\n| Solitude | 官方 `main.js` 的 `scrollFn/percent`、`header.styl`；`22c738b` | 导航机制与真实博客内容适配；没有接入上游外部小组件 |\n| Redefine | 官方 `typed.js`、`navbarShrink.js`；`afa67f3` | 主题内独立状态机，没有移植 Hexo/Swup 页面系统 |\n| Cactus | 官方 `global.css`；`728f1f4` | 本站共享搜索/外观菜单，正文来源统一；不额外增加装饰动画 |\n| Traveritas | [官方工程](https://github.com/Traveritas/traveritas.github.io)，`408ca1d`；`Constructs.astro`、`reality.ts`、`brand.ts`、`morph.ts`、`IndexRow.astro` | 独立生成 80 块方块；原作几何求解、脑电波信号、声音、开场与跨页体系仍有区别 |\n| Stefan | [作者 Codrops 技术复盘](https://tympanus.net/codrops/2025/03/05/case-study-stefan-vitasovic-portfolio-2025/)、`/projects` 的运行代码与实际操作 | 已补原生 WebGL 共享 1×128 网格、横向噪声位移、弯曲、LED/颗粒；纹理是本站封面，不是原作商业视频；未确认完整官方工程仓库 |\n| Radar | 官方单文件 HTML/Canvas/原生 JS 与真实模拟操作 | 原站是雷达教学；本站的交互信号点关联文章，不伪造测量数值 |\n| Good Fella | [作者 GitHub](https://github.com/GoodFellaStudio)、[作者菜单动画说明](https://lab.good-fella.com/blog/gsap-ease-reverse)及官网运行效果 | 已查作者仓库未确认首页完整工程；ASCII 为本站头像浮雕，不是原作三维人头模型 |\n| AVA | 官网 [handscript.js](https://srg.ava-digital.site/f/handscript.js)，实际滚动触发手势切换 | 本地保留 Q 点阵，尚未还原逐指骨骼手套；未找到匹配的开放项目/模型仓库 |\n| Nfinite | 官网运行代码、连续滚动观察，官方署名 [Numbered](https://numbered.com/) | 已适配点云与三层纸面；工业影片、完整材料叙事与后续全屏散云未移植 |\n| Follow Art | [Vide Infra 官方案例](https://videinfra.com/work/follow-art)及开发过程 | 官网被 Cloudflare 阻挡，未绕过；本地为平面卡片透视，原作还包含 WebGL 曲面弯折 |\n| Milkin | 官网运行代码中的 `stone.glb`、阻尼相机、指针旋转 | 本地为原创石头二维图像；搜索到的同名 GitHub 工程只是文本或加载动画练习，不能替代原作模型 |\n| Digilab | 官网运行代码、入口和滚动操作，作者 Numbered | 未移植声学地图热点、真实录音和完整场景时间线；未确认官方完整仓库 |\n| Büro18 | 官网运行代码中的横向 scrub、真实滚轮操作 | 文章章节已横向滚动与变色；未包含各章专属插画形变和全部逐字动画；搜索到的 image-trail 工程是第三方复刻 |\n\n限定验证：各改动主题仅确认对应关键交互和卸载/降级路径，未重跑此前全主题截图和回归测试。当前来源与过程证据位于 `.references/`，本地定点结果位于 `.impeccable/review/`，这些开发文件均不进入站点产物。\n\r\n## Shapes\r\n\r\n前言按主题列出主容器圆角。Koharu 的 8px 框保留交错斜切图片，more 使用对角 13px 圆角；Firefly / Shirone 的 16px 主面板搭配更小的内缩图片与元数据底；Solitude 的 12px 描边卡与全圆胶囊形成层级；Redefine 使用 18px 软边卡；Cactus 索引无卡片背景，少数提示面与代码保留小圆角。\r\n\r\n头像形状同样独立：Koharu 桌面是 120px 圆形、抽屉是 64px 圆形；Firefly 和 Shirone 是大方形圆角头像；Solitude 是蓝色名片上的 118px 白边圆头像；Redefine 是 80px 圆角方头像；Cactus 以仙人掌 SVG 标识和正文索引为主。\r\n\r\n## Components\r\n\r\n### Buttons\r\n\r\n实际共用控件是图标按钮、文字按钮、明暗分段选项、外观选择项和联系链接。基础图标按钮至少 40px，内边距 8px，hover 使用辅助色面和强调色；各主题导航可覆盖圆角与宽度。文字按钮用于复制文章链接、恢复外观和页脚入口，至少 44px 高；联系链接使用辅助色面。未使用的旧 `.button-primary` / `.button-quiet` 不是新增页面的规范按钮。\r\n\r\n全局键盘焦点是 3px 强调色描边、外偏移 4px；Koharu 抽屉内部为 2px 描边、偏移 3px。图标由 Lucide 输出 SVG；仅图标按钮具备 `aria-label`。不把元数据图标伪装成按钮。\r\n\r\n### Chips\r\n\r\n分类筛选以 button 和 `aria-pressed` 表示选中。Koharu 使用粉色小选项；Firefly / Shirone 的分类条独立成面板；Solitude 使用描边胶囊，选中或 hover 填满强调色。标签通向稳定标签页面。切换首页时，目标主题包含相同筛选器就延续分类，否则回到全部文章。\r\n\r\n### Cards / Containers\r\n\r\n- **Koharu：** 左右交替行卡，图片宽 `calc(47% - 20px)`；左图斜切 `polygon(0 0,92% 0,100% 100%,0 100%)`，右图斜切 `polygon(0 0,100% 0,100% 100%,8% 100%)`。正文包含分类、日期、题目、简介、标签和伸出边角的 more 链接。分类卡 hover / 焦点翻到背面，整张仍是分类链接。\r\n- **Firefly：** 单列横卡，右图占 30%，四側内缩 16px；粗标题左竖标、带图标底的元数据、底部标签。无封面时使用右侧纵向进入按钮，不采用 Koharu 的斜切或交替顺序。\r\n- **Shirone：** 色面文章有短竖标题标、元数据图标底、28% 右封面，无封面时有箭头区。日历按最新文章所在月份生成，使用上海日期；只有有文章的日期可点击。\r\n- **Solitude：** 杂志网格先图后标题，日期与标签便于扫描。蓝色作者卡保留底部姓名和社交区；hover 或 `focus-within` 时头像缩回并出现介绍；小屏隐藏辅助栏。\r\n- **Redefine：** 全屏影像下进入带可选 150px 顶图的单列文章卡，手机封面 160px。圆形滚动按钮和胶囊社交区在首屏底部，链接通向文章和已有联系方式。\r\n- **Cactus：** `time + title` 构成无背景的一行，标题使用下划线正文链接。Pinned Posts 使用保留的 Hello World，Posts 显示真实可见文章，Notes 使用随笔分类。不虚构数量或文章经历。\r\n\r\n### Inputs / Fields\r\n\r\n搜索是 native dialog 内的单一 search input，填满剩余宽度，无单独输入框底；输入行负责底部分隔。字段有隐藏标签、可见提示和强调色插入光标，聚焦不新增边框。输入后 100ms 搜索本地索引，结果显示分类、标题、摘要和匹配强调；最多渲染 30 项。状态区覆盖输入提示、加载中、结果数、无结果与加载失败。\r\n\r\n`/` 或 Ctrl/Cmd+K 打开搜索；↑/↓ 移动焦点，Enter 可打开首项，Esc 关闭并恢复触发控件焦点。代码复制提供“复制 / 已复制 / 重试”；正文图片使用 native dialog 灯箱，图片说明来自 alt。\r\n\r\n### Navigation\r\n\r\n共享入口为首页、文章、分类、关于，十六套均保留搜索和外观设置。路由决定 `aria-current`。菜单按钮维护 `aria-expanded`；Koharu 另有 `aria-haspopup=dialog` 与抽屉目标。\r\n\r\n- **Koharu：** 64px fixed 透明导航，在 `html[data-nav-scrolled='true']` 时转换为桌面漂浮胶囊：内缩 10px/16px、最大 1320px，surface 90% 混合底、模糊 14px。≤992px 滚动后贴顶铺满、取消胶囊圆角。native dialog 抽屉宽 `min(320px,85vw)`、高 100dvh，包含横排资料、真实统计、可展开文章菜单及来源链接；关闭、Esc、遮罩可退出并恢复焦点。\r\n- **Firefly：** 72px（手机 64px）fixed 宽导航。过横幅后下滚超过 5px 设置 `data-nav-hidden=true` 收起，上滚超过 5px 恢复；菜单、对话框或导航焦点活动时保持显示。背景混合 surface 88%，模糊 12px。\r\n- **Shirone：** 64px fixed 透明导航，在 `data-nav-scrolled=true` 后变为实色 surface、强调色当前项和轻投影，保持可见。\r\n- **Solitude：** 60px sticky 导航，品牌与链接 hover 变为强调色胶囊。\r\n- **Redefine：** 70px fixed 玻璃导航，首页使用暖桃到蓝的透明渐变，阅读页使用 surface 83% 混合背景。\r\n- **Cactus：** 桌面姓名在第一行、竖线分隔导航在第二行、工具在右侧；≤639px 折叠菜单，文章页页头 sticky。\r\n\r\nKoharu / Firefly / Shirone 的滚动阈值来自当前横幅底部减去 72px；切换主题、窗口尺寸变化与打开控件会重新同步，不使用固定首页滚动高度。\r\n\r\n### Appearance & Reading Controls\r\n\r\n外观 dialog 展示十六张本站真实页面预览，配合分组筛选与粘性标题，以描边、勾选和 `aria-pressed` 表示选中。明暗分段独立包含浅色、深色、系统；默认 Firefly + 系统。偏好保存在本地 `qinghe-theme` 与 `qinghe-mode`，存储不可用仍可阅读。\r\n\r\n选择不同主题会立即打开覆盖整个视口的 native dialog 水墨层。新 CSS、目标首页的非懒加载图片及声明的封面并行预加载，图片完成加载后尝试解码；如果读者已经滚到文章区，也准备同一篇文章在新首页中的封面。三者与覆盖动画、覆盖后停留全部就绪后，锁定提交并自动关闭外观选择框，在实心墨层后替换主题与首页，恢复当前正文或文章卡的位置，再揭开新页面。点击当前已选主题不会重放动画；快速请求仍以最新一次为准。\r\n\r\n遮罩的礼貌状态区显示“正在切换至 …”，不展示虚构进度百分比。全屏层截获键盘事件，提交前 Esc 可取消，包括覆盖后的停留阶段，取消会立即中止等待；完全覆盖后若继续等待 900ms，显示“取消切换”。提交开始后取消被锁定并隐藏控件，避免新旧状态混杂。提交前的失败或取消移除待用样式，保留原主题、原阅读内容和外观选择框；取消状态与加载失败状态分别反馈，失败允许重试。资源等待上限 12s，另有 15s 兜底避免遮罩永久停留。\r\n\r\n成功后焦点回到页头外观入口，失败或取消后回到外观框内当前主题选项。文章地址与正文 DOM 保持稳定，显式选择清除预览 `?theme=`。文章目录使用原生 details，手机初始折叠；当前位置以 `aria-current=location` 表示。滚动超过 500px 出现返回顶部，减弱动态效果时立即返回。\r\n\r\n`.impeccable/design.json` 只承载扩展：阴影、动效、断点、颜色元数据及组件片段。色阶预览从实际基色推导，仅为展示，不是新生产令牌；片段是可独立渲染的局部样本，不含 Astro 或应用运行逻辑。\r\n\r\n## Do's and Don'ts\r\n\r\n### Do:\r\n\r\n- Do 保留十六套独立首页组件及各自列宽、封面顺序、名片形状和手机重排。\r\n- Do 将日常共享控件绑定到当前主题语义变量；水墨遮罩使用独立墨色，同时提供清楚的状态、取消入口与键盘焦点。\r\n- Do 保留示例标记、真实统计、原始文章地址与本地素材来源。\r\n- Do 在减弱动态效果模式下保留完整文字与可操作控件。\r\n- Do 为新图片补充 ASSETS.md 来源，用真实数据填充分类、标签和日历。\r\n\r\n### Don't:\r\n\r\n- Don't 把十六套首页重新归并为通用 hero、营销 CTA 或统一卡片网格。\r\n- Don't 将本站适配描述为未经修改的上游包或商业原站完整移植，或将演示插画当作代码许可证自动覆盖的素材。\r\n- Don't 为匹配演示密度虚构文章经历、访客数、音乐播放器或评论。\r\n- Don't 从保留的旧通用首页 CSS 提取规则；以当前挂载的十六套组件为准。\r\n- Don't 移植其他主题的颜色、重阴影或圆角而破坏选定主题的结构。\r\n- Don't 将静态构图核对或独立替代动效描述为原站动态忠实度已验收。",
+    "keyCharacteristics": [
+      "十六套独立首页结构；不以统一 hero 和文章卡换色替代原主题构图。",
+      "中文优先；本地 Noto Sans SC Variable 负责共用正文，Cactus 以等宽字体表达正文与导航。",
+      "主题与明暗模式独立；颜色、正文和控件保持语义一致。",
+      "封面、头像和示例文章均使用本站有来源的内容，不复制演示站身份。"
+    ],
+    "rules": [
+      {
+        "name": "The Theme Boundary Rule",
+        "body": "主题前缀标识适用范围。一个主题的强调色、圆角或布局不能成为其余主题的默认值。",
+        "section": "colors"
+      },
+      {
+        "name": "The Shared Reading Rule",
+        "body": "正文语义、稳定标题锚点和文章地址共用；切换外观不能重建文章正文或改变其内容。",
+        "section": "typography"
+      },
+      {
+        "name": "The Native Depth Rule",
+        "body": "深度服从各主题：Koharu 和 Redefine 使用柔和抬升，Firefly 与 Shirone 以色面为主，Solitude 使用描边，Cactus 以留白和文字建立层级。",
+        "section": "elevation"
+      },
+      {
+        "name": "The Opaque Swap Rule",
+        "body": "新主题只能在水墨完全覆盖、所需样式与首屏图片准备完成后提交；布局稳定并恢复阅读位置后才揭开。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do 保留十六套独立首页组件及各自列宽、封面顺序、名片形状和手机重排。",
+      "Do 将日常共享控件绑定到当前主题语义变量；水墨遮罩使用独立墨色，同时提供清楚的状态、取消入口与键盘焦点。",
+      "Do 保留示例标记、真实统计、原始文章地址与本地素材来源。",
+      "Do 在减弱动态效果模式下保留完整文字与可操作控件。",
+      "Do 为新图片补充 ASSETS.md 来源，用真实数据填充分类、标签和日历。"
+    ],
+    "donts": [
+      "Don't 把十六套首页重新归并为通用 hero、营销 CTA 或统一卡片网格。",
+      "Don't 将本站适配描述为未经修改的上游包或商业原站完整移植，或将演示插画当作代码许可证自动覆盖的素材。",
+      "Don't 为匹配演示密度虚构文章经历、访客数、音乐播放器或评论。",
+      "Don't 从保留的旧通用首页 CSS 提取规则；以当前挂载的十六套组件为准。",
+      "Don't 移植其他主题的颜色、重阴影或圆角而破坏选定主题的结构。",
+      "Don't 将静态构图核对或独立替代动效描述为原站动态忠实度已验收。"
+    ]
+  }
+}

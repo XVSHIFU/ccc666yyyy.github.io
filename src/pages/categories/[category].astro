@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts, type Post } from '../../lib/content';
+import { url } from '../../lib/site';
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return [...new Set(posts.map(post => post.data.category))].map(category => ({ params: { category }, props: { category, posts: posts.filter(post => post.data.category === category) } }));
+}
+interface Props { category: string; posts: Post[] }
+const { category, posts } = Astro.props;
+---
+<Base title={`${category} · 分类`} pageType="page">
+  <section class="content-surface collection-surface">
+    <header class="page-heading"><a class="back-link" href={url('/categories/')}>返回所有分类</a><h1>{category}</h1><p class="page-intro">在这个方向里，读到 {posts.length} 篇文字。</p></header>
+    <div class="collection-posts">{posts.map(post => <PostCard post={post} />)}</div>
+  </section>
+</Base>

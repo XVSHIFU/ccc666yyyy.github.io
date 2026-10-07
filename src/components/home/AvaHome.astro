@@ -1,0 +1,52 @@
+---
+import { ArrowUpRight, ArrowDown, Plus, Mail } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate, categoryUrl } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts = await getPosts();
+---
+<div class="ava-home">
+  <section class="ava-hero" aria-labelledby="ava-title">
+    <div class="ava-corner-intro"><p>在学习中实践，<br/>在生活里保持好奇。<br/>我是 <strong>{site.name}</strong>，<br/>欢迎来到我的个人空间。</p><a href={url('about/')}>关于我<ArrowUpRight size={17}/></a></div>
+    <a class="ava-latest" href={getPostUrl(posts[0])}><span>最近写下</span><strong>{posts[0].data.title}</strong><ArrowUpRight size={18}/></a>
+    <ava-sculpture class="ava-sculpture" aria-hidden="true"><canvas></canvas><svg viewBox="0 0 440 470"><defs><pattern id="ava-dots" width="4.5" height="4.5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.05" fill="currentColor"/></pattern></defs><g class="ava-object">{[32,26,20,14,8,2].map((depth) => <path d="M217 38C111 38 52 115 52 228C52 341 112 414 216 414C243 414 267 409 287 397L330 444L370 406L327 361C349 327 362 281 362 228C362 115 305 38 217 38ZM217 113C267 113 286 160 286 228C286 296 265 340 217 340C164 340 130 296 130 228C130 160 163 113 217 113Z" fill-rule="evenodd" fill="url(#ava-dots)" transform={`translate(${depth * .38},${-depth * .48})`}/>)}</g></svg></ava-sculpture>
+    <nav class="ava-world-menu" aria-label="小站入口"><a href="#writings">[ 文章 ]</a><a href={url('categories/')}>分类</a><a href={url('about/')}>关于我</a><button type="button" data-open-search>搜索</button><button type="button" data-open-appearance>换个世界</button></nav>
+    <div class="ava-hero-bottom"><h1 id="ava-title"><span lang="en">QINGHE’_</span><small>{site.title}</small></h1><a href="#writings" aria-label="向下阅读文章"><ArrowDown size={22}/></a></div>
+    <span class="ava-edge-label" aria-hidden="true">NOTES / IDEAS / EVERYDAY</span>
+  </section>
+  <main id="main-content" class="feed ava-feed">
+    <section class="ava-statement"><h2>想法，<br/>值得留下痕迹。</h2><div><p>{site.description}</p><a href={url('archives/')}>浏览所有文章<ArrowUpRight size={18}/></a></div></section>
+    <div class="ava-posts" id="writings" data-post-list>{posts.map(post => <article class="post-card ava-post" data-category={post.data.category} data-post-key={post.id}><div class="ava-post-info"><div class="ava-post-meta"><a href={categoryUrl(post.data.category)}>[ {post.data.category} ]</a><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published,true)}</time>{post.data.example && <span class="example-badge">示例</span>}</div><h3><a href={getPostUrl(post)}>{post.data.title}</a></h3><p>{post.data.description}</p><a class="ava-read" href={getPostUrl(post)}>展开阅读<Plus size={19}/></a></div><a class="ava-post-image" href={getPostUrl(post)} tabindex="-1" aria-hidden="true"><img src={url(post.data.cover || 'media/portrait.webp')} width="900" height="650" alt="" loading="lazy"/></a></article>)}</div>
+    <section class="ava-signoff"><span>下一个想法，<br/>正在发生。</span><a href={`mailto:${site.email}`}><Mail size={19}/>给我写信<ArrowUpRight size={20}/></a></section>
+  </main>
+</div>
+<script>
+  class AvaSculpture extends HTMLElement {
+    cleanup?: () => void; frame=0; resize?:ResizeObserver;
+    connectedCallback(){
+      const canvas=this.querySelector('canvas')!;const ctx=canvas.getContext('2d');if(!ctx)return;
+      const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+      const hero=this.closest<HTMLElement>('.ava-hero')!;const writings=this.closest('.ava-home')!.querySelector<HTMLElement>('#writings')!;
+      let width=1,height=1,progress=0,pose=0,pointerX=0,pointerY=0,turn=0,tilt=0,color='#262322',visible=true;
+      const path=new Path2D(this.querySelector('path')!.getAttribute('d')!);
+      const points:{x:number;y:number;z:number;shade:number}[]=[];
+      // Original Q geometry: the public reference's hand/model is not part of this asset.
+      for(let y=34;y<447;y+=8)for(let x=50;x<375;x+=8){if(ctx.isPointInPath(path,x,y,'evenodd'))for(const depth of [-1,0,1])points.push({x:(x-220)/210,y:(y-235)/210,z:depth*.16,shade:.5+depth*.14});}
+      const draw=()=>{
+        ctx.clearRect(0,0,width,height);const p=reduce.matches?0:pose;const yaw=-.22+p*.92+turn*.2;const pitch=-.16-p*.25+tilt*.18;const scale=Math.min(width/2.55,height/2.4)*(1-p*.3);ctx.fillStyle=color;
+        for(const dot of points){const x=dot.x*Math.cos(yaw)+dot.z*Math.sin(yaw);const z=-dot.x*Math.sin(yaw)+dot.z*Math.cos(yaw);const y=dot.y*Math.cos(pitch)-z*Math.sin(pitch);const depth=4/(4-z);const twist=p*.22;const rx=x*Math.cos(twist)-y*Math.sin(twist),ry=x*Math.sin(twist)+y*Math.cos(twist);ctx.globalAlpha=dot.shade+.15*Math.max(0,z);ctx.beginPath();ctx.arc(width/2+rx*scale*depth,height/2+ry*scale*depth,Math.max(.65,width/460)*(1+z*.2),0,Math.PI*2);ctx.fill();}
+        ctx.globalAlpha=1;this.dataset.pose=p>.55?'turned':'front';
+      };
+      const tick=()=>{this.frame=0;if(!this.isConnected||document.hidden||!visible)return;pose+=(progress-pose)*.14;turn+=(pointerX-turn)*.12;tilt+=(pointerY-tilt)*.12;draw();if(Math.abs(pose-progress)+Math.abs(turn-pointerX)+Math.abs(tilt-pointerY)>.002)this.frame=requestAnimationFrame(tick);};
+      const start=()=>{if(reduce.matches){draw();return;}if(!this.frame&&visible&&!document.hidden)this.frame=requestAnimationFrame(tick);};
+      const scroll=()=>{const box=hero.getBoundingClientRect();const end=writings.getBoundingClientRect();visible=end.top>0&&box.top<innerHeight;progress=reduce.matches?0:Math.max(0,Math.min(1,-box.top/(box.height*.72)));const travel=reduce.matches?0:Math.max(0,Math.min(-box.top, end.top-box.top-this.offsetTop-height*.85));this.style.setProperty('--ava-travel',`${travel}px`);this.dataset.progress=progress.toFixed(3);start();};
+      const move=(event:PointerEvent)=>{if(reduce.matches||!visible)return;pointerX=(event.clientX/innerWidth-.5)*2;pointerY=(event.clientY/innerHeight-.5)*2;start();};
+      const size=()=>{width=Math.max(1,this.clientWidth);height=Math.max(1,this.clientHeight);const dpr=Math.min(devicePixelRatio,1.5);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);color=getComputedStyle(this).color;draw();this.classList.add('is-ready');scroll();};
+      const preference=()=>{cancelAnimationFrame(this.frame);this.frame=0;pose=progress;scroll();draw();};
+      const mode=new MutationObserver(()=>{color=getComputedStyle(this).color;draw();});mode.observe(document.documentElement,{attributes:true,attributeFilter:['data-mode']});
+      this.resize=new ResizeObserver(size);this.resize.observe(this);window.addEventListener('scroll',scroll,{passive:true});window.addEventListener('pointermove',move,{passive:true});reduce.addEventListener('change',preference);document.addEventListener('visibilitychange',preference);size();
+      this.cleanup=()=>{window.removeEventListener('scroll',scroll);window.removeEventListener('pointermove',move);reduce.removeEventListener('change',preference);document.removeEventListener('visibilitychange',preference);mode.disconnect();};
+    }
+    disconnectedCallback(){cancelAnimationFrame(this.frame);this.frame=0;this.resize?.disconnect();this.cleanup?.();}
+  }
+  if(!customElements.get('ava-sculpture'))customElements.define('ava-sculpture',AvaSculpture);
+</script>

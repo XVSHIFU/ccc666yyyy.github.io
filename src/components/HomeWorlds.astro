@@ -1,0 +1,46 @@
+---
+import KoharuHome from './home/KoharuHome.astro';
+import FireflyHome from './home/FireflyHome.astro';
+import ShironeHome from './home/ShironeHome.astro';
+import SolitudeHome from './home/SolitudeHome.astro';
+import RedefineHome from './home/RedefineHome.astro';
+import CactusHome from './home/CactusHome.astro';
+import TraveritasHome from './home/TraveritasHome.astro';
+import RadarHome from './home/RadarHome.astro';
+import GoodFellaHome from './home/GoodFellaHome.astro';
+import AvaHome from './home/AvaHome.astro';
+import NfiniteHome from './home/NfiniteHome.astro';
+import FollowArtHome from './home/FollowArtHome.astro';
+import MilkinHome from './home/MilkinHome.astro';
+import DigilabHome from './home/DigilabHome.astro';
+import StefanHome from './home/StefanHome.astro';
+import BuroHome from './home/BuroHome.astro';
+---
+<div id="theme-home" data-home-theme="firefly"><FireflyHome/></div>
+<template data-home-template="koharu"><KoharuHome/></template>
+<template data-home-template="firefly"><FireflyHome/></template>
+<template data-home-template="shirone"><ShironeHome/></template>
+<template data-home-template="solitude"><SolitudeHome/></template>
+<template data-home-template="redefine"><RedefineHome/></template>
+<template data-home-template="cactus"><CactusHome/></template>
+<template data-home-template="traveritas"><TraveritasHome/></template>
+<template data-home-template="radar"><RadarHome/></template>
+<template data-home-template="goodfella"><GoodFellaHome/></template>
+<template data-home-template="ava"><AvaHome/></template>
+<template data-home-template="nfinite"><NfiniteHome/></template>
+<template data-home-template="followart"><FollowArtHome/></template>
+<template data-home-template="milkin"><MilkinHome/></template>
+<template data-home-template="digilab"><DigilabHome/></template>
+<template data-home-template="stefan"><StefanHome/></template>
+<template data-home-template="buro"><BuroHome/></template>
+<script is:inline>
+  (() => {
+    const theme = document.documentElement.dataset.theme;
+    const home = document.getElementById('theme-home');
+    const template = document.querySelector(`template[data-home-template="${theme}"]`);
+    if (home && template && theme !== 'firefly') {
+      home.replaceChildren(template.content.cloneNode(true));
+      home.dataset.homeTheme = theme;
+    }
+  })();
+</script>

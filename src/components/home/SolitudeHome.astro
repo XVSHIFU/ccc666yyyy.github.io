@@ -1,0 +1,78 @@
+---
+import { Star, BookOpen, ArrowUpRight, CodeXml, Mail, Rss, Sparkles, Tag, ArrowRight } from '@lucide/astro';
+import { getPosts, getPostUrl, formatDate, categoryUrl, tagUrl } from '../../lib/content';
+import { site, url } from '../../lib/site';
+const posts = await getPosts();
+const categories = [...new Set(posts.map(post => post.data.category))];
+const tags = [...new Set(posts.flatMap(post => post.data.tags))];
+---
+<solitude-motion class="solitude-home" data-page-title={site.title}>
+  <h1 class="sr-only">{site.title}</h1>
+  <nav class="solitude-category-bar" id="writings" aria-label="筛选文章分类"><div class="solitude-category-scroll"><button type="button" data-category-filter="all" aria-pressed="true"><Star size={16} fill="currentColor"/>精选</button><a href={url('archives/')}><BookOpen size={16}/>全部文章</a>{categories.map(category => <button type="button" data-category-filter={category} aria-pressed="false">{category}</button>)}</div><a class="solitude-more" href={url('categories/')}>更多<ArrowUpRight size={14}/></a></nav>
+  <div class="solitude-columns">
+    <main id="main-content" class="feed solitude-feed"><h2 class="sr-only">最新文章</h2><div class="solitude-posts" data-post-list>{posts.map((post,index) => <article class="post-card solitude-post" data-category={post.data.category} data-post-key={post.id}>
+      <a class="solitude-post-cover" href={getPostUrl(post)} tabindex="-1" aria-hidden="true"><img src={url(post.data.cover || 'media/landscape.webp')} alt="" width="800" height="500" loading={index < 2 ? 'eager' : 'lazy'}/></a>
+      <div class="solitude-post-info"><div><div class="solitude-post-tips"><a href={categoryUrl(post.data.category)}>{post.data.category}</a>{index === 0 && <span>最新</span>}{post.data.example && <span class="example-badge">示例</span>}</div><h2><a href={getPostUrl(post)}>{post.data.title}</a></h2></div><div class="solitude-post-meta"><div>{post.data.tags.slice(0,2).map(tag => <a href={tagUrl(tag)}><span>#</span>{tag}</a>)}</div><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published, true)}</time></div></div>
+    </article>)}</div><p id="filter-status" class="sr-only" role="status" aria-live="polite"></p><div class="solitude-pagination"><span aria-current="page" aria-label="第1页">1</span></div></main>
+    <aside class="solitude-aside" aria-label="作者与小站信息">
+      <section class="solitude-author"><span class="solitude-hello"><Sparkles size={14}/>你好，很高兴遇见你</span><a class="solitude-avatar" href={url('about/')} aria-label="认识 qinghe"><img src={url('media/avatar.webp')} alt="qinghe 的头像" width="118" height="118"/></a><div class="solitude-author-detail"><p>保持好奇，<br/>慢慢生长。</p><a href={url('about/')}>走近这个小站 <ArrowRight size={18}/></a></div><div class="solitude-author-bottom"><div><h2>{site.name}</h2><p>{site.description}</p></div><div class="solitude-social"><a href={site.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><CodeXml size={20}/></a><a href={`mailto:${site.email}`} aria-label="邮件"><Mail size={19}/></a></div></div></section>
+      <section class="solitude-site-info"><dl><div><dt>文章总数</dt><dd>{posts.length} 篇</dd></div><div><dt>文章分类</dt><dd>{categories.length} 个</dd></div><div><dt>标签</dt><dd>{tags.length} 个</dd></div>{posts[0] && <div><dt>最近更新</dt><dd>{formatDate(posts[0].data.published, true)}</dd></div>}</dl></section>
+      <div class="solitude-aside-sticky"><section class="solitude-tag-card"><h2><Tag size={17}/>发现更多</h2><div>{tags.map(tag => <a href={tagUrl(tag)}>#{tag}</a>)}</div></section><a class="solitude-rss" href={url('rss.xml')}><Rss size={19}/><span>订阅文章更新</span><ArrowUpRight size={17}/></a></div>
+    </aside>
+  </div>
+</solitude-motion>
+<script>
+  // Source: Solitude source/js/main.js scrollFn/percent and _layout/header.styl.
+  // Independently authored; only the currently mounted homepage owns these nodes.
+  class SolitudeMotion extends HTMLElement {
+    private controller?: AbortController;
+    private frame = 0;
+    private label?: HTMLAnchorElement;
+    private progress?: HTMLButtonElement;
+    private navigation?: HTMLElement;
+    connectedCallback() {
+      this.controller = new AbortController();
+      const { signal } = this.controller;
+      this.navigation = document.querySelector<HTMLElement>('.primary-nav') || undefined;
+      this.label = document.createElement('a');
+      this.label.className = 'solitude-page-label'; this.label.href = '#main-content';
+      this.label.textContent = this.dataset.pageTitle || '文章';
+      document.querySelector('.header-inner')?.append(this.label);
+      this.progress = document.createElement('button'); this.progress.type = 'button';
+      this.progress.className = 'solitude-scroll-progress';
+      document.querySelector('.header-actions')?.prepend(this.progress);
+      this.progress.addEventListener('click', () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }), { signal });
+      let previous = scrollY, reading = false;
+      const update = () => {
+        this.frame = 0;
+        const current = Math.max(0, scrollY);
+        const desktop = matchMedia('(min-width: 900px)').matches;
+        const focused = document.querySelector('.site-header')?.contains(document.activeElement);
+        if (!desktop || current === 0 || focused || document.querySelector('dialog[open]')) reading = false;
+        else if (Math.abs(current - previous) > 3) reading = current > previous;
+        document.documentElement.dataset.solitudeNav = reading ? 'reading' : 'menu';
+        document.documentElement.dataset.solitudeScrolled = String(current > 0);
+        if (this.navigation) this.navigation.inert = reading;
+        this.label!.inert = !reading;
+        const total = document.documentElement.scrollHeight - innerHeight;
+        const percentage = total > 0 ? Math.min(100, Math.round(current / total * 100)) : 0;
+        this.progress!.textContent = percentage > 90 ? '回到顶部' : `${percentage}%`;
+        this.progress!.setAttribute('aria-label', `已阅读 ${percentage}%，回到顶部`);
+        previous = current;
+      };
+      const request = () => { if (!this.frame) this.frame = requestAnimationFrame(update); };
+      window.addEventListener('scroll', request, { passive: true, signal });
+      window.addEventListener('resize', request, { passive: true, signal });
+      document.addEventListener('focusin', request, { signal });
+      update();
+    }
+    disconnectedCallback() {
+      this.controller?.abort(); cancelAnimationFrame(this.frame);
+      this.label?.remove(); this.progress?.remove();
+      if (this.navigation) this.navigation.inert = false;
+      delete document.documentElement.dataset.solitudeNav;
+      delete document.documentElement.dataset.solitudeScrolled;
+    }
+  }
+  if (!customElements.get('solitude-motion')) customElements.define('solitude-motion', SolitudeMotion);
+</script>
